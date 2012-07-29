@@ -1,0 +1,6 @@
+C:\OneStop\Research\SAT\SavingsAnalysis.Common\bin\Debug\SavingsAnalysis.Common.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Common\bin\Debug\SavingsAnalysis.Common.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Common\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Common\obj\Debug\SavingsAnalysis.Common.csprojResolveAssemblyReference.cache
+C:\OneStop\Research\SAT\SavingsAnalysis.Common\obj\Debug\SavingsAnalysis.Common.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Common\obj\Debug\SavingsAnalysis.Common.pdb

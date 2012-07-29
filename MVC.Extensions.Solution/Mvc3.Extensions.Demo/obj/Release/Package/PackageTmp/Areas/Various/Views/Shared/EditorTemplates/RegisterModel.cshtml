@@ -1,0 +1,42 @@
+﻿@using Mvc3.Extensions.Demo.Areas.Various.Models
+@model RegisterModel
+<div class="editor-label">
+    @Html.LabelFor( model => model.UserName , null , null , null )
+</div>
+<div class="editor-field">
+    @Html.TextBoxFor( 
+        model => model.UserName , 
+        new { title = ModelMetadata.FromLambdaExpression<RegisterModel , string>(
+            model => model.UserName , ViewData ).Description } )  
+    @Html.ValidationMessageFor( model => model.UserName )
+</div>
+<div class="editor-label">
+    @Html.LabelFor( model => model.Email , null , null , null )
+</div>
+<div class="editor-field">
+    @Html.TextBoxFor( 
+        model => model.Email , 
+        new { title = ModelMetadata.FromLambdaExpression<RegisterModel , string>( 
+            model => model.Email , ViewData ).Description } )  
+    @Html.ValidationMessageFor( model => model.Email )
+</div>
+<div class="editor-label">
+    @Html.LabelFor( model => model.Password , null , null , null )
+</div>
+<div class="editor-field">
+    @Html.TextBoxFor( 
+        model => model.Password , 
+        new { title = ModelMetadata.FromLambdaExpression<RegisterModel , string>( 
+            model => model.Password , ViewData ).Description } )  
+    @Html.ValidationMessageFor( model => model.Password )
+</div>
+<div class="editor-label">
+    @Html.LabelFor( model => model.ConfirmPassword , null , null , null )
+</div>
+<div class="editor-field">
+    @Html.TextBoxFor( 
+        model => model.ConfirmPassword , 
+        new { title = ModelMetadata.FromLambdaExpression<RegisterModel , string>( 
+            model => model.ConfirmPassword , ViewData ).Description } )  
+    @Html.ValidationMessageFor( model => model.ConfirmPassword )
+</div>

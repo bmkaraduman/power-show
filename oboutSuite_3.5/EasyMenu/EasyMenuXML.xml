@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<menu>
+  <EasyMenu ID="EasyMenuMain" AttachTo="">
+    <MenuItem ID="Item1" InnerHTML="Item 1" />
+    <MenuItem ID="Item2" InnerHTML="Item 2"/>
+    <MenuItem ID="Item3" InnerHTML="Item 3" />
+    <MenuItem ID="Item4" InnerHTML="Item 4" />
+  </EasyMenu>
+
+  <EasyMenu ID="EasyMenu1" AttachTo="Item1">
+    <MenuItem ID="Item11" InnerHTML="Item 11" />
+    <MenuItem ID="Item12" InnerHTML="Item 12"/>
+    <MenuItem ID="Item13" InnerHTML="Item 13" />
+  </EasyMenu>
+  
+  <EasyMenu ID="EasyMenu11" AttachTo="Item13">
+    <MenuItem ID="Item111" InnerHTML="Item 111" />
+    <MenuItem ID="Item112" InnerHTML="Item 112"/>
+    <MenuItem ID="Item113" InnerHTML="Item 113" />
+  </EasyMenu>
+  
+  <EasyMenu ID="EasyMenu21" AttachTo="Item2">
+    <MenuItem ID="Item21" InnerHTML="Item 21" />
+    <MenuItem ID="Item22" InnerHTML="Item 22"/>
+    <MenuItem ID="Item23" InnerHTML="Item 23" />
+  </EasyMenu>
+  
+  <EasyMenu ID="EasyMenu211" AttachTo="Item21">
+    <MenuItem ID="Item211" InnerHTML="Item 211" />
+  </EasyMenu>
+  
+  <EasyMenu ID="EasyMenu14" AttachTo="Item4">
+    <MenuItem ID="Item41" InnerHTML="Item 41" />
+    <MenuItem ID="Item42" InnerHTML="Item 42"/>
+    <MenuItem ID="Item43" InnerHTML="Item 43" />
+	<MenuItem ID="Item44" InnerHTML="Item 44" />
+	<MenuItem ID="Item45" InnerHTML="Item 45" />
+  </EasyMenu>
+</menu>

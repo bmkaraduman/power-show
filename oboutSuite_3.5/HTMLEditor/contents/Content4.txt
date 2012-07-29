@@ -1,0 +1,15 @@
+If you don't use <span style="font-style: italic">master page</span> and Editor  is not placed into the <span style="font-style: italic">user's  control</span>, then you can use <span style="color: #00468b">PreInit</span> event of the <span style="font-weight: bold">Page</span>.<br />
+<br />
+ASP.NET<br />
+<pre class="prettyprint lang-xml">&lt;obout:Editor runat=&quot;server&quot; Id=&quot;<span style="font-weight: bold">editor</span>&quot; Height=&quot;500px&quot; Width=&quot;100%&quot; /&gt;</pre>C#<br />
+<pre class="prettyprint lang-cs">using Obout.Ajax.UI.HTMLEditor;<br />
+using Obout.Ajax.UI.HTMLEditor.Popups;<br />
+ ...<br />
+ <br />
+protected override void OnPreInit(EventArgs e)<br />
+{<br />
+   base.OnPreInit(e);<br />
+   ImageBrowser imageBrowser = new ImageBrowser();<br />
+   imageBrowser.GalleryFolders = &quot;~/myImages;&quot;;<br />
+   <span style="font-weight: bold">editor</span>.PopupHolder.Demand.Add(imageBrowser);<br />
+}</pre>

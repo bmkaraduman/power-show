@@ -1,0 +1,125 @@
+﻿@{
+	ViewBag.Title = "Index";
+}
+
+<h2>
+	Cascading using jQuery.ajax()
+</h2>
+<h3>
+	<a href="http://weblogs.asp.net/raduenuca/archive/2011/04/10/asp-net-mvc-cascading-dropdown-lists-tutorial-part-5-2-cascading-using-jquery-ajax-ajax-and-jquery-templates.aspx">
+		Cascading Dropdown Lists Tutorial–Part 5.2: Cascading using jQuery.ajax() ($.ajax() and jQuery Templates)</a>
+</h3>
+
+Only Romania has cities entries (select Europe then Romania)
+
+<fieldset>
+	<legend>Continents</legend>
+	<div id='continentsContainer'>
+	</div>
+</fieldset>
+<fieldset>
+	<legend>Countries</legend>
+	<div id='countriesContainer'>
+	</div>
+</fieldset>
+<fieldset>
+	<legend>Cities</legend>
+	<div id="citiesContainer">
+	</div>
+</fieldset>
+
+@DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:fff")
+
+<script id="noInfoTemplate" type="text/html">
+	No information available
+</script>
+
+<script id="selectTemplate" type="text/html">
+	{{if options.length}}
+		<select id='${id}'>
+			<option value=''>${choose}</option>
+			{{each options}}
+				<option value='${Id}'>${Name}</option>
+			{{/each}}
+		</select>
+	{{else}}
+		{{tmpl '#noInfoTemplate'}}
+	{{/if}}
+</script>
+
+<script id="citiesTemplate" type="text/html">
+	{{if cities.length}}
+		<table>
+			<tr>
+				<th>Name</th>
+				<th>Population</th>
+			</tr>
+			{{each cities}}
+				<tr>
+					<td>${Name}</td>
+					<td align='right'>${Population}</td>
+				</tr>
+			{{/each}}
+		</table>
+	{{else}}
+		{{tmpl '#noInfoTemplate'}}
+	{{/if}}
+</script>
+
+<script type='text/javascript'>
+	$(document).ready(function () {
+		//Load the continents
+		$.ajax({
+			url: '@Url.Action( MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.GetContinents( ) )',
+			type: 'GET',
+			success: function (data) {
+				$("#continentsContainer").html($("#selectTemplate").tmpl({
+					id: 'continents',
+					choose: '[Please select a continent]',
+					options: data 
+				}));
+				$('#countriesContainer').html($('#noInfoTemplate').tmpl());
+				$('#citiesContainer').html($('#noInfoTemplate').tmpl());
+			}
+		});
+
+		//Catch the continents change event
+		$('#continents').live('change', function () {
+			$('#citiesContainer').html($('#noInfoTemplate').tmpl());
+			if ($('#continents option:selected').val() != '') {
+				$.ajax({
+					url: '@Url.Action( MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.GetCountries( ) )',
+					data: { continentId: $('#continents option:selected').val() },
+					type: 'GET',
+					success: function (data) {
+						$("#countriesContainer").html($("#selectTemplate").tmpl({
+							id: 'countries',
+							choose: '[Please select a country]',
+							options: data 
+						}));
+					}
+				});
+			}
+			else {
+				$('#countriesContainer').html($('#noInfoTemplate').tmpl());
+			}
+		});
+
+		//Catch the countries change event
+		$('#countries').live('change', function () {
+			if ($('#countries option:selected').val() != '') {
+				$.ajax({
+					url: '@Url.Action( MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.GetCities( ) )',
+					data: { countryId: $('#countries option:selected').val() },
+					type: 'GET',
+					success: function (data) {
+						$("#citiesContainer").html($("#citiesTemplate").tmpl({ cities: data }));
+					}
+				});
+			}
+			else {
+				$('#citiesContainer').html($('#noInfoTemplate').tmpl());
+			}
+		});
+	});
+</script>

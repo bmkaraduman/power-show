@@ -1,0 +1,1 @@
+<%@Page Language="C#" Inherits="cs_externalpage" Src="cs_externalpage.aspx.cs" %>

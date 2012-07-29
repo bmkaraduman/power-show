@@ -1,0 +1,57 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+<%@ Register TagPrefix="oem" Namespace="OboutInc.EasyMenu_Pro" Assembly="obout_EasyMenu_Pro" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>Untitled Page</title>
+    <script language="javascript" type="text/javascript">
+        function Navigate(callbackPanelName, containerName, pageName)
+        {
+            ob_post.UpdatePanelFromPage(callbackPanelName, containerName, pageName);
+        }
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+	<a style="font-family:Tahoma;font-size:12px" href="../Default.aspx?type=ASPNET">« Back to examples</a>
+    <div>
+        <h3 align="center">Master page header</h3> 
+        <table width="600px" height="500px">
+            <tr>
+                <td valign="top" style="border-right:1px solid #cccccc;width:150px;">
+                     <h5 align="center"><nobr>Navigation bar (master page)</nobr></h3> 
+                    <!--// The head of the menus //-->
+	                <oem:EasyMenu id="EasymenuMain" runat="server" ShowEvent="Always" StyleFolder="../../EasyMenu/styles/vertical1"
+		                Position="Vertical" Width="140">
+		                <Components>
+			                <oem:MenuItem InnerHtml="Components" ID="item1"></oem:MenuItem>
+			                <oem:MenuItem InnerHtml="Tutorials" ID="item2"></oem:MenuItem>
+			            </Components>
+	                </oem:EasyMenu>
+	
+	                <!--// The menus //-->
+	                <oem:EasyMenu id="Easymenu1" runat="server" ShowEvent="MouseOver" AttachTo="item1" Align="Right" Width="140" OffsetHorizontal="-2" StyleFolder="../../EasyMenu/styles/vertical1">
+		                <Components>
+			                <oem:MenuItem InnerHtml="ASP TreeView" OnClientClick="Navigate('callbackPanel_ASPTreeView', 'container', 'ASPTreeViewPage.aspx')" Url="Default.aspx#ASPTreeView" ID="menuItem13"></oem:MenuItem>
+			                <oem:MenuItem InnerHtml="Grid" OnClientClick="Navigate('callbackPanel_Grid', 'container', 'GridPage.aspx')" Url="Default.aspx#Grid" ID="menuItem1"></oem:MenuItem>
+		                </Components>
+	                </oem:EasyMenu>
+	                <oem:EasyMenu id="Easymenu2" runat="server" ShowEvent="MouseOver" AttachTo="item2" Align="Right" Width="140" OffsetHorizontal="-2" StyleFolder="../../EasyMenu/styles/vertical1">
+		                <Components>
+			                <oem:MenuItem InnerHtml="ASP TreeView dynamic loading" OnClientClick="Navigate('callbackPanel_ASPTreeViewDynamicLoading', 'container', 'ASPTreeViewPage.aspx')" Url="Default.aspx#ASPTreeViewDynamicLoading" ID="menuItem21"></oem:MenuItem>
+			            </Components>
+	                </oem:EasyMenu>
+                </td>
+                <td valign="top" style="padding-left:30px;">
+                    Content page (loaded using AJAXPage callback panel)
+                    <asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+                    </asp:contentplaceholder>            
+                </td>
+            </tr>
+        </table>
+        <h3 align="center">Master page footer</h3> 
+    </div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,86 @@
+using System;
+using System.Data.OleDb;
+using System.Web.UI.WebControls;
+using OboutInc.Combobox;
+using Obout.Grid;
+
+public class cs_customers : OboutInc.oboutAJAXPage
+{
+	protected Combobox ddlCustomers;
+	protected Grid gridOrders;
+	protected Literal lName;
+	protected Literal lCompany;
+	protected Literal lAddress;
+	protected Literal lPhone;
+	
+	void Page_Load(object sender, EventArgs e) {
+        if (!IsPostBack)
+			LoadCustomers();
+			
+		if (!IsPostBack || (Session["CustomerLoaded"] != null && (bool)Session["CustomerLoaded"]))
+        {
+			Session["CustomerLoaded"] = false;
+			int CustomerID = 1;
+			if (IsCallback && Session["CustomerID"] != null)
+				CustomerID = Int32.Parse(Session["CustomerID"].ToString());
+			
+			LoadCustomerDetails(CustomerID);
+			LoadCustomerOrders(CustomerID);
+			ddlCustomers.Value = CustomerID.ToString();
+		}
+    }
+	
+	private void LoadCustomers() {
+		// load customers list from the database
+		OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/customer.mdb"));
+		myConn.Open();
+		
+		OleDbCommand myComm;
+		myComm = new OleDbCommand("select CustomerID, CustomerName from Customers", myConn);
+		OleDbDataReader myReader = myComm.ExecuteReader();
+		while (myReader.Read())
+			ddlCustomers.AddOption(myReader.GetInt32(0).ToString(), myReader.GetString(1), "");
+		myReader.Close();
+		myConn.Close();	
+	}
+	
+	public void LoadCustomer(int CustomerID) {
+		Session["CustomerID"] = CustomerID;
+		Session["CustomerLoaded"] = true;
+	}
+	
+	private void LoadCustomerDetails(int CustomerID) {
+		// load customers list from the database
+		OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/customer.mdb"));
+		myConn.Open();
+		
+		OleDbCommand myComm;
+		myComm = new OleDbCommand("select CustomerName, CustomerCompany, CustomerAddress, CustomerPhone from Customers where CustomerID = " + CustomerID.ToString(), myConn);
+		OleDbDataReader myReader = myComm.ExecuteReader();
+		while (myReader.Read()) {
+			lName.Text = myReader.GetString(0);
+			lCompany.Text = myReader.GetString(1);
+			lAddress.Text = myReader.GetString(2);
+			lPhone.Text = myReader.GetString(3);
+		}
+		
+		myReader.Close();
+		myConn.Close();	 
+	}
+	
+	private void LoadCustomerOrders(int CustomerID) {
+		OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/customer.mdb"));
+
+		string query = "SELECT distinct ItemName, ItemPrice,  Format(OrderDate, \"Short Date\") as OrderDate, OrderStatus, count(OrderID) as OrderCount FROM Orders O inner join Items I on O.ItemID = I.ItemID where O.CustomerID = " + CustomerID.ToString() + " group by O.ItemID, ItemName, ItemPrice, OrderDate, OrderStatus";
+		
+		OleDbCommand myComm = new OleDbCommand(query, myConn);
+		myConn.Open();
+		OleDbDataReader myReader = myComm.ExecuteReader();
+		
+		gridOrders.DataSource = myReader;
+		gridOrders.DataBind();
+		
+		myReader.Close();
+	}	
+	
+}

@@ -1,0 +1,25 @@
+﻿@model Mvc3.Extensions.Demo.Areas.CascadingDropDownLists.Models.Atlas
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<h2>
+	Cascading using Microsoft AJAX (Ajax.BeginForm helper) 
+</h2>
+<h3>
+	<a href="http://weblogs.asp.net/raduenuca/archive/2011/03/20/asp-net-mvc-cascading-dropdown-lists-tutorial-part-3-cascading-using-microsoft-ajax-ajax-beginform-helper.aspx">
+		Cascading Dropdown Lists Tutorial–Part 3: Cascading using Microsoft AJAX (Ajax.BeginForm helper)</a>
+</h3>
+
+Only Romania has cities entries (select Europe then Romania)
+
+@Html.Partial( MVC.CascadingDropDownLists.DropDownAjaxPost.Views._Continents )
+<div id="countries">
+	@Html.Partial( MVC.CascadingDropDownLists.DropDownAjaxPost.Views._Countries )
+</div>
+<div id="cities">
+	@Html.Partial( MVC.CascadingDropDownLists.DropDownAjaxPost.Views._Cities )
+</div>
+
+@DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:fff")

@@ -1,0 +1,31 @@
+<%@ Register Src="vb_autosuggest.ascx" TagName="AutoSuggestControl" TagPrefix="uc1" %>
+<%@ Page language="VB" Inherits="vb_autosuggest" CodeFile="vb_autosuggest.aspx.vb" %>
+<html>
+    <head runat="server">
+        <style type="text/css">
+            .tdText 
+            {
+		        font:11px Verdana;
+		        color:#333333;
+	        }
+        </style>
+    </head>
+    <body>
+        <br />
+        <br />
+        <span class="tdText">
+            <b>English Dictionary with AJAX Autosuggest inside user control</b>
+            <br /><br />
+            Search a word in the dictionary. The results will be retrived from the
+            database without reloading the page. 
+            <br /><br />
+            The database for this example contains only the words starting with "A"
+            <br /><br /><br />
+        </span>
+        
+		<uc1:AutoSuggestControl ID="AutoSuggestControl1" runat="server" />
+        <br /><br />
+		<a href="Default.aspx?type=VBNET">« Back to examples</a>
+    </body>
+</html>
+

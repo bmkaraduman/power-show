@@ -1,0 +1,652 @@
+﻿using System;
+using System.Collections;
+using System.Configuration;
+using System.Data;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using Obout.Grid;
+using OboutInc.Combobox;
+using System.Data.OleDb;
+
+
+public partial class AJAXPage_cs_integration_dynamic_combo : OboutInc.oboutAJAXPage
+{
+    Grid grid1 = new Grid();
+    OboutInc.Calendar2.Calendar dummyCal = new OboutInc.Calendar2.Calendar();
+    static readonly object obj = new object();
+
+    protected void Page_load(object sender, EventArgs e)
+    {
+        grid1.ID = "grid1";
+        grid1.CallbackMode = true;
+        grid1.Serialize = true;
+        grid1.AutoGenerateColumns = false;
+        grid1.AllowAddingRecords = false;
+
+        grid1.TemplateSettings.RowEditTemplateId = "tplRowEdit";
+
+        grid1.FolderStyle = "../grid/styles/premiere_blue";
+
+        // setting the event handlers
+
+        grid1.UpdateCommand += new Obout.Grid.Grid.EventHandler(UpdateRecord);
+        grid1.Rebind += new Obout.Grid.Grid.DefaultEventHandler(RebindGrid);
+
+
+        // creating the Template for editing Rows
+        //------------------------------------------------------------------------
+        GridRuntimeTemplate RowEditTemplate = new GridRuntimeTemplate();
+        RowEditTemplate.ID = "tplRowEdit";
+        RowEditTemplate.Template = new Obout.Grid.RuntimeTemplate();
+        RowEditTemplate.Template.CreateTemplate += new Obout.Grid.GridRuntimeTemplateEventHandler(CreateRowEditTemplate);
+        //------------------------------------------------------------------------
+
+        //------------------------------------------------------------------------
+        GridRuntimeTemplate editBtnTemplate = new GridRuntimeTemplate();
+        editBtnTemplate.ID = "editBtnTemplate";
+        editBtnTemplate.Template = new Obout.Grid.RuntimeTemplate();
+        editBtnTemplate.Template.CreateTemplate += new Obout.Grid.GridRuntimeTemplateEventHandler(CreateEditBtnTemplate);
+        //------------------------------------------------------------------------
+
+        //------------------------------------------------------------------------
+        GridRuntimeTemplate updateBtnTemplate = new GridRuntimeTemplate();
+        updateBtnTemplate.ID = "updateBtnTemplate";
+        updateBtnTemplate.Template = new Obout.Grid.RuntimeTemplate();
+        updateBtnTemplate.Template.CreateTemplate += new Obout.Grid.GridRuntimeTemplateEventHandler(CreateUpdateBtnTemplate);
+        //------------------------------------------------------------------------
+
+        grid1.Templates.Add(RowEditTemplate);
+        grid1.Templates.Add(editBtnTemplate);
+        grid1.Templates.Add(updateBtnTemplate);
+
+        // creating the columns
+        Column oCol1 = new Column();
+        oCol1.DataField = "OrderID";
+        oCol1.ReadOnly = true;
+        oCol1.Visible = false;
+        oCol1.HeaderText = "ORDER ID";
+        oCol1.Width = "150";
+
+        Column oCol2 = new Column();
+        oCol2.DataField = "ShipName";
+        oCol2.Visible = true;
+        oCol2.HeaderText = "NAME";
+        oCol2.Width = "200";
+
+
+
+        Column oCol3 = new Column();
+        oCol3.DataField = "ShipCountry";
+        oCol3.Visible = true;
+        oCol3.HeaderText = "COUNTRY";
+        oCol3.Width = "200";
+
+
+        Column oCol4 = new Column();
+        oCol4.DataField = "OrderDateFormatted";
+        oCol4.Visible = true;
+        oCol4.HeaderText = "ORDER DATE";
+        oCol4.Width = "170";
+
+
+        Column oCol5 = new Column();
+        oCol5.Width = "200";
+        oCol5.AllowEdit = true;
+        oCol5.TemplateSettings.TemplateId = "editBtnTemplate";
+        oCol5.TemplateSettings.EditTemplateId = "updateBtnTemplate";
+
+        // add the columns to the Columns collection of the grid
+        grid1.Columns.Add(oCol1);
+        grid1.Columns.Add(oCol2);
+        grid1.Columns.Add(oCol3);
+        grid1.Columns.Add(oCol4);
+        grid1.Columns.Add(oCol5);
+
+        // add the grid to the controls collection of the PlaceHolder        
+        phGrid1.Controls.Add(grid1);
+
+
+        if (!Page.IsPostBack)
+        {
+            CreateGrid();
+        }
+    }
+
+    // Create the methods that will load the data into the templates
+    //------------------------------------------------------------------------
+    public void CreateEditBtnTemplate(Object sender, Obout.Grid.GridRuntimeTemplateEventArgs e)
+    {
+        Literal oLiteral = new Literal();
+        e.Container.Controls.Add(oLiteral);
+        oLiteral.DataBinding += new EventHandler(DataBindEditBtnTemplate);
+    }
+    protected void DataBindEditBtnTemplate(Object sender, EventArgs e)
+    {
+        Literal oLiteral = sender as Literal;
+        Obout.Grid.TemplateContainer oContainer = oLiteral.NamingContainer as Obout.Grid.TemplateContainer;
+
+        oLiteral.Text = "<input type=\"button\" id=\"btnEdit_" + oContainer.PageRecordIndex + "\" class=\"tdText\" value=\"Edit\" onclick=\"ShowDetails(this)\"/> | <input type=\"button\" id=\"btnDetails_" + oContainer.PageRecordIndex + "\" class=\"tdText\" value=\"View Details\" onclick=\"ShowDetails(this)\"/>";
+    }
+    //------------------------------------------------------------------------
+
+    //------------------------------------------------------------------------
+    public void CreateUpdateBtnTemplate(Object sender, Obout.Grid.GridRuntimeTemplateEventArgs e)
+    {
+        Literal oLiteral = new Literal();
+        e.Container.Controls.Add(oLiteral);
+        oLiteral.DataBinding += new EventHandler(DataBindUpdateBtnTemplate);
+    }
+    protected void DataBindUpdateBtnTemplate(Object sender, EventArgs e)
+    {
+        Literal oLiteral = sender as Literal;
+        Obout.Grid.TemplateContainer oContainer = oLiteral.NamingContainer as Obout.Grid.TemplateContainer;
+
+        oLiteral.Text = "&nbsp;";
+    }
+    //------------------------------------------------------------------------
+
+    //------------------------------------------------------------------------
+    public void CreateRowEditTemplate(Object sender, Obout.Grid.GridRuntimeTemplateEventArgs e)
+    {
+        PlaceHolder oPH1 = new PlaceHolder();
+        e.Container.Controls.Add(oPH1);
+        oPH1.DataBinding += new EventHandler(DataBindRowEditTemplate);
+    }
+    protected void DataBindRowEditTemplate(Object sender, EventArgs e)
+    {
+        PlaceHolder oPH1 = sender as PlaceHolder;
+        Obout.Grid.TemplateContainer oContainer = oPH1.NamingContainer as Obout.Grid.TemplateContainer;
+
+        Panel DetailsContainer = new Panel();
+        DetailsContainer.ID = "DetailsContainer";
+        DetailsContainer.Attributes["style"] = "display:none";
+
+        Panel EditContainer = new Panel();
+        EditContainer.ID = "EditContainer";
+        EditContainer.Attributes["style"] = "display:none";
+
+        EditContainer.Controls.Add(CreateTableForEdit());
+        DetailsContainer.Controls.Add(CreateTableForDetails());
+
+        oPH1.Controls.Add(EditContainer);
+        oPH1.Controls.Add(DetailsContainer);
+    }
+
+    public Table CreateTableForEdit()
+    {
+        Table oTable = new Table();
+
+        oTable.CssClass = "rowEditTable";
+
+        TableRow oTr = new TableRow();
+
+        TableCell oCell1 = new TableCell();
+        TableCell oCell2 = new TableCell();
+
+        // For Ship Information
+
+        Panel oPanelShipInformation = new Panel();
+        oPanelShipInformation.Attributes["style"] = "width: 275px; height: 216px";
+        oPanelShipInformation.GroupingText = "Ship Information";
+        Table oTableShipInformation = new Table();
+
+        oTableShipInformation.Rows.Add(CreateTableRowWithTextbox("Ship Name:", "txtShipName"));
+        oTableShipInformation.Rows.Add(CreateTableRowWithTextbox("Ship Address:", "txtShipAddress"));
+        oTableShipInformation.Rows.Add(CreateTableRowWithTextbox("Ship Region:", "txtShipRegion"));
+        oTableShipInformation.Rows.Add(CreateTableRowWithTextbox("Ship Postal Code:", "txtShipPostalCode"));
+        oTableShipInformation.Rows.Add(CreateTableRowWithCombobox("Ship Continent:", "cboContinent", "SelectContinent()"));
+        oTableShipInformation.Rows.Add(CreateTableRowWithCombobox("Ship Country:", "cboCountry", "SelectCountry()"));
+        oTableShipInformation.Rows.Add(CreateTableRowWithCombobox("Ship City:", "cboCity", string.Empty));
+        oTableShipInformation.Rows.Add(CreateEmptyTableRow());
+
+        oPanelShipInformation.Controls.Add(oTableShipInformation);
+        oCell1.Controls.Add(oPanelShipInformation);
+
+        // For Ship Information
+        Panel oPanelOrderInformation = new Panel();
+        oPanelOrderInformation.Attributes["style"] = "width: 275px; height: 216px";
+        oPanelOrderInformation.GroupingText = "Order Information";
+        Table oTableOrderInformation = new Table();
+
+        oTableOrderInformation.Rows.Add(CreateTableRowWithLabel("Order ID:", "txtOrderID"));
+        oTableOrderInformation.Rows.Add(CreateTableRowWithCalendar("Order Date:", "txtOrderDate", "gridCal1"));
+        oTableOrderInformation.Rows.Add(CreateTableRowWithCalendar("Required Date:", "txtRequiredDate", "gridCal2"));
+        oTableOrderInformation.Rows.Add(CreateTableRowWithCalendar("Shipped Date:", "txtShippedDate", "gridCal3"));
+        oTableOrderInformation.Rows.Add(CreateTableRowWithTextbox("Ship Via:", "txtShipVia"));
+        oTableOrderInformation.Rows.Add(CreateTableRowWithCheckbox("Sent:", "chkSentEdit"));
+
+
+        oPanelOrderInformation.Controls.Add(oTableOrderInformation);
+        oCell2.Controls.Add(oPanelOrderInformation);
+
+
+        oTr.Cells.Add(oCell1);
+        oTr.Cells.Add(oCell2);
+        oTable.Rows.Add(oTr);
+
+        oTable.Rows.Add(CreateEmptyTableRow());
+
+        TableRow oTr2 = new TableRow();
+        TableCell oCell2_1 = new TableCell();
+        oCell2_1.ColumnSpan = 3;
+        oCell2_1.HorizontalAlign = HorizontalAlign.Center;
+
+        Button oSaveButton = new Button();
+        oSaveButton.CssClass = "tdText";
+        oSaveButton.OnClientClick = "saveChanges();return false";
+        oSaveButton.Text = "Save";
+
+        Literal oSpacer = new Literal();
+        oSpacer.Text = " ";
+
+        Button oCancelButton = new Button();
+        oCancelButton.CssClass = "tdText";
+        oCancelButton.OnClientClick = "grid1.cancel();return false";
+        oCancelButton.Text = "Cancel";
+
+        oCell2_1.Controls.Add(oSaveButton);
+        oCell2_1.Controls.Add(oSpacer);
+        oCell2_1.Controls.Add(oCancelButton);
+        oTr2.Controls.Add(oCell2_1);
+
+        oTable.Rows.Add(oTr2);
+
+        return oTable;
+    }
+
+    public Table CreateTableForDetails()
+    {
+        Table oTable = new Table();
+
+        oTable.CssClass = "rowEditTable";
+
+        TableRow oTr = new TableRow();
+
+        TableCell oCell1 = new TableCell();
+        TableCell oCell2 = new TableCell();
+
+        // For Ship Information
+
+        Panel oPanelShipInformation = new Panel();
+        oPanelShipInformation.Attributes["style"] = "width: 275px; height: 150px";
+        oPanelShipInformation.GroupingText = "Ship Information";
+        Table oTableShipInformation = new Table();
+
+        oTableShipInformation.Rows.Add(CreateTableRowWithLabel("Ship Name:", "lblShipName"));
+        oTableShipInformation.Rows.Add(CreateTableRowWithLabel("Ship Address:", "lblShipAddress"));
+        oTableShipInformation.Rows.Add(CreateTableRowWithLabel("Ship City:", "lblShipCity"));
+        oTableShipInformation.Rows.Add(CreateTableRowWithLabel("Ship Region:", "lblShipRegion"));
+        oTableShipInformation.Rows.Add(CreateTableRowWithLabel("Ship Postal Code:", "lblShipPostalCode"));
+        oTableShipInformation.Rows.Add(CreateTableRowWithLabel("Ship Country:", "lblCountry"));
+        oTableShipInformation.Rows.Add(CreateEmptyTableRow());
+
+        oPanelShipInformation.Controls.Add(oTableShipInformation);
+        oCell1.Controls.Add(oPanelShipInformation);
+
+        // For Ship Information
+        Panel oPanelOrderInformation = new Panel();
+        oPanelOrderInformation.Attributes["style"] = "width: 275px; height: 150px";
+        oPanelOrderInformation.GroupingText = "Order Information";
+
+        Table oTableOrderInformation = new Table();
+
+
+        oTableOrderInformation.Rows.Add(CreateTableRowWithLabel("Order Date:", "lblOrderDate"));
+        oTableOrderInformation.Rows.Add(CreateTableRowWithLabel("Required Date:", "lblRequiredDate"));
+        oTableOrderInformation.Rows.Add(CreateTableRowWithLabel("Shipped Date:", "lblShippedDate"));
+        oTableOrderInformation.Rows.Add(CreateTableRowWithLabel("Ship Via:", "lblShipVia"));
+        oTableOrderInformation.Rows.Add(CreateTableRowWithCheckbox("Sent:", "chkSent"));
+        oTableOrderInformation.Rows.Add(CreateEmptyTableRow());
+        oTableOrderInformation.Rows.Add(CreateEmptyTableRow());
+
+
+        oPanelOrderInformation.Controls.Add(oTableOrderInformation);
+        oCell2.Controls.Add(oPanelOrderInformation);
+
+
+        oTr.Cells.Add(oCell1);
+        oTr.Cells.Add(oCell2);
+        oTr.VerticalAlign = VerticalAlign.Top;
+        oTr.HorizontalAlign = HorizontalAlign.Center;
+        oTable.Rows.Add(oTr);
+
+        TableRow oTr2 = new TableRow();
+        TableCell oCell2_1 = new TableCell();
+        oCell2_1.ColumnSpan = 3;
+        oCell2_1.HorizontalAlign = HorizontalAlign.Center;
+
+        Button oHideButton = new Button();
+        oHideButton.CssClass = "tdText";
+        oHideButton.OnClientClick = "grid1.cancel();return false";
+        oHideButton.Text = "Hide Details";
+
+
+        oCell2_1.Controls.Add(oHideButton);
+
+        oTr2.Controls.Add(oCell2_1);
+
+        oTable.Rows.Add(oTr2);
+
+        return oTable;
+    }
+
+    public TableRow CreateTableRowWithTextbox(string sLabelText, string sControlId)
+    {
+        TableRow oTr = new TableRow();
+        TableCell oCell1 = new TableCell();
+        TableCell oCell2 = new TableCell();
+
+        Label oLabel = new Label();
+        oLabel.Text = sLabelText;
+        oCell1.Wrap = false;
+        oCell1.Controls.Add(oLabel);
+
+        Literal oLiteral = new Literal();
+        oLiteral.Text = "<input id=\"" + sControlId + "\" style=\"width: 150px;\" class=\"ob_gEC\" Type=\"text\"  />";
+
+        oCell2.Controls.Add(oLiteral);
+
+        oTr.Cells.Add(oCell1);
+        oTr.Cells.Add(oCell2);
+
+        return oTr;
+    }
+
+    public TableRow CreateTableRowWithCombobox(string sLabelText, string sControlId, string clientChangeMethod)
+    {
+        TableRow oTr = new TableRow();
+        TableCell oCell1 = new TableCell();
+        TableCell oCell2 = new TableCell();
+
+        Label oLabel = new Label();
+        oLabel.Text = sLabelText;
+        oCell1.Controls.Add(oLabel);
+        OboutInc.Combobox.Combobox cbo1 = new Combobox();
+
+        cbo1.ID = sControlId;
+        cbo1.Height = 150;
+        cbo1.Width = 150;
+        cbo1.InnerWidth = 150;
+        cbo1.AlignContainer = "right";
+        cbo1.FolderStyle = "../Combobox/styles/default";
+        if (!string.IsNullOrEmpty(clientChangeMethod)) cbo1.OnClientChange = clientChangeMethod;
+        else
+        {
+            oTr.ID = "cityRow";
+            oTr.Style.Add("display", "none");
+        }
+        oCell2.Controls.Add(cbo1);
+
+        oTr.Cells.Add(oCell1);
+        oTr.Cells.Add(oCell2);
+
+        return oTr;
+    }
+
+    public TableRow CreateTableRowWithCalendar(string sLabelText, string sControlId, string sCalendarId)
+    {
+        TableRow oTr = new TableRow();
+        TableCell oCell1 = new TableCell();
+        TableCell oCell2 = new TableCell();
+        TableCell oCell3 = new TableCell();
+
+        Label oLabel = new Label();
+        oLabel.Text = sLabelText;
+        oCell1.Controls.Add(oLabel);
+
+        Literal oLiteral = new Literal();
+        oLiteral.Text = "<input id=\"" + sControlId + "\" style=\"width: 150px;\" class=\"ob_gEC\" type=\"text\"  />";
+
+        oCell2.Controls.Add(oLiteral);
+
+        OboutInc.Calendar2.Calendar cal1 = new OboutInc.Calendar2.Calendar();
+        cal1.ID = sCalendarId;
+        cal1.StyleFolder = "../Calendar/styles/expedia";
+        cal1.DatePickerMode = true;
+        cal1.TextBoxId = sControlId;
+        cal1.DatePickerImagePath = "../Calendar/styles/icon2.gif";
+
+        oCell3.Controls.Add(cal1);
+
+        oTr.Cells.Add(oCell1);
+        oTr.Cells.Add(oCell2);
+        oTr.Cells.Add(oCell3);
+
+        return oTr;
+    }
+
+    public TableRow CreateTableRowWithCheckbox(string sLabelText, string sControlId)
+    {
+        TableRow oTr = new TableRow();
+        TableCell oCell1 = new TableCell();
+        TableCell oCell2 = new TableCell();
+
+        Label oLabel = new Label();
+        oLabel.Text = sLabelText;
+        oCell1.Controls.Add(oLabel);
+
+        Literal oLiteral = new Literal();
+        oLiteral.Text = "<input id=\"" + sControlId + "\" class=\"tdText\" Type=\"checkbox\"  />";
+
+        oCell2.Controls.Add(oLiteral);
+
+        oTr.Cells.Add(oCell1);
+        oTr.Cells.Add(oCell2);
+
+        return oTr;
+    }
+
+
+    public TableRow CreateTableRowWithLabel(string sLabelText, string sControlId)
+    {
+        TableRow oTr = new TableRow();
+        TableCell oCell1 = new TableCell();
+        TableCell oCell2 = new TableCell();
+        oCell1.CssClass = "txtText";
+        oCell2.CssClass = "txtText";
+
+        Label oLabel = new Label();
+        oLabel.Text = sLabelText;
+        oCell1.Wrap = false;
+        oCell1.Controls.Add(oLabel);
+
+        Literal oLiteral = new Literal();
+        oLiteral.Text = "<input id=\"" + sControlId + "\" style=\"width: 150px;\" class=\"txtText\" readonly=\"readonly\"  />";
+
+        oCell2.Controls.Add(oLiteral);
+
+        oTr.Cells.Add(oCell1);
+        oTr.Cells.Add(oCell2);
+
+        return oTr;
+    }
+
+    public TableRow CreateEmptyTableRow()
+    {
+        TableRow oTr = new TableRow();
+        TableCell oCell1 = new TableCell();
+        oCell1.ColumnSpan = 2;
+
+        Literal oLiteral = new Literal();
+        oLiteral.Text = "<br />";
+
+        oCell1.Controls.Add(oLiteral);
+        oTr.Cells.Add(oCell1);
+
+        return oTr;
+    }
+
+    //-----------------------------------------------------------------------
+
+    protected void CreateGrid()
+    {
+        OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/Northwind.mdb"));
+
+        OleDbCommand myComm = new OleDbCommand("SELECT TOP 25 *, FORMAT(OrderDate, \"mm/dd/yyyy\") AS OrderDateFormatted, FORMAT(RequiredDate, \"mm/dd/yyyy\") AS RequiredDateFormatted, FORMAT(ShippedDate, \"mm/dd/yyyy\") AS ShippedDateFormatted FROM Orders ORDER BY OrderID DESC", myConn);
+        myConn.Open();
+        OleDbDataReader myReader = myComm.ExecuteReader();
+
+        grid1.DataSource = myReader;
+        grid1.DataBind();
+
+        myConn.Close();
+    }
+    protected void DeleteRecord(object sender, GridRecordEventArgs e)
+    {
+        OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/Northwind.mdb"));
+        myConn.Open();
+
+        OleDbCommand myComm = new OleDbCommand("DELETE FROM Orders WHERE OrderID = @OrderID", myConn);
+
+        myComm.Parameters.Add("@OrderID", OleDbType.Integer).Value = e.Record["OrderID"];
+
+        myComm.ExecuteNonQuery();
+        myConn.Close();
+    }
+
+    protected void UpdateRecord(object sender, GridRecordEventArgs e)
+    {
+        OleDbConnection myConn = new
+        OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/Northwind.mdb"));
+        myConn.Open();
+
+        OleDbCommand myComm = new OleDbCommand(@"UPDATE Orders SET ShipName = @ShipName, ShipAddress=@ShipAddress, ShipCity = @ShipCity,ShipRegion=@ShipRegion, ShipPostalCode=@ShipPostalCode, ShipCountry =@ShipCountry, Sent = @Sent, OrderDate=@OrderDate,RequiredDate=@RequiredDate, ShippedDate=@ShippedDate, ShipVia=@ShipVia
+        WHERE OrderID = @OrderID", myConn);
+
+        myComm.Parameters.Add("@ShipName", OleDbType.VarChar).Value = e.Record["ShipName"];
+        myComm.Parameters.Add("@ShipAddress", OleDbType.VarChar).Value = e.Record["ShipAddress"];
+        myComm.Parameters.Add("@ShipCity", OleDbType.VarChar).Value = e.Record["ShipCity"];
+        myComm.Parameters.Add("@ShipRegion", OleDbType.VarChar).Value = e.Record["ShipRegion"];
+        myComm.Parameters.Add("@ShipPostalCode", OleDbType.VarChar).Value = e.Record["ShipPostalCode"];
+        myComm.Parameters.Add("@ShipCountry", OleDbType.VarChar).Value = e.Record["ShipCountry"];
+        myComm.Parameters.Add("@Sent", OleDbType.Boolean).Value = e.Record["Sent"];
+        myComm.Parameters.Add("@OrderDate", OleDbType.Date).Value = e.Record["OrderDate"];
+        myComm.Parameters.Add("@RequiredDate", OleDbType.Date).Value = e.Record["RequiredDate"];
+        myComm.Parameters.Add("@ShippedDate", OleDbType.Date).Value = e.Record["ShippedDate"];
+        myComm.Parameters.Add("@ShipVia", OleDbType.Integer).Value = e.Record["ShipVia"];
+        myComm.Parameters.Add("@OrderID", OleDbType.Integer).Value = e.Record["OrderID"];
+        myComm.ExecuteNonQuery();
+        myConn.Close();
+    }
+
+
+
+    public string[] LoadRecord(string orderId)
+    {
+        OleDbConnection myConn = new
+        OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/Northwind.mdb"));
+
+        OleDbCommand myComm = new OleDbCommand("SELECT *,FORMAT(OrderDate,\"mm/dd/yyyy\") AS OrderDateFormatted,FORMAT(RequiredDate, \"mm/dd/yyyy\") AS RequiredDateFormatted,FORMAT(ShippedDate, \"mm/dd/yyyy\") AS ShippedDateFormatted FROM Orders WHERE OrderId=@OrderID", myConn);
+        myComm.Parameters.Add("@OrderID", OleDbType.Integer).Value = int.Parse(orderId);
+        myConn.Open();
+        OleDbDataReader myReader = myComm.ExecuteReader();
+        string[] sRecord = new string[12];
+        while (myReader.Read())
+        {
+            sRecord[0] = myReader["ShipName"].ToString();
+            sRecord[1] = myReader["ShipAddress"].ToString();
+            sRecord[2] = myReader["ShipCity"].ToString();
+            sRecord[3] = myReader["ShipRegion"].ToString();
+            sRecord[4] = myReader["ShipPostalCode"].ToString();
+            sRecord[5] = myReader["ShipCountry"].ToString();
+            sRecord[6] = myReader["OrderID"].ToString();
+            sRecord[7] = myReader["OrderDate"].ToString();
+            sRecord[8] = myReader["RequiredDate"].ToString();
+            sRecord[9] = myReader["ShippedDate"].ToString();
+            sRecord[10] = myReader["ShipVia"].ToString();
+            sRecord[11] = myReader["Sent"].ToString();
+
+        }
+        myConn.Close();
+        return sRecord;
+
+    }
+
+    protected void RebindGrid(object sender, EventArgs e)
+    {
+        CreateGrid();
+    }
+
+    // update the country list with the countries from the selected continent
+    public string SetCountry(string ContinentID)
+    {
+        // load continent list from the database
+        //OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("continent.mdb"));
+        OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/DynamicCombobox.mdb"));
+        myConn.Open();
+
+        OleDbCommand myComm;
+        myComm = new OleDbCommand("select CountryID, CountryName from Country where ContinentID = " + ContinentID + " order by CountryName", myConn);
+        OleDbDataReader myReader = myComm.ExecuteReader();
+        string responseData = string.Empty;
+        lock (obj)
+        {
+            while (myReader.Read())
+            {
+                string data = myReader.GetInt32(0).ToString() + "@" + myReader.GetString(1);
+                responseData += (responseData.Length == 0) ? data : ("|" + data);
+            }
+        }
+        myReader.Close();
+        myConn.Close();
+
+        return responseData;
+    }
+
+    // update the city list with the cities from the selected country
+    public string SetCity(string CountryID)
+    {
+        // load continent list from the database
+        //OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("continent.mdb"));
+        OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/DynamicCombobox.mdb"));
+        myConn.Open();
+
+        OleDbCommand myComm;
+        myComm = new OleDbCommand("select CityID, CityName from City where CountryID = " + CountryID + " order by CityName", myConn);
+        OleDbDataReader myReader = myComm.ExecuteReader();
+        string responseData = string.Empty;
+        lock (obj)
+        {
+            while (myReader.Read())
+            {
+                string data = myReader.GetInt32(0).ToString() + "@" + myReader.GetString(1);
+                responseData += (responseData.Length == 0) ? data : ("|" + data);
+            }
+        }
+        myReader.Close();
+        myConn.Close();
+
+        return responseData;
+    }
+
+    public string SetContinent(string Country)
+    {
+        OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/DynamicCombobox.mdb"));
+        myConn.Open();
+
+        OleDbCommand myComm;
+        myComm = new OleDbCommand("select ContinentName from Continent where ContinentID = (select ContinentID from Country where CountryName = '" + Country + "')", myConn);
+        OleDbDataReader myReader = myComm.ExecuteReader();
+        string continentName = string.Empty;
+        while (myReader.Read())
+        {
+            continentName = myReader.GetString(0);
+        }
+        myReader.Close();
+        myComm = new OleDbCommand("select ContinentID, ContinentName from Continent", myConn);
+        myReader = myComm.ExecuteReader();
+        string continentsForCombo = string.Empty;
+        while (myReader.Read())
+        {
+            string data = myReader.GetInt32(0).ToString() + "@" + myReader.GetString(1);
+            continentsForCombo += (continentsForCombo.Length == 0) ? data : ("|" + data);
+        }
+        myReader.Close();
+        myConn.Close();
+        return (continentName + "^" + continentsForCombo);
+    }
+}

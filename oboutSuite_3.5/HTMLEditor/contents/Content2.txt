@@ -1,0 +1,43 @@
+<br />
+<p style="margin: 0px; text-align: center"><img src="http://test.obout.com/editor_new/images/text_decoration_header.gif" /></p>
+<p style="margin: 0px; text-align: center"><br /></p>
+<table cellspacing="0" cellpadding="0" style="border-style: none; width: 100%;border-collapse: collapse">
+<tbody>
+<tr>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td>
+<td align="center" style="border: #000000 1px solid">Generates browser-independent</td>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td></tr>
+<tr>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td>
+<td align="center" style="border: #000000 1px solid">and standards-compliant HTML</td>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td></tr>
+<tr>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td></tr>
+<tr>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td>
+<td align="center" style="border: #000000 1px solid">Loads features on demand -- lightweight and fast</td>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td></tr>
+<tr>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td></tr>
+<tr>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td>
+<td align="center" style="border: #000000 1px solid">Fully customizable: external image galleries,</td>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td></tr>
+<tr>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td>
+<td align="center" style="border: #000000 1px solid">custom buttons, import/export content, templates</td>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td></tr>
+<tr>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td>
+<td align="center" style="border: #000000 1px solid">&nbsp;</td></tr>
+<tr>
+<td style="border: #000000 1px solid">&nbsp;</td>
+<td align="center" style="border: #000000 1px solid">Integrates with grid, AJAXPage, flyout and other controls</td>
+<td style="border: #000000 1px solid">&nbsp;</td></tr></tbody></table>
+<p style="margin: 0px; text-align: center"><br /></p>
+<p style="margin: 0px; text-align: center"><img src="http://test.obout.com/editor_new/images/text_decoration_footer.gif" /></p><br />

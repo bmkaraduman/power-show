@@ -1,0 +1,273 @@
+	/* Left */
+	.premiere_blue .ob_iBL
+	{
+    	position: absolute;
+    	font-size: 1px;
+    	height: 17px;
+    	width: 12px;
+    	left: 0px;
+    	background-image: url(images/button.png);
+	}
+	
+	* HTML .premiere_blue .ob_iBL
+	{
+	    -background-image: url(images/button.gif);
+	}
+	
+	/* Center */
+	.premiere_blue .ob_iBC
+	{
+		margin-left: 12px;
+	    margin-right: 12px;
+	    font-family: Verdana;
+		font-size: 10px;
+		color: #4B555E;
+		height: 17px;
+		line-height: 17px;
+		-moz-user-select: none;
+		background-repeat: repeat-x;
+		zoom: 1;
+		overflow: hidden;
+		background-image: url(images/button.png);
+	}
+	
+	* HTML .premiere_blue .ob_iBC
+	{
+	    -background-image: url(images/button.gif);
+	}
+	
+	.premiere_blue .ob_iBC div
+	{
+	    display: inline;
+	    position: relative;
+	    top: 3px;
+	    height: 10px;
+	    line-height: 10px;
+	}
+	
+	.premiere_blue .ob_iBC input
+	{
+	    font-size: 1px;
+	    width: 1px;
+	    height: 1px;
+	    position: absolute;
+	    top: 5px;
+	    left: 5px;
+	    z-index: -1;
+	    outline: 0;
+	    border: 0px;
+	}
+	
+	/* Right */
+	.premiere_blue .ob_iBR
+	{
+		position: absolute;
+		right: 0px;
+    	font-size: 1px;
+    	height: 17px;
+    	width: 12px;
+    	right: 0px;
+    	background-image: url(images/button.png);
+	}
+	
+	* HTML .premiere_blue .ob_iBR
+	{
+	    -background-image: url(images/button.gif);
+	}
+	
+	.premiere_blue .ob_iBOv
+	{
+	    position: absolute;
+	    left: 0px;
+	    bottom: 0px;
+	    top: 0px;
+	    right: 0px;
+	    background-image: url(images/overlay.gif);
+	    width: 100%;
+	    height: 17px;
+        float: left;	    
+	}
+	
+	
+	
+	
+	
+	/* Normal State - container */
+	.premiere_blue .ob_iBCN
+	{
+        position: relative;
+        display:-moz-inline-stack;
+        display:inline-block;
+        zoom:1;
+        *display:inline;
+        height: 17px;
+        font-size: 10px;
+    	padding: 0px;
+    	text-align: center;
+	}
+	
+	/* Normal State - left */
+	.premiere_blue .ob_iBCN .ob_iBL
+	{
+		background-position: 0px 0px;
+	}
+	
+	/* Normal State - center */
+	.premiere_blue .ob_iBCN .ob_iBC
+	{
+		background-position: 0px -85px;
+	}
+		
+	/* Normal State - right */
+	.premiere_blue .ob_iBCN .ob_iBR
+	{
+		background-position: -12px 0px;
+	}
+	
+	
+	
+	/* Over State - container */
+	.premiere_blue .ob_iBCO
+	{
+		position: relative;
+        display:-moz-inline-stack;
+        display:inline-block;
+        zoom:1;
+        *display:inline;
+        height: 17px;
+        font-size: 10px;
+    	padding: 0px;
+    	text-align: center;
+	}
+	
+	/* Over State - left */
+	.premiere_blue .ob_iBCO .ob_iBL
+	{
+		background-position: 0px -17px;
+	}
+	
+	/* Over State - center */
+	.premiere_blue .ob_iBCO .ob_iBC
+	{
+		background-position: 0px -102px;
+	}
+	
+	/* Over State - right */
+	.premiere_blue .ob_iBCO .ob_iBR
+	{
+		background-position: -12px -17px;
+	}
+	
+	
+	
+	
+	
+	/* Pressed State - container */
+	.premiere_blue .ob_iBCP
+	{
+		position: relative;
+        display:-moz-inline-stack;
+        display:inline-block;
+        zoom:1;
+        *display:inline;
+        height: 17px;
+        font-size: 10px;
+    	padding: 0px;
+    	text-align: center;
+	}
+	
+	/* Pressed State - left */
+	.premiere_blue .ob_iBCP .ob_iBL
+	{		
+		background-position: 0px -51px;
+	}
+	
+	/* Pressed State - center */
+	.premiere_blue .ob_iBCP .ob_iBC
+	{		
+		background-position: 0px -136px;
+	}
+	
+	.premiere_blue .ob_iBCP .ob_iBC div
+	{
+	    top: 4px;
+	    left: 2px;
+	}
+	
+	/* Pressed State - right */
+	.premiere_blue .ob_iBCP .ob_iBR
+	{		
+		background-position: -12px -51px;
+	}
+	
+	
+	
+	
+	
+	/* Focused State - container */
+	.premiere_blue .ob_iBCF
+	{
+		position: relative;
+        display:-moz-inline-stack;
+        display:inline-block;
+        zoom:1;
+        *display:inline;
+        height: 17px;
+        font-size: 10px;
+    	padding: 0px;
+    	text-align: center;
+	}
+	
+	/* Focused State - left */
+	.premiere_blue .ob_iBCF .ob_iBL
+	{
+		background-position: 0px -34px;
+	}
+	
+	/* Focused State - center */
+	.premiere_blue .ob_iBCF .ob_iBC
+	{
+		background-position: 0px -119px;
+	}
+	
+	/* Focused State - right */
+	.premiere_blue .ob_iBCF .ob_iBR
+	{
+		background-position: -12px -34px;
+	}
+	
+	
+	
+	
+	
+	/* Disabled State - container */
+	.premiere_blue .ob_iBCD
+	{
+		position: relative;
+        display:-moz-inline-stack;
+        display:inline-block;
+        zoom:1;
+        *display:inline;
+        height: 17px;
+        font-size: 10px;
+    	padding: 0px;
+    	text-align: center;
+	}
+	
+	/* Disabled State - left */
+	.premiere_blue .ob_iBCD .ob_iBL
+	{
+		background-position: 0px -68px;
+	}
+	
+	/* Disabled State - center */
+	.premiere_blue .ob_iBCD .ob_iBC
+	{
+		background-position: 0px -153px;
+	}	
+	
+	/* Disabled State - right */
+	.premiere_blue .ob_iBCD .ob_iBR
+	{
+		background-position: -12px -68px;
+	}

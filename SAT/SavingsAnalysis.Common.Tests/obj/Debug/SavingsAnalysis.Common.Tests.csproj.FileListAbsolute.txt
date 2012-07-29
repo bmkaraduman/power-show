@@ -1,0 +1,9 @@
+C:\OneStop\Research\SAT\SavingsAnalysis.Common.Tests\bin\Debug\SavingsAnalysis.Common.Tests.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Common.Tests\bin\Debug\SavingsAnalysis.Common.Tests.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Common.Tests\bin\Debug\nunit.framework.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Common.Tests\bin\Debug\SavingsAnalysis.Common.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Common.Tests\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Common.Tests\bin\Debug\SavingsAnalysis.Common.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Common.Tests\obj\Debug\SavingsAnalysis.Common.Tests.csprojResolveAssemblyReference.cache
+C:\OneStop\Research\SAT\SavingsAnalysis.Common.Tests\obj\Debug\SavingsAnalysis.Common.Tests.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Common.Tests\obj\Debug\SavingsAnalysis.Common.Tests.pdb

@@ -1,0 +1,10 @@
+F:\Blog\MVC.Extensions.Solution\MVC3.Extensions\obj\Release\ResolveAssemblyReference.cache
+F:\Blog\MVC.Extensions.Solution\MVC3.Extensions\bin\Release\Mvc3.Extensions.dll
+F:\Blog\MVC.Extensions.Solution\MVC3.Extensions\bin\Release\Mvc3.Extensions.pdb
+F:\Blog\MVC.Extensions.Solution\MVC3.Extensions\obj\Release\Mvc3.Extensions.dll
+F:\Blog\MVC.Extensions.Solution\MVC3.Extensions\obj\Release\Mvc3.Extensions.pdb
+E:\Blog\MVC.Extensions.Solution\MVC3.Extensions\bin\Release\Mvc3.Extensions.dll
+E:\Blog\MVC.Extensions.Solution\MVC3.Extensions\bin\Release\Mvc3.Extensions.pdb
+E:\Blog\MVC.Extensions.Solution\MVC3.Extensions\obj\Release\ResolveAssemblyReference.cache
+E:\Blog\MVC.Extensions.Solution\MVC3.Extensions\obj\Release\Mvc3.Extensions.dll
+E:\Blog\MVC.Extensions.Solution\MVC3.Extensions\obj\Release\Mvc3.Extensions.pdb

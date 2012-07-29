@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<template>
+  <zoompanel>
+    <div class="light_blue_oizg">
+    <div class="gallery_topholder">
+      <div class="gallery_topleft"></div>
+      <div class="gallery_top"></div>
+      <div class="gallery_topright"></div>
+    </div>
+      <div class="ZoomImageContainer">
+      <ul class="ZoomImageRow">
+        <li class="ZoomImage">{BigImage}</li>
+        <li class="ZoomImageDescription">{Description}</li>
+      </ul>
+
+      </div>
+      
+      <div class="gallery_btmholder">
+        <div class="gallery_btmleft"></div>
+        <div class="gallery_btm"></div>
+        <div class="gallery_btmright"></div>
+      </div>
+    </div>
+  </zoompanel>
+  <loading>
+    Loading...
+  </loading>
+  <background></background>
+</template>

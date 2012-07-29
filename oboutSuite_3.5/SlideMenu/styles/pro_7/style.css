@@ -1,0 +1,104 @@
+.SMParent {
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+    background-image:url(background_parent.gif);
+    background-repeat:repeat-x;
+	border-top:1px solid #DADBDB;
+    font:bold 8pt Tahoma;
+    color:#7E7D7B;
+    text-align:left;
+	padding: 2px;
+    padding-left: 12px;
+    height:21px;
+}
+
+.SMParentOver {
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+    background-image:url(background_parent.gif);
+    background-repeat:repeat-x;
+	border-top:1px solid #DADBDB;
+    font:bold 8pt Tahoma;
+    color:#006896;
+    text-align:left;
+	padding: 2px;
+    padding-left: 12px;
+	cursor:pointer; 
+    height:21px;
+}
+
+.SMParentSelected {
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+    background-image:url(background_parentselected.gif);
+    background-repeat:repeat-x;
+	border-top:1px solid #DADBDB;
+    font:bold 8pt Tahoma;
+    color:white;
+    text-align:left;
+	padding: 2px;
+    padding-left: 12px;
+    height:21px;
+}
+
+.SMChild {
+	font:8pt Tahoma; 
+	color:#232323;
+	text-decoration:none;
+    padding-left: 5px;
+	text-align:left;
+}
+.SMChild a {
+	color:#232323;
+	font:8pt Tahoma;
+	text-decoration:none;
+}
+
+.SMChildOver {
+	font:8pt Tahoma; 
+	color:#232323;
+	text-decoration:underline;
+    padding-left: 5px;
+	cursor:pointer;
+	text-align:left;
+}
+.SMChildOver a {
+	color:#232323;
+	font:8pt Tahoma;
+	text-decoration:underline;
+}
+
+.SMChildSelected {
+	font:bold 8pt Tahoma; 
+	color:#232323;
+	text-decoration:none;
+    padding-left: 7px;
+	text-align:left;
+}
+.SMChildSelected a {
+	color:#232323;
+	font:bold 8pt Tahoma;
+	text-decoration:none;
+}
+
+.SMChildrenBox {
+	padding-left:3px;
+}
+
+.SMMenu {
+	background-color:white;
+	border:1px solid #DADBDB;
+	border-top:none;
+	width: 150px;
+	border-top: none;
+	overflow:hidden;
+}
+
+.SMImageParent {
+	display:none;
+}
+
+.SMImageChild {
+	border:0px;
+	margin-right:2px;
+}

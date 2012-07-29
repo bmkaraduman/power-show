@@ -1,0 +1,460 @@
+/*  Treat this CSS file as 2 parts:                         */
+/*      Part 1 sets the background image and dimensions,    */
+/*      Part 2 sets the background position                 */
+
+
+/* Part 1 */
+/* Here we set background image and define dimensions of each element of the control */
+	
+	/* Top Left */
+	.plain .ob_iTaTL
+	{
+		position: absolute;
+    	font-family: Verdana;
+    	font-size: 1px;
+    	height: 20px;
+    	width: 7px;
+    	left: 0px;
+    	top: 0px;
+    	background-image: url(images/textarea-vertical.png);
+	}
+	* HTML .plain .ob_iTaTL
+	{
+	    -background-image: url(images/textarea-vertical.gif);
+	}
+	
+	/* Top Center */
+	.plain .ob_iTaTC
+	{
+		position: absolute;
+		height: 20px;
+		top: 0px;
+		left: 7px;
+		right: 7px;
+		font-family: Verdana;
+    	font-size: 1px;
+    	background-image: url(images/textarea-vertical.png);
+	}
+	* HTML .plain .ob_iTaTC
+	{
+	    -background-image: url(images/textarea-vertical.gif);
+	}
+	
+	/* Top Right */
+	.plain .ob_iTaTR
+	{
+		position: absolute;    	
+    	font-family: Verdana;
+    	font-size: 1px;
+    	height: 20px;
+		width: 7px;
+		right: 0px;
+		top: 0px;
+		background-image: url(images/textarea-vertical.png);
+	}
+	* HTML .plain .ob_iTaTR
+	{
+	    -background-image: url(images/textarea-vertical.gif);
+	}
+	
+	/* Middle Left */
+	.plain .ob_iTaML
+	{
+		position: absolute;
+    	font-family: Verdana;
+    	font-size: 1px;
+    	width: 7px;
+    	left: 0px;
+    	top: 20px;
+    	bottom: 7px;
+    	background-image: url(images/textarea-horizontal.png);
+	}
+	* HTML .plain .ob_iTaML
+	{
+	    -background-image: url(images/textarea-horizontal.gif);
+	}
+
+	/* Middle Center */
+	.plain .ob_iTaMC
+	{
+		position: absolute;
+		width: auto;
+		height: auto;
+		left: 7px;
+		top: 20px;
+		bottom: -6px;
+		right: 7px;
+		font-family: Verdana;
+    	font-size: 1px;    	
+	}
+	
+	/* Middle Right */
+	.plain .ob_iTaMR
+	{
+		position: absolute;
+    	font-family: Verdana;
+    	font-size: 1px;
+    	width: 7px;
+    	right: 0px;
+    	top: 20px;
+    	bottom: 7px;
+    	background-image: url(images/textarea-horizontal.png);
+	}
+	* HTML .plain .ob_iTaMR
+	{
+	    -background-image: url(images/textarea-horizontal.gif);
+	}
+	
+	/* Bottom Left */
+	.plain .ob_iTaBL
+	{
+		position: absolute;
+    	font-family: Verdana;
+    	font-size: 1px;
+    	height: 7px;
+    	width: 7px;
+    	left: 0px;
+    	bottom: 0px;
+    	background-image: url(images/textarea-vertical.png);
+	}
+	* HTML .plain .ob_iTaBL
+	{
+	    -background-image: url(images/textarea-vertical.gif);
+	}
+	
+	/* Bottom Center */
+	.plain .ob_iTaBC
+	{
+		position: absolute;
+		height: 7px;
+		bottom: 0px;
+		left: 7px;
+		right: 7px;
+		font-family: Verdana;
+    	font-size: 1px;
+    	background-image: url(images/textarea-vertical.png);
+	}
+	* HTML .plain .ob_iTaBC
+	{
+	    -background-image: url(images/textarea-vertical.gif);
+	}
+	
+	/* Bottom Right */
+	.plain .ob_iTaBR
+	{
+		position: absolute;
+		font-family: Verdana;
+    	font-size: 1px;
+    	height: 7px;
+		width: 7px;
+		right: 0px;
+		bottom: 0px;
+		background-image: url(images/textarea-vertical.png);
+	}
+	* HTML .plain .ob_iTaBR
+	{
+	    -background-image: url(images/textarea-vertical.gif);
+	}
+
+/* Part 2 */
+/* Background position for each state */
+
+    /* Normal state */
+	    /* Top Left */
+	    .plain .ob_iTaCN .ob_iTaTL
+	    {
+		    background-position: 0px 0px;
+	    }
+
+        /* Top Center */
+	    .plain .ob_iTaCN .ob_iTaTC
+	    {		
+		    background-position: 0px -20px;		
+	    }		
+
+	    /* Top Right */
+	   .plain .ob_iTaCN .ob_iTaTR
+	    {
+		    background-position: 0px -40px;		
+	    }
+	
+	    /* Middle Left */
+	   .plain .ob_iTaCN .ob_iTaML
+	    {
+		    background-position: 0px 0px;
+		    background-repeat: repeat-y;
+	    }
+
+	    /* Middle Center */
+	   .plain .ob_iTaCN .ob_iTaMC
+	    {
+	        background-color: #fdfdfd;
+	    }
+	    .plain .ob_iTaCN .ob_iTaMC textarea
+	    {
+	        color: #2b4c61;
+	    }
+		
+	    /* Middle Right */
+	   .plain .ob_iTaCN .ob_iTaMR
+	    {
+		    background-position: -7px 0px;
+		    background-repeat: repeat-y;
+	    }
+	
+	    /* Bottom Left */
+	   .plain .ob_iTaCN .ob_iTaBL
+	    {
+		    background-position: 0px -60px;
+	    }
+	
+	    /* Bottom Center */
+	    .plain .ob_iTaCN .ob_iTaBC
+	    {
+		    background-position: 0px -67px;
+	    }
+		
+	    /* Bottom Right */
+	    .plain .ob_iTaCN .ob_iTaBR
+	    {
+		    background-position: 0px -74px;
+	    }	
+	    
+       
+    /* Mouse over state */	
+	    /* Top Left */
+	   .plain .ob_iTaCO .ob_iTaTL
+	    {
+		    background-position: 0px -81px;
+	    }
+	
+	    /* Top Center */
+	   .plain .ob_iTaCO .ob_iTaTC
+	    {
+		    background-position: 0px -101px;
+	    }		
+		
+	    /* Top Right */
+	   .plain .ob_iTaCO .ob_iTaTR
+	    {
+		    background-position: 0px -121px;
+	    }
+		
+	    /* Middle Left */
+	   .plain .ob_iTaCO .ob_iTaML
+	    {
+		    background-position: -14px 0px;
+		    background-repeat: repeat-y;
+	    }
+	
+	    /* Middle Center */
+	    .plain .ob_iTaCO .ob_iTaMC
+	    {
+	        background-color: #fdfdfd;		
+	    }
+	
+	   .plain .ob_iTaCO .ob_iTaMC textarea
+	    {
+	        color: #063e61;
+	    }
+		
+	    /* Middle Right */
+	   .plain .ob_iTaCO .ob_iTaMR
+	    {
+		    background-position: -21px 0px;
+		    background-repeat: repeat-y;
+	    }
+	
+	    /* Bottom Left */
+	    .plain .ob_iTaCO .ob_iTaBL
+	    {
+		    background-position: 0px -141px;
+	    }
+	
+	    /* Bottom Center */
+	    .plain .ob_iTaCO .ob_iTaBC
+	    {
+		    background-position: 0px -148px;
+	    }
+		
+	    /* Bottom Right */
+	   .plain .ob_iTaCO .ob_iTaBR
+	    {
+		    background-position: 0px -155px;
+	    }
+	
+	
+	/* Focused State */
+	    /* Top Left */
+	   .plain .ob_iTaCF .ob_iTaTL
+	    {
+		    background-position: 0px -162px;
+	    }
+	
+	    /* Top Center */
+	   .plain .ob_iTaCF .ob_iTaTC
+	    {
+		    background-position: 0px -182px;
+	    }		
+		
+	    /* Top Right */
+	   .plain .ob_iTaCF .ob_iTaTR
+	    {
+		    background-position: 0px -202px;
+	    }
+	
+	    /* Middle Left */
+	  .plain .ob_iTaCF .ob_iTaML
+	    {
+		    background-position: -28px 0px;
+		    background-repeat: repeat-y;
+	    }
+	
+	    /* Middle Center */
+	   .plain .ob_iTaCF .ob_iTaMC
+	    {
+	        background-color: #fdfdfd;		
+	    }
+	
+	   .plain .ob_iTaCF .ob_iTaMC textarea
+	    {
+	        color: #0e4c73;
+	    }
+		
+	    /* Middle Right */
+	   .plain .ob_iTaCF .ob_iTaMR
+	    {
+		    background-position: -35px 0px;
+		    background-repeat: repeat-y;
+	    }
+		
+	    /* Bottom Left */
+	   .plain .ob_iTaCF .ob_iTaBL
+	    {
+		    background-position: 0px -222px;
+	    }
+	
+	    /* Bottom Center */
+	   .plain .ob_iTaCF .ob_iTaBC
+	    {
+		    background-position: 0px -230px;
+		    font-size: 1px;
+	    }
+		
+	    /* Bottom Right */
+	    .plain .ob_iTaCF .ob_iTaBR
+	    {
+		    background-position: 0px -237px;
+	    }
+	
+	
+	/* Disabled state */
+	    /* Top Left */
+	   .plain .ob_iTaCD .ob_iTaTL
+	    {
+		    background-position: 0px -244px;
+	    }
+	
+	    /* Top Center */
+	   .plain .ob_iTaCD .ob_iTaTC
+	    {
+		    background-position: 0px -264px;
+	    }		
+		
+	    /* Top Right */
+	   .plain .ob_iTaCD .ob_iTaTR
+	    {
+		    background-position: 0px -284px;
+	    }
+	
+	    /* Middle Left */
+	   .plain .ob_iTaCD .ob_iTaML
+	    {
+		    background-position: -42px 0px;
+		    background-repeat: repeat-y;
+	    }
+	
+	    /* Middle Center */
+	   .plain .ob_iTaCD .ob_iTaMC
+	    {
+	        background-color: #e9e9e9;		
+	    }
+	
+	   .plain .ob_iTaCD .ob_iTaMC textarea
+	    {
+	        color: #5b676d;
+	    }
+		
+	    /* Middle Right */
+	  .plain .ob_iTaCD .ob_iTaMR
+	    {
+		    background-position: -49px 0px;
+		    background-repeat: repeat-y;
+	    }
+	
+	    /* Bottom Left */
+	   .plain .ob_iTaCD .ob_iTaBL
+	    {
+		    background-position: 0px -304px;
+	    }
+	
+	    /* Bottom Center */
+	   .plain .ob_iTaCD .ob_iTaBC
+	    {
+		    background-position: 0px -311px;
+	    }
+		
+	    /* Bottom Right */
+	   .plain .ob_iTaCD .ob_iTaBR
+	    {
+		    background-position: 0px -318px;
+	    }
+    
+    /* Container does not change in every state for this style.                     */
+    /* If you create a style, where container must change, split the CSS classes:   */
+    /*      .ob_iTaCN - normal                                                      */
+    /*      .ob_iTaCO - mouse over                                                  */
+    /*      .ob_iTaCF - focused                                                     */
+    /*      .ob_iTaCD - disabled                                                    */
+
+     	/* Container */
+	  .plain .ob_iTaCN, .ob_iTaCO, .ob_iTaCF, .ob_iTaCD
+	    {
+    	    position: relative;
+            display:-moz-inline-stack;
+            display:inline-block;
+            zoom:1;
+            *display:inline;
+            font-family: Courier;
+            font-size: 10px;
+    	    padding: 0px;
+    	    text-align: center;
+    	    overflow: hidden;
+	    }
+
+        
+
+/* Extra styles, that would rarely change */
+	/* Textarea */
+	.plain .ob_iTaMC textarea
+	{
+	    position: absolute;
+	    display: block;
+	    width: 100%;
+	    height: 100%;
+	    left: 0px;
+	    right: 0px;	    
+	    top: -13px;
+	    font-family: Verdana !important;
+		font-size: 10px !important;
+		outline: 0;
+		border: 0px;
+		margin: 0px;
+		margin-top: auto;
+		margin-bottom: auto;
+		padding: 0px;
+		overflow: auto;
+		resize: none;
+		background-image: none;
+		background-color: Transparent;
+	}

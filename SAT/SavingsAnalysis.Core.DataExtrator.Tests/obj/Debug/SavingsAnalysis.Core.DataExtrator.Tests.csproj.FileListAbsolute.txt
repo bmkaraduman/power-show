@@ -1,0 +1,8 @@
+C:\OneStop\Research\SAT\SavingsAnalysis.Core.DataExtrator.Tests\bin\Debug\SavingsAnalysis.Core.DataExtrator.Tests.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Core.DataExtrator.Tests\bin\Debug\SavingsAnalysis.Core.DataExtrator.Tests.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Core.DataExtrator.Tests\bin\Debug\nunit.framework.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Core.DataExtrator.Tests\bin\Debug\SavingsAnalysis.Common.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Core.DataExtrator.Tests\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Core.DataExtrator.Tests\bin\Debug\SavingsAnalysis.Common.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Core.DataExtrator.Tests\obj\Debug\SavingsAnalysis.Core.DataExtrator.Tests.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Core.DataExtrator.Tests\obj\Debug\SavingsAnalysis.Core.DataExtrator.Tests.pdb

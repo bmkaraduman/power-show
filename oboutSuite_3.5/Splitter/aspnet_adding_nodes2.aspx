@@ -1,0 +1,106 @@
+<%@ Register Tagprefix="obspl" Namespace="OboutInc.Splitter2" Assembly="obout_Splitter2_Net" %>
+<%@ Page Language="C#" Debug="true" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<script language="C#" runat="server">
+	void Page_Load(object sender, EventArgs e) {
+		obout_ASPTreeView_2_NET.Tree oTree;
+		//build TreeView
+		oTree = new obout_ASPTreeView_2_NET.Tree();
+			
+		string Html;
+		
+		oTree.AddRootNode("I am Root node!", "xpPanel.gif");
+		
+		Html = "<span style='cursor:pointer;'>Obout Inc</span>";
+		oTree.Add("root", "r1", Html, null, null, null);
+		
+		Html = "<span style='cursor:pointer;'>Brooklyn Bridge</span>";
+		oTree.Add("root", "r2", Html, true, null, null);
+		
+			Html = "<span style='cursor:pointer;'>Drawing</span>";
+			oTree.Add("r2", "r2_0", Html, null, null, null);
+		
+			Html = "<span style='cursor:pointer;'>Picture</span>";
+			oTree.Add("r2", "r2_1", Html, null, null, null);
+		
+		Html = "<span style='cursor:pointer;'>Pictures</span>";
+		oTree.Add("root", "r3", Html, true, null, null);
+		
+			Html = "<span style='cursor:pointer;'>Obout Inc</span>";
+			oTree.Add("r3", "r3_0", Html, null, null, null);
+		
+			Html = "<span style='cursor:pointer;'>My Pictures</span>";
+			oTree.Add("r3", "r3_1", Html, null, null, null);
+
+		oTree.FolderIcons = "../TreeView/tree2/icons";
+        oTree.FolderScript = "../TreeView/tree2/script";
+        oTree.FolderStyle = "../TreeView/tree2/style/Classic";
+		
+		oTree.SelectedId = "r1";
+		
+		treeView.Text = oTree.HTML();
+	}	
+</script>
+
+<html>
+	<head id="Head1" runat="server">
+	    <title>obout ASP.NET Splitter examples</title>
+    	   
+        <style type="text/css">
+            .tdText 
+		    {
+	            font:11px Verdana;
+	            color:#333333;
+            }
+		</style>
+	</head>
+	<body>
+	    <form id="Form1" runat="server">
+	    <br />
+		<span class="tdText"><b>ASP.NET Splitter - Control left panel from right panel</b></span>
+	    <br /><br />
+	        <a style="font-size:10pt;font-family:Tahoma" href="Default.aspx?type=ASPNET">« Back to examples</a>
+	        <br /><br />
+		    <obspl:Splitter StyleFolder="styles/default" id="splDV" runat="server" CookieDays="0">
+			    <LeftPanel WidthMin="100" WidthMax="400">
+				    <header height="40">
+					    <div style="width:100%;height:100%;background-color:#e0e6ed" class="tdText" align="center">
+					    <br />
+					    optional left header
+					    </div>
+				    </header>
+				    <content>
+					    <div style="margin:5px;"> 
+						    <asp:Literal id="treeView" runat="server" />
+					    </div>
+				    </content>
+				    <footer height="40">
+					    <div style="width:100%; height: 100%;background-color:#e0e6ed;" class="tdText" align="center">
+					    <br />
+					    optional left footer
+					    </div>
+				    </footer>
+			    </LeftPanel>
+			    <RightPanel>
+			    <header height="50">
+					    <div style="width:100%;height:100%;background-color:#ebe9ed" class="tdText" align="center">
+					    <br />
+					    optional right header
+					    </div>
+				    </header>
+				    <content url="aspnet_adding_nodes2_addpage.aspx">
+
+				    </content>
+				    <footer height="50">
+					    <div style="width:100%;height:100%;background-color:#ebe9ed" class="tdText" align="center">
+					    <br />
+					    optional right footer
+					    </div>
+				    </footer>
+			    </RightPanel>
+		    </obspl:Splitter>
+		 </form>
+	</body>
+</html>

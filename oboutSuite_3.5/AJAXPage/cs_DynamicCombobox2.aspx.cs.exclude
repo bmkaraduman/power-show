@@ -1,0 +1,95 @@
+using System;
+using System.Data.OleDb;
+using OboutInc.Combobox;
+
+public class cs_DynamicCombobox2 : OboutInc.oboutAJAXPage
+{
+	protected Combobox cboContinent;
+	protected Combobox cboCountry;
+	
+	static readonly object obj = new object();
+	
+	void Page_Load(object sender, EventArgs e) {
+     		
+		if (!IsPostBack)
+		{
+			// load continent list from the database
+			OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/DynamicCombobox.mdb"));
+			myConn.Open();
+			
+			OleDbCommand myComm;
+			myComm = new OleDbCommand("select ContinentID, ContinentName from Continent", myConn);
+			OleDbDataReader myReader = myComm.ExecuteReader();
+			while (myReader.Read())
+				cboContinent.AddOption(myReader.GetInt32(0).ToString(), myReader.GetString(1), "");
+			myReader.Close();
+			myConn.Close();	
+			
+			cboContinent.Text = "Please select a continent";
+		}
+    }
+	
+	// update the country list with the countries from the selected continent
+	public void SelectContinent(string ContinentID)
+	{
+		// load continent list from the database
+		OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/DynamicCombobox.mdb"));
+		myConn.Open();
+		
+		OleDbCommand myComm;
+		myComm = new OleDbCommand("select CountryID, CountryName from Country where ContinentID = " + ContinentID + " order by CountryName", myConn);
+		OleDbDataReader myReader = myComm.ExecuteReader();
+		lock (obj)
+		{
+			cboCountry.Options.Clear();
+			while (myReader.Read())
+			{
+                cboCountry.AddOption(myReader.GetInt32(0).ToString(), myReader.GetString(1), "images/flags/flag_" + myReader.GetString(1).ToLower().Replace(" ", "_") + ".png");
+			}
+		}
+		myReader.Close();
+		myConn.Close();	
+	}
+
+    // update the city list with the cities from the selected country
+    public void SelectCountry(string CountryID)
+    {
+        // load continent list from the database
+        OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/DynamicCombobox.mdb"));
+        myConn.Open();
+
+        OleDbCommand myComm;
+        myComm = new OleDbCommand("select CityID, CityName from City where CountryID = " + CountryID + " order by CityName", myConn);
+        OleDbDataReader myReader = myComm.ExecuteReader();
+        Combobox cboCity = (Combobox)this.FindControl("cboCity");
+        
+        lock (obj)
+        {
+            cboCity.Options.Clear();
+            while (myReader.Read())
+            {
+                cboCity.AddOption(myReader.GetInt32(0).ToString(), myReader.GetString(1));
+            }
+        }
+        myReader.Close();
+        myConn.Close();
+        if (cboCity.Options.Count == 0)
+        {
+            cboCity.AddOption("No City", "No City");
+        }
+    }
+	
+	public bool callbackPanelCountry_OnBeforePanelUpdate(string panelId, string containerId)
+	{
+		SelectContinent((string)this.UpdatePanelParams["ContinentID"]);
+		
+		return true;
+	}
+
+    public bool callbackPanelCity_OnBeforePanelUpdate(string panelId, string containerId)
+    {
+        SelectCountry((string)this.UpdatePanelParams["CountryID"]);
+
+        return true;
+    }
+}

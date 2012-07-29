@@ -1,0 +1,106 @@
+﻿@{
+	ViewBag.Title = "Index";
+}
+
+<h2>
+	Cascading using a CascadeSelect jQuery Plugin
+</h2>
+<h3>
+	<a href="http://weblogs.asp.net/raduenuca/archive/2011/05/08/asp-net-mvc-cascading-dropdown-lists-tutorial-part-6-creating-a-jquery-cascade-plugin.aspx">
+		Cascading Dropdown Lists Tutorial – Part 6: Creating a jQuery Cascade Select Plugin</a>
+</h3>
+
+Only Romania has cities entries (select Europe then Romania)
+
+<fieldset>
+	<legend>Continents</legend>
+	<select id='continents'></select>
+</fieldset>
+<fieldset>
+	<legend>Countries</legend>
+	<select id='countries'></select>
+</fieldset>
+<fieldset>
+	<legend>Cities</legend>
+	<table id='cities'>
+		<tr>
+			<th>
+				Name
+			</th>
+			<th>
+				Population
+			</th>
+		</tr>
+	</table>
+</fieldset>
+
+@DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:fff")
+
+<script type='text/javascript'>
+	$(document).ready(function () {
+		$('#continents').cascadeSelect({
+			root: true,
+			url: '@Url.Action( MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.GetContinents( ) )',
+			promptText: '[Please select a continent]',
+			//promptText: null,
+			childSelector: '#countries'
+		});
+
+		$('#countries').cascadeSelect({
+			url: '@Url.Action( MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.GetCountries( ) )',
+			promptText: '[Please select a country]',
+			filter: "continentId",
+			childSelector: '#cities'
+		});
+
+		$('#cities').cascadeSelect({
+			promptText: null,
+			filter: "countryId",
+			onLoad: loadCities,
+			onClear: clearCities
+		});
+	});
+
+	function clearCities() {
+	    var cities = $(this);
+		var domCities = cities.get(0);
+		for (var i = domCities.rows.length - 1; i > 0; i--) {
+			domCities.deleteRow(i);
+		}
+	}
+
+	function loadCities(data) {
+	    var cities = $(this);
+		var domCities = cities.get(0);
+		var noInfo = $('#noInfo_' + cities.attr('id'));
+
+		$.ajax({
+		    url: '@Url.Action( MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.GetCities( ) )',
+		    data: data,
+		    type: 'GET',
+		    success: function (data) {
+		        if (data.length > 0) {
+		            for (var i = 0; i < data.length; i++) {
+		                var item = data[i];
+
+		                var lastRow = domCities.rows.length;
+		                var cityRow = domCities.insertRow(lastRow);
+
+		                var cityName = cityRow.insertCell(0);
+		                cityName.innerHTML = item.Name;
+
+		                var cityPopulation = cityRow.insertCell(1);
+		                cityPopulation.innerHTML = item.Population.toString();
+		                cityPopulation.align = 'right';
+		            }
+		            noInfo.hide();
+		            cities.show();
+		        }
+		        else {
+		            noInfo.show();
+		            cities.hide();
+		        }
+		    }
+		});
+	}
+</script>        

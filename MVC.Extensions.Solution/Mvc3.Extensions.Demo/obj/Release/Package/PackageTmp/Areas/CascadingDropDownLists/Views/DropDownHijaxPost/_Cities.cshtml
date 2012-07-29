@@ -1,0 +1,32 @@
+﻿@model Mvc3.Extensions.Demo.Areas.CascadingDropDownLists.Models.Atlas
+<fieldset>
+    <legend>Cities</legend>
+    @if ( Model.Cities != null && Model.Cities.Count( ) > 0 )
+    {
+        <table>
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Population
+                </th>
+            </tr>
+            @foreach ( var item in Model.Cities )
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td align="right">
+                        @item.Population.ToString( "0,0" )
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        @:<text>No information available</text>
+    }
+</fieldset>

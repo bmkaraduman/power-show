@@ -1,0 +1,439 @@
+﻿.galleryContainer{
+    background-color: #222222;
+    color:#fff;
+}
+.ImageZoomTable
+{
+	width:100%;
+	border:solid 1px #303030;
+}   
+.dark_grayZoomOut
+{
+    cursor:url(zoomin.cur),pointer !important;
+}
+.dark_grayOIZ
+{
+	display:inline;
+}
+.dark_grayOIZ .oizZoomPanel
+{
+    position:absolute;
+    background-color:#303030;
+    border:solid 2px gray;
+}
+.dark_grayOIZ .oizLoading
+{
+	position:absolute;
+    font-family:Verdana;
+    font-size:11px;
+    background:white;
+    border:solid 1px gray;
+}
+.dark_grayOIZ .oizBigImage
+{
+	cursor:url(zoomout.cur),pointer !important;
+	border:solid 1px gray;
+}
+.dark_grayOIZ .oizBackground
+{
+	position:absolute;
+	direction:rtl;
+	background-color:black;
+}
+
+.dark_grayOIZ .oizEffectPanel
+{
+	background-color:white;
+	border:solid 1px gray;
+}
+
+.dark_grayOIZ .oizEffectImage
+{
+    border:solid 1px gray;
+}
+
+.dark_grayOIZ .oizTransparent
+{
+	filter:alpha(opacity=0);
+	-moz-opacity:0.0;
+	opacity:0.0;    
+}
+
+.dark_grayOIZ .oizDescription
+{
+    color:#cccccc;
+    font-family:Arial;
+    font-size:12px;
+    font-weight:bold;
+}
+.dark_grayOIZ .oizCloseButton
+{
+position:absolute;
+float:right;
+background-color:Aqua;
+}
+
+.dark_grayOIZ .oizMoveButton
+{
+
+}
+
+/*Gallery styles*/
+
+.ImageZoomEntryRow
+{
+}
+
+
+/*if using List View*/
+
+.dark_gray_oizg li.ImageZoomEntryCell img
+{
+	cursor:pointer;
+	padding:3px;
+}
+.dark_gray_oizg li.ImageZoomEntryCellSelected img
+{
+	padding:3px;
+}
+
+.dark_gray_oizg li.ImageZoomEntryCell
+{
+	background-image:none;
+	border:solid 1px #606060 !important;
+	list-style-type: none;
+	display:inline-block;
+	background:none;
+	margin:4px;
+	padding:1px;
+	-webkit-box-shadow: #303030 1px 1px 2px;
+	-moz-box-shadow: #303030 1px 1px 2px;
+}
+
+.dark_gray_oizg li.ImageZoomEntryCell:hover
+{
+	border:solid 1px #FF9933 !important;
+	-webkit-box-shadow: #303030 2px 2px 8px;
+	-moz-box-shadow: #303030 2px 2px 8px;
+	display:inline-block;
+	margin:4px;
+	padding:1px;
+}
+
+.dark_gray_oizg li.ImageZoomEntryCellSelected
+{
+	border:solid 1px #FF9933 !important;
+	list-style-type: none;
+	display:inline-block;
+	background:none;
+	margin:4px;
+	padding:1px;
+}
+.dark_gray_oizg ul.ImageZoomEntryRow
+{
+	background:none;
+	list-style-type:none;
+	padding:0;
+	text-align:center;
+	display:inline-block;
+}
+
+.ImageZoomTable
+{
+	width:100%;
+	border:solid 2px #303030;
+	text-align:center;
+	background-color:#303030;
+}
+
+/* footer */
+.dark_gray_oizg .ImageZoomPagerCell
+{
+	width:100%;
+	background-color:#303030;
+	height:35px;
+	text-align:center;
+	vertical-align:middle;
+	border-top:solid 1px #404040;
+	margin:0 !important;
+	padding:0;
+	background-image:none;
+}
+/*footer item container*/
+.dark_gray_oizg .ob_izFIC
+{
+	border-width:0px;
+	width:100%;
+	color: #fff;
+	cursor: default;
+	font-family: Verdana;
+	font-size: 10px;
+	bottom:2px;
+	display:block;
+	padding-top:5px;
+	position:relative;
+}
+
+
+/*image size selector*/
+.dark_gray_oizg .ob_izFIC .ob_izImgsS
+{
+	float:left;
+	margin-top:3px;
+	padding-left:4px;
+	vertical-align:middle;
+}
+.dark_gray_oizg .ob_izImgsS span
+{
+	margin-right:5px;
+	float:left;
+	display:block;
+	margin-top:4px;
+}
+/*Page size selector*/
+.dark_gray_oizg .ob_izPsS
+{
+	float:right;
+	margin-top:3px;
+	padding-left:10px;
+	vertical-align:middle;
+}
+.dark_gray_oizg .ob_izPsS span
+{
+	display:block;
+	float:left;
+	margin-right:5px;
+	margin-top:4px;
+}
+
+/*Paging container*/
+.ob_izPC
+{
+	white-space:nowrap;
+	display:block;
+	height:23px;
+	padding-right:4px;
+}
+/*Page data*/
+.dark_gray_oizg .pageData 
+{
+	float:right;
+	margin-top:7px;
+	padding-left:3px;
+	padding-right:10px;
+}
+.dark_gray_oizg .pageData span
+{
+	margin-left:5px;
+	float:right;
+}
+
+/*pager*/
+.dark_gray_oizg .pager 
+{
+	margin-top:5px;
+	float:right;
+}
+.dark_gray_oizg .ob_IZPBN
+{
+	display:block;
+	float:left;
+}
+.dark_gray_oizg .ob_IZPBS
+{
+	display:block;
+	float:left;
+}
+.dark_gray_oizg .ob_IZPBN a
+{
+	text-decoration:none;
+	display:block;
+	margin:0 2px 0 2px;
+	padding: 1px 3px;
+	border: 1px solid #99A3B5;
+	color: #ddd;
+	cursor: pointer;
+	font: normal normal normal 11px/normal Verdana;
+}
+.dark_gray_oizg .ob_IZPBN a:hover
+{
+	text-decoration:none;
+	display:block;
+	margin:0 2px 0 2px;
+	padding: 1px 3px;
+	border: 1px solid #99A3B5;
+	color: #fff;
+	cursor: pointer;
+	font: normal normal normal 11px/normal Verdana;
+}
+.dark_gray_oizg .ob_IZPBS a
+{
+	text-decoration:none;
+	display:block;
+	margin:0 2px 0 2px;
+	padding: 1px 3px;
+	color: #fff;
+	cursor: pointer;
+	font: normal normal normal 11px/normal Verdana;
+}
+/*gallery paging*/
+.dark_gray_oizg .first 
+{
+	background:url(btn_normal.png) 0 0;
+	float:right;
+	width:25px;
+	height : 21px;
+	display:block;
+	background-repeat:no-repeat;
+	text-decoration:none;
+	margin-top:3px;
+}
+.dark_gray_oizg .first:hover 
+{
+	background:url(btn_over.png) 0 0;
+	float:right;
+	width:25px;
+	height : 21px;
+	display:block;
+	background-repeat:no-repeat;
+	text-decoration:none;
+	margin-top:3px;
+}
+
+.dark_gray_oizg .prev 
+{
+	background:url(btn_normal.png) 0px -21px ;
+	float:right;
+	width:25px;
+	height : 21px;
+	display:block;
+	background-repeat:no-repeat;
+	text-decoration:none;
+	margin-top:3px;
+}
+.dark_gray_oizg .prev:hover
+{
+	background:url(btn_over.png) 0px -21px ;
+	float:right;
+	width:25px;
+	height : 21px;
+	display:block;
+	background-repeat:no-repeat;
+	text-decoration:none;
+	margin-top:3px;
+}
+
+.dark_gray_oizg .next 
+{
+	background:url(btn_normal.png) 0px -42px;
+	float:right;
+	width:25px;
+	height : 21px;
+	display:block;
+	background-repeat:no-repeat;
+	text-decoration:none;
+	margin-top:3px;
+}
+.dark_gray_oizg .next:hover
+{
+	background:url(btn_over.png) 0px -42px;
+	float:right;
+	width:25px;
+	height : 21px;
+	display:block;
+	background-repeat:no-repeat;
+	text-decoration:none;
+	margin-top:3px;
+}
+.dark_gray_oizg .last 
+{
+	background:url(btn_normal.png) 0px -63px;
+	float:right;
+	width:25px;
+	height : 21px;
+	margin-top:3px;
+	display:block;
+	background-repeat:no-repeat;
+	text-decoration:none;
+}
+.dark_gray_oizg .last:hover 
+{
+	background:url(btn_over.png) 0px -63px;
+	float:right;
+	width:25px;
+	height : 21px;
+	margin-top:3px;
+	display:block;
+	background-repeat:no-repeat;
+	text-decoration:none;
+}
+
+.dark_gray_oizg .ImageZoomPagerRow
+{
+	background-color:#303030;
+	margin:0 !important;
+	text-align :center ; 
+	list-style-type:none;
+	padding:0;	
+	overflow:hidden;
+}
+
+.dark_gray_oizg .ImageZoomEntryContainer
+{
+	border:solid 1px #303030;
+	background-color:#303030;
+	text-align:center;
+}
+/* Zoom mode paging */
+.dark_grayOIZ .oizNextPrev
+{
+	background:url("start.gif") no-repeat scroll 50% 50% transparent;
+	left:0;
+	position:absolute;
+	top:0;
+}
+.oizNextPrev a
+{
+	text-decoration:none;
+}
+.oizPrevLink
+{
+	display:block;
+	left:0%;
+	top:0%;
+	position:absolute;
+	width:50%;
+	height:100%;
+}
+.oizNextLink
+{
+	display:block;
+	left:50%;
+	top:0%;
+	position:absolute;
+	width:50%;
+	height:100%;
+}
+.oizPrevLink:hover
+{
+	background:url("overPrev.png") no-repeat scroll left 50% transparent;
+}
+.oizNextLink:hover
+{
+	background:url("overNext.png") no-repeat scroll right 50% transparent;
+}
+.oizPrevLink span, .oizNextLink span
+{
+	display:none;
+}
+.oizZoomModeBg
+{
+	z-index: 9999;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	position:absolute;
+	background:url("5.gif") no-repeat scroll 50% 50% transparent;
+	display:none;
+}

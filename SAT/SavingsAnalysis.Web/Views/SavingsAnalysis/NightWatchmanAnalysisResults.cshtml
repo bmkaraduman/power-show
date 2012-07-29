@@ -1,0 +1,196 @@
+﻿@using System.Web.Mvc.Html
+@model SavingsAnalysis.Web.ViewModels.NightWatchmanAnalysisResultsViewModel
+
+<tr>
+    <td>
+        @Html.LabelFor(m => m.NWStartDate)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.NWStartDate)
+    </td>
+    <td>
+        @Html.ValidationMessageFor(m => m.NWStartDate)
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.StartTime)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.StartTime)
+    </td>
+    <td>
+        @Html.ValidationMessageFor(m => m.StartTime)
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.EndTime)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.EndTime)
+    </td>
+    <td>
+        @Html.ValidationMessageFor(m => m.EndTime)
+    </td>
+</tr>           
+
+<tr>
+    <td>
+        @Html.LabelFor(m => m.NumberOfDesktops)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.NumberOfDesktops)
+    </td>
+    <td>
+        @Html.ValidationMessageFor(m => m.NumberOfDesktops)
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.NumberOfLaptops)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.NumberOfLaptops)
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.NumberOfMachineOnWeekDays)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.NumberOfMachineOnWeekDays)
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.NumberOfMachineOnWeekEnds)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.NumberOfMachineOnWeekEnds)
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.Period)
+    </td>
+    <td>@Html.TextBoxFor(m => m.Period)
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.Period)
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.PassengerCars)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.PassengerCars)
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.PotentialYearlyCO2Savings)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.PotentialYearlyCO2Savings)
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.PotentialYearlyKwhSavings)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.PotentialYearlyKwhSavings)
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.PowerStateOff)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.PowerStateOff)
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.PowerStateOn)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.PowerStateOn)
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.ShowCars)
+    </td>
+    <td>
+        @Html.DropDownListFor(m => m.ShowCars, Model.ShowCarOptions())
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.ShowNuclear)
+    </td>
+    <td>
+        @Html.DropDownListFor(m => m.ShowNuclear, Model.ShowNuclearOptions())
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.ShowStars)
+    </td>
+    <td>
+        @Html.DropDownListFor(m => m.ShowStars, Model.ShowStarsOptions())
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.ShowTrees)
+    </td>
+    <td>
+        @Html.DropDownListFor(m => m.ShowTrees, Model.ShowTreesOptions())
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.ShowZ)
+    </td>
+    <td>
+        @Html.DropDownListFor( m => m.ShowZ, Model.ShowZOptions())
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.YearlyCostSavings)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.YearlyCostSavings)
+    </td>
+    <td>
+    </td>
+</tr>

@@ -1,0 +1,104 @@
+<%@ Page Language="C#" Inherits="cs_DynamicCombobox" Src="cs_DynamicCombobox.aspx.cs"%>
+
+<%@ Register TagPrefix="obout" Namespace="OboutInc.Combobox" Assembly="obout_Combobox_Net" %> 
+<%@ Register TagPrefix="oajax" Namespace="OboutInc" Assembly="obout_AJAXPage" %> 
+
+<html>
+	<head runat="server">
+		<script>
+		// update the country list with the countries from the selected continent
+		function SelectContinent()
+		{
+			var ContinentID = cboContinent.getValue();	
+			
+	ob_post.AddParam("ContinentID", ContinentID);
+	ob_post.UpdatePanel("callbackPanelCountry");
+		}
+function ob_OnBeforePanelUpdate(panelId, containerId, page)
+{
+	if (panelId == "callbackPanelCountry")
+		{
+			document.getElementById('divComment').style.display = 'none';
+	}
+			
+	return true;
+		}
+		</script>
+		
+		<style>
+			td {font: 10pt Tahoma; }
+			.title {font-size: X-Large; padding: 20px; border-bottom: 2px solid gray; width: 100%; }
+		</style>
+	</head>
+	<body>
+		<table border="0">
+			<tr>
+				<td valign="top" width="630" colspan="4">
+					<span class="title">Dynamic Combobox example</span><br /><br /><br />
+					Please select a continent from the list below to populate the contries list <br />
+					from the database <span style="color:crimson;">without reloading the page</span>.
+					<br />
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table style="width:300px" border="0">
+						<tr>
+							<td class="bodyStyle">
+								Continent:
+							</td>
+							<td valign="top" class="h5" align="left" style="padding-left:20px">	            			            
+								<div style="width:200px;height:25px" id="divContinent">
+									<obout:Combobox FolderStyle="../Combobox/styles/default" id="cboContinent" Width="200" runat="server" OnClientChange="SelectContinent()">
+										<Options>
+										</Options>
+									</obout:Combobox> 
+								</div>
+							</td>	
+						</tr>
+						<tr>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="bodyStyle">
+								Country:
+							</td>
+							<td valign="middle" class="h5" align="left" style="padding-left:20px;height:27px">	             			            
+								<div style="width:260px" id="divCountry"  class="bodyStyle">
+									<div id="divComment" style="width:260px;">Please select a continent from the list above</div>
+							<oajax:CallbackPanel OnBeforePanelUpdate="callbackPanelCountry_OnBeforePanelUpdate" runat="server" ID="callbackPanelCountry" RenderMethod="OnExplicitRequest">
+										<content style="height:25px;width:200px;">
+											<table width=100% height=100% cellpadding=0 cellspacing=0>
+												<tr>
+													<td align=left>
+														<obout:Combobox FolderStyle="../Combobox/styles/default" id="cboCountry" Width="200" Height="200" runat="server">
+															<Options>
+															</Options>
+														</obout:Combobox> 
+													</td>
+												</tr>
+											</table>
+										</content>
+										<loading style="text-align:center;height:25px;width:200px;">
+											<table width=100% height=100% cellpadding=0 cellspacing=0>
+												<tr>
+													<td align=center>
+														<img src="loading_icons/1.gif">
+													</td>
+												</tr>
+											</table>
+										</loading>
+									</oajax:CallbackPanel>  
+								</div>
+							</td>	
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+		<br /><br /><br />
+		
+		<a style="font-family:Tahoma;font-size:12px" href="Default.aspx?type=CSHARP">« Back to examples</a>
+	</body>
+</html>

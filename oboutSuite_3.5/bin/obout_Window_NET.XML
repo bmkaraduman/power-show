@@ -1,0 +1,471 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>obout_Window_NET</name>
+    </assembly>
+    <members>
+        <member name="T:OboutInc.Window.Dialog">
+             <summary>
+            Summary Description for Dialog
+             </summary>
+        </member>
+        <member name="M:OboutInc.Window.Dialog.#ctor">
+            <Summary>
+             Initiates a new Dialog object
+             Default position is Screen center
+             Default width : 0, Height: 0, opacity is 100, Page opacity 25
+             By Default a dialog control doesn't open with the loading of the page( VisibleOnLoad false)
+             By Default the control is draggable and modal
+             By default the close button is visible.
+            </Summary>
+        </member>
+        <member name="M:OboutInc.Window.Dialog.Render(System.Web.UI.HtmlTextWriter)">
+            <Summary>
+             Render the Html markup for Dialog
+            </Summary>
+        </member>
+        <member name="M:OboutInc.Window.Dialog.initScript(System.String,System.Boolean)">
+            <Summary>
+             Render the Html markup for Dialog
+             It writes the Javascript functions to initialize the dialog control in Page.
+             function Dialog(txtID,txtStyleRootFolder,txtStyle,txtContainerID,txtContentID,
+                             txtTitle,txtIconPath,txtPosition,funcOnInit,funcOnPreOpen,funcOnOpen,funcOnDrag,funcOnPreClose,
+                             funcOnClose,intLeft,intTop,intWidth,intHeight,intOpacity,intPageOpacity,intzIndex,bVisible,bIsModal,bIsDraggable,bCloseButton)
+             Example - 
+             var [dialog ID];
+             function init[dialog ID](){
+             try{
+             [dialog ID] = new Dialog('dlg','/wdstyles','default',..........);
+             }
+             catch(e){
+             alert('obout Window init:'+e.toString());
+             }
+             }
+             old[dialog ID]load = window.onload;
+             window.onload=function(evt){if (old[dialog ID]load!=null) old[dialog ID]load();
+             init[dialog ID]();};
+            </Summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.Left">
+            <summary>
+            Gets or sets Left position of Dialog
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.Top">
+            <summary>
+            Gets or sets Top position of Dialog
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.Width">
+            <summary>
+            Gets or sets Width of Dialog
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.Height">
+            <summary>
+            Gets or sets Height of Dialog
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.zIndex">
+            <summary>
+            Gets or sets zIndex of Dialog.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.VisibleOnLoad">
+            <summary>
+            Gets or sets whether Dialog is visible after page is loaded.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.Opacity">
+            <summary>
+            Gets or sets Opacity of Dialog
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.PageOpacity">
+            <summary>
+            Gets or sets minwidth of Window.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.IsModal">
+            <summary>
+            Gets or sets whether Dialod is modal
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.IsDraggable">
+            <summary>
+            Gets or sets whether Dialod is modal
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.ShowCloseButton">
+            <summary>
+            Gets or sets whether the close button is showed.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.Title">
+            <summary>
+            Gets or sets Title of Dialog
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.IconPath">
+            <summary>
+            Gets or sets IconPath of Dialog
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.Style">
+            <summary>
+            Gets or sets Style
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.StyleRootFolder">
+            <summary>
+            Gets or sets root folder of styles
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.StyleFolder">
+            <summary>
+            Gets or sets Folder that contain style for window
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.OnClientInit">
+            <summary>
+            Gets or sets script for Dialog Init event
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.OnClientOpen">
+            <summary>
+            Gets or sets script for Dialog Open event.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.OnClientPreOpen">
+            <summary>
+            Gets or sets script for Dialog Open event.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.OnClientDrag">
+            <summary>
+            Gets or sets script for Window Close event.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.OnClientPreClose">
+            <summary>
+            Gets or sets script for Dialog Pre-Close event.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.OnClientClose">
+            <summary>
+            Gets or sets script for Dialog Close event.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.Position">
+            <summary>
+            Gets or sets special position for dialog.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Dialog.DebugMode">
+            <summary>
+            Gets or sets whether error message will show when error occurs.
+            </summary>
+        </member>
+        <member name="T:OboutInc.Window.Positions">
+            <Summary>
+             Enum containing Window position
+            </Summary>
+        </member>
+        <member name="F:OboutInc.Window.Positions.CUSTOM">
+            <Summary>
+            Window position is Custom
+            </Summary>
+        </member>
+        <member name="F:OboutInc.Window.Positions.SCREEN_CENTER">
+            <Summary>
+            Window position is the center of the Screen
+            </Summary>
+        </member>
+        <member name="T:OboutInc.Window.Window">
+             <summary>
+            Summary Description for Window
+             </summary>
+        </member>
+        <member name="M:OboutInc.Window.Window.#ctor">
+            <Summary>
+             Initializes a new Winodw object
+             Default mode for window is normal ( not maximized )
+             Default width : 320, Height: 240, Page opacity is 25, overflow is Hidden
+             By Default a window control opens with the loading of the page( VisibleOnLoad)
+             By Default the control is draggable, resizable and non-modal
+             By default the close button and status bar are visible.
+            </Summary>
+        </member>
+        <member name="M:OboutInc.Window.Window.RaisePostDataChangedEvent">
+            <Summary>
+             Raises PostData Changed Event
+            </Summary>
+        </member>
+        <member name="M:OboutInc.Window.Window.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)">
+            <Summary>
+             Processes the control specific postback data
+             postCollection: The collection posted to the server. 
+             postDataKey: The index within the posted collection that references the content to load. 
+             With this the control 'remembers' modifications to its properties.
+            </Summary>
+        </member>
+        <member name="M:OboutInc.Window.Window.OnPreRender(System.EventArgs)">
+            <Summary>
+            OverRides the  OnPreRender method of Asp.Net control's life cycle.
+            It sets the values of the mandetory properties in Hidden fields for the rendering of the window control. 
+            </Summary>
+        </member>
+        <member name="M:OboutInc.Window.Window.Render(System.Web.UI.HtmlTextWriter)">
+            <Summary>
+             Renders the Html markup for Window Control
+            </Summary>
+        </member>
+        <member name="M:OboutInc.Window.Window.initScript(System.String,System.Boolean)">
+            <Summary>
+             This method writes the initial Javascript function calls to render the window control into the Page.
+             it calls the function IWindow(txtID,txtStyleRootFolder,txtStyle,txtRelativeID,txtContainerID,txtContentID,txtMode,txtTitle,txtLogo,txtUrl,txtOverflow,txtStatus,intLeft,intTop,intWidth,intHeight,intMinWidth,intMinHeight,intOpacity,intPageOpacity,bVisible,bDraggable,bResizable,bIsModal,bCloseButton,bMinimizeButton,bMaximizeButton,bShowStatusBar,funcOnInit,funcOnPreOpen,funcOnOpen,funcOnDrag,funcOnResize,funcOnPreClose,funcOnClose)
+             For Example
+             var myWindow;
+             function initmyWindow()
+             {
+             try{
+             myWindow = new IWindow('myWindow','/wdstyles','default','','myWindow_container','myWindow_content','maximize','Obout Window','',null,'AUTO','Statusbar',............);
+             }
+             catch(e){
+             alert('obout Window init:'+e.toString());
+             }
+             }
+             oldmyWindowload = window.onload;
+             window.onload=function(evt){
+             if (oldmyWindowload!=null) 
+             oldmyWindowload();
+             initmyWindow();
+             };
+            </Summary>
+        </member>
+        <member name="M:OboutInc.Window.Window.getFormClientID">
+            <Summary>
+             It returns the control's client ID assigned to it by Asp.Net. 
+             When used in a standalone ASPX file the control have the same ClientID as its ID
+             But When used in a ASCX file or used in Pages with Master Page, the control gets assigned dynamic ClientID.
+             This method returns the dynamic ClientID.
+             
+             This can be used to manipulate the control in ClientSide.
+            </Summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.Left">
+            <summary>
+            Gets or sets Left position of Window when Position property is set to CUSTOM. Optional
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.Top">
+            <summary>
+            Gets or sets Top position of Window when Position property is set to CUSTOM. Optional 
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.Width">
+            <summary>
+            Gets or sets width of Window.Optional 
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.Height">
+            <summary>
+            Gets or sets height of Window.Optional 
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.MinWidth">
+            <summary>
+            Gets or sets minimum Width that window can be resized. Optional 
+            In some case, due to customed content inside Window, one may need to limit the size of Window that user may resize.
+            MinWidth is used to specify the smallest width.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.MinHeight">
+            <summary>
+            Gets or sets minimum Height that window can be resized. Optional 
+            In some case, due to customed content inside Window, one may need to limit the size of Window that user may resize.
+            MinHeight is used to specify the smallest height.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.VisibleOnLoad">
+            <summary>
+            Gets or sets whether Window will be open when page finishes loading. Default is true.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.Opacity">
+            <summary>
+            Gets or sets opacity level of window (0-100).
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.PageOpacity">
+            <summary>
+            Gets or sets opacity level page background when Window is in Modal mode (0-100)
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.IsDraggable">
+            <summary>
+            Gets or sets whether Window can be dragged.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.IsResizable">
+            <summary>
+            Gets or sets whether Window can be resized.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.IsModal">
+            <summary>
+            Gets or sets whether background will be blocked when Window appears.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.ShowCloseButton">
+            <summary>
+            Gets or sets whether the close button is shown.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.ShowMaximizeButton">
+            <summary>
+            Gets or sets whether maximize button is shown.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.ShowMinimizeButton">
+            <summary>
+            Gets or sets whether minimize button is shown.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.InitialMode">
+            <summary>
+            Gets or sets whether the initial mode of Window: normal or maximize.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.ShowStatusBar">
+            <summary>
+            Gets or sets whether statusbar is shown.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.Title">
+            <summary>
+            Gets or sets Title of Window.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.IconPath">
+            <summary>
+            Gets or sets path of icon in Window header.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.Status">
+            <summary>
+            Gets or sets Status of Window.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.OnClientInit">
+             <summary>
+            Gets or sets javascript to be executed after Window initiates.
+             </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.OnClientPreOpen">
+            <summary>
+            Gets or sets javascript to be executed before Window start opening.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.OnClientOpen">
+            <summary>
+            Gets or sets javascript to be executed after Window opens.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.OnClientPreClose">
+            <summary>
+            Gets or sets javascript to be executed before Window start closing.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.OnClientClose">
+            <summary>
+            Gets or sets javascript to be executed after Window close.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.OnClientDrag">
+            <summary>
+            Gets or sets javascript to be executed after Window is dragged.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.OnClientResize">
+            <summary>
+            Gets or sets javascript to be executed after Window is resized by user.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.RelativeElementID">
+            <summary>
+            Gets or sets ID of the element which Windows will have relative position to.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.EnableClientSideControl">
+            <summary>
+            Gets or sets whether extra client-side functions can be used such as windowalert()
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.Style">
+            <summary>
+            Gets or sets the name of the Style inside the style folder
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.StyleRootFolder">
+            <summary>
+            Gets or sets root folder of styles
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.StyleFolder">
+            <summary>
+            Gets or sets Folder that contain style for window
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.Url">
+            <summary>
+            Gets or sets Url to be loaded into Window
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.Overflow">
+            <summary>
+            Gets or sets overflow behaviours.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Window.Window.DebugMode">
+            <summary>
+            Gets or sets whether error message will show when error occurs.
+            </summary>
+        </member>
+        <member name="T:OboutInc.Window.OverflowStyles">
+            <Summary>
+            Enum for Overflow style of Window
+            </Summary>
+        </member>
+        <member name="F:OboutInc.Window.OverflowStyles.AUTO">
+            <Summary>
+            Use to keep overflow automatic, scroll apears only when content overflows
+            </Summary>
+        </member>
+        <member name="F:OboutInc.Window.OverflowStyles.HIDDEN">
+            <Summary>
+            Use to hide overlfow
+            </Summary>
+        </member>
+        <member name="F:OboutInc.Window.OverflowStyles.SCROLL">
+            <Summary>
+            Use to make scroll appear always
+            </Summary>
+        </member>
+        <member name="T:OboutInc.Window.InitialModes">
+            <Summary>
+            Enum for Initial Modes of Window
+            </Summary>
+        </member>
+        <member name="F:OboutInc.Window.InitialModes.NORMAL">
+            <Summary>
+            Use to keep Window in normal size
+            </Summary>
+        </member>
+        <member name="F:OboutInc.Window.InitialModes.MAXIMIZE">
+            <Summary>
+            Use to keep Window Maximized 
+            </Summary>
+        </member>
+    </members>
+</doc>

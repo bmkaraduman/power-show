@@ -1,0 +1,1 @@
+<%@Page Language="vb" Inherits="vb_externalpage" Src="vb_externalpage.aspx.vb" %>

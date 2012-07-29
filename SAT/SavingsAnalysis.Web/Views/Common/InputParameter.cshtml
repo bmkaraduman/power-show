@@ -1,0 +1,10 @@
+﻿@model SavingsAnalysis.Web.Models.CommonInputParameter
+<li>
+        @Html.LabelFor(m => m.FileName)
+        @Html.TextBoxFor(m => m.FileName)
+</li>
+<li>
+        @Html.LabelFor(m => m.CompanyName)
+        @Html.TextBoxFor(m => m.CompanyName)
+        @Html.ValidationMessageFor(m => m.CompanyName)
+</li>

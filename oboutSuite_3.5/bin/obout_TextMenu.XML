@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>obout_TextMenu</name>
+    </assembly>
+    <members>
+        <member name="F:OboutInc.TextMenu.Constants.version_year">
+            Version information
+            
+        </member>
+        <member name="T:OboutInc.TextMenu.Item">
+            <summary>
+            An item of the menu.
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.Item.ParentID">
+            <summary>
+            id of parent item
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.Item.InnerHtml">
+            <summary>
+            Text value
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.Item.Url">
+            <summary>
+            Url of menu item
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.Item.UrlTarget">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="T:OboutInc.TextMenu.ItemsCollection">
+            <summary>
+            A collection for all menu components.
+            </summary>
+        </member>
+        <member name="T:OboutInc.TextMenu.TextMenu">
+            <summary>
+            A menu that can contain items and separators
+            </summary>
+        </member>
+        <member name="M:OboutInc.TextMenu.TextMenu.#ctor">
+            <summary>
+            Creates a new instance of TextMenu
+            </summary>
+        </member>
+        <member name="M:OboutInc.TextMenu.TextMenu.Add(System.String,System.String,System.String)">
+            <summary>
+            Add item to render.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="parentId">The parentId for this item</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+        </member>
+        <member name="M:OboutInc.TextMenu.TextMenu.Add(System.String,System.String,System.String,System.String)">
+            <summary>
+            Add item to render.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="parentId">The parentId for this item</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+            <param name="url">Url to navigate to when user clicks on this item</param>
+        </member>
+        <member name="M:OboutInc.TextMenu.TextMenu.Add(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Add item to render.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="parentId">The parentId for this item</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+            <param name="url">Url to navigate to when user clicks on this item</param>
+            <param name="urlTarget">Target where to load the url</param>
+        </member>
+        <member name="M:OboutInc.TextMenu.TextMenu.AddItem(OboutInc.TextMenu.Item)">
+            <summary>
+            Add item to render.
+            </summary>
+            <param name="id">MenuItem to add</param>
+        </member>
+        <member name="M:OboutInc.TextMenu.TextMenu.Render(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Renders the controls to the page
+            </summary>
+            <param name="writer">The writer to which the control renders itself</param>
+        </member>
+        <member name="M:OboutInc.TextMenu.TextMenu.ArrangePath(System.String,System.String)">
+            <summary>
+            get absolute path, combining two strings to build url
+            </summary>
+            <param name="prefix">folder path</param>
+            <param name="file">file name</param>
+            <returns></returns>
+        </member>
+        <member name="P:OboutInc.TextMenu.TextMenu.Items">
+            <summary>
+            A collection containing all TM items.
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.TextMenu.ColorBackground">
+            <summary>
+            Background Color for Menu Items.
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.TextMenu.ColorBackgroundOver">
+            <summary>
+            Background Color for Menu Items when mouse over.
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.TextMenu.ColorFont">
+            <summary>
+            Text Color for Menu Items.
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.TextMenu.ColorFontOver">
+            <summary>
+            Text Color for Menu Items when mouse over.
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.TextMenu.Font">
+            <summary>
+            Text Font for Menu Items.
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.TextMenu.FontParent">
+            <summary>
+            Text Font for Parent Items (optional).
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.TextMenu.Vertical">
+            <summary>
+            If TextMenu's parent items should be aligned horizontal.
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.TextMenu.SubMenuText">
+            <summary>
+            Text Font displayed for Menu Items with submenu.
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.TextMenu.AutoPosition">
+            <summary>
+            If TextMenu should AutoPosition if it would be shown outside of screen.
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.TextMenu.RightToLeft">
+            <summary>
+            If TextMenu should display from right to left.
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.TextMenu.PersistHoveredItem">
+            <summary>
+            Gets or sets a value indicating whether to persist 'hover' style for the item in the main menu after some item in submenu was clicked.
+            </summary>
+        </member>
+        <member name="P:OboutInc.TextMenu.TextMenu.StyleFolder">
+            <summary>
+            Path to CSS file with menu classes.
+            </summary>
+        </member>
+    </members>
+</doc>

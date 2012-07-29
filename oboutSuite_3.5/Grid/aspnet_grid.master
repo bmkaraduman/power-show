@@ -1,0 +1,47 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="aspnet_grid.master.cs" Inherits="grid_examples_aspnet_grid" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>obout ASP.NET Grid examples</title>
+    <style type="text/css">
+		.tdText {
+			font:11px Verdana;
+			color:#333333;
+		}
+		.option2{
+			font:11px Verdana;
+			color:#0033cc;				
+			padding-left:4px;
+			padding-right:4px;
+		}
+		a {
+			font:11px Verdana;
+			color:#315686;
+			text-decoration:underline;
+		}
+
+		a:hover {
+			color:crimson;
+		}
+		.ob_iBC
+        {
+            display: block !important;
+        }
+
+        * HTML .ob_iBC
+        {
+            -display: inline !important; 
+        }
+	</style>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:contentplaceholder id="aspnet_contentplaceholder" runat="server">
+        </asp:contentplaceholder>
+    </div>
+    </form>
+</body>
+</html>

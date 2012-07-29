@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/cs/SiteMap-File-1.0" >
+    
+  <siteMapNode title="Aspnet - ImageZoom Examples"  description="">
+    
+    <siteMapNode title="Mode  - 2"  description="">
+      <siteMapNode url="~/ImageZoom/cs_imagezoom_single.aspx" title="Single"  description="cs_imagezoom_single" />
+      <siteMapNode url="~/ImageZoom/cs_imagezoom_gallery.aspx" title="Gallery"  description="cs_imagezoom_gallery" />
+    </siteMapNode>
+    <siteMapNode title="Populating with data  - 4"  description="">
+        <siteMapNode url="~/ImageZoom/cs_datasource_dataset.aspx" title="Binding to Dataset"  description="cs_datasource_dataset" />
+        <siteMapNode url="~/ImageZoom/cs_datasource_datatable.aspx" title="Binding to Datatable"  description="cs_datasource_datatable" />
+        <siteMapNode url="~/ImageZoom/cs_datasource_ods.aspx" title="Binding to ObjectDataSource"  description="cs_datasource_ods" />
+        <siteMapNode url="~/ImageZoom/cs_datasource_sds.aspx" title="Binding to SqlDataSources"  description="cs_datasource_sds" />
+    </siteMapNode>
+       
+  </siteMapNode>
+  
+</siteMap>
+

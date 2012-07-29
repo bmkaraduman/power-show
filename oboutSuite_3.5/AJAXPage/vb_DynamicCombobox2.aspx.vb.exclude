@@ -1,0 +1,94 @@
+imports System
+imports System.Data.OleDb
+imports OboutInc.Combobox
+
+Public Class vb_DynamicCombobox2
+    Inherits OboutInc.oboutAJAXPage
+
+    Protected cboContinent As Combobox
+    Protected cboCountry As Combobox
+    Protected Shared ReadOnly obj As Object = New Object()
+
+    Private Sub Page_Load(ByVal sender As System.Object, ByVal e As System.EventArgs)
+
+        If Not IsPostBack Then
+
+            ' load continent list from the database
+            Dim myConn As OleDbConnection = New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/DynamicCombobox.mdb"))
+            myConn.Open()
+
+            Dim myComm As OleDbCommand
+            myComm = New OleDbCommand("select ContinentID, ContinentName from Continent", myConn)
+            Dim myReader As OleDbDataReader = myComm.ExecuteReader()
+            While myReader.Read()
+                cboContinent.AddOption(myReader.GetInt32(0).ToString(), myReader.GetString(1), "")
+            End While
+            myReader.Close()
+            myConn.Close()
+
+            cboContinent.Text = "Please select a continent"
+        End If
+
+    End Sub
+
+    ' update the country list with the countries from the selected continent
+    Public Sub SelectContinent(ByVal ContinentID as string)
+
+        ' load continent list from the database
+        Dim myConn As OleDbConnection = New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/DynamicCombobox.mdb"))
+        myConn.Open()
+
+        Dim myComm As OleDbCommand
+        myComm = New OleDbCommand("select CountryID, CountryName from Country where ContinentID = " + ContinentID + " order by CountryName", myConn)
+        Dim myReader As OleDbDataReader = myComm.ExecuteReader()
+        SyncLock obj
+            cboCountry.Options.Clear()
+            While myReader.Read()
+                'cboCountry.AddOption(myReader.GetString(0), myReader.GetString(0), "")
+                cboCountry.AddOption(myReader.GetInt32(0).ToString(), myReader.GetString(1), "images/flags/flag_" + myReader.GetString(1).ToLower().Replace(" ", "_") + ".png")
+            End While
+        End SyncLock
+
+        myReader.Close()
+        myConn.Close()
+    End Sub
+
+    ' update the city list with the cities from the selected country
+    Public Sub SelectCountry(ByVal CountryID As String)
+        ' load continent list from the database
+        Dim myConn As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../App_Data/DynamicCombobox.mdb"))
+        myConn.Open()
+
+        Dim myComm As OleDbCommand
+        myComm = New OleDbCommand("select CityID, CityName from City where CountryID = " & CountryID & " order by CityName", myConn)
+        Dim myReader As OleDbDataReader = myComm.ExecuteReader()
+        Dim cboCity As Combobox = DirectCast(Me.FindControl("cboCity"), Combobox)
+
+        SyncLock obj
+            cboCity.Options.Clear()
+            While myReader.Read()
+                cboCity.AddOption(myReader.GetInt32(0).ToString(), myReader.GetString(1))
+            End While
+        End SyncLock
+        myReader.Close()
+        myConn.Close()
+        If cboCity.Options.Count = 0 Then
+            cboCity.AddOption("No City", "No City")
+        End If
+    End Sub
+
+
+    Public Function callbackPanelCountry_OnBeforePanelUpdate(ByVal panelId As String, ByVal containerId As String) As Boolean
+
+        SelectContinent(Me.UpdatePanelParams("ContinentID").ToString())
+
+        Return True
+    End Function
+
+    Public Function callbackPanelCity_OnBeforePanelUpdate(ByVal panelId As String, ByVal containerId As String) As Boolean
+
+        SelectCountry(Me.UpdatePanelParams("CountryID").ToString())
+
+        Return True
+    End Function
+End Class

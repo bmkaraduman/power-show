@@ -1,0 +1,45 @@
+﻿@model Mvc3.Extensions.Demo.Areas.Various.Models.RegisterModel
+
+@{
+	ViewBag.Title = "Register";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+	Display visual hints for the fields in your form
+</h2>
+<h3>
+	<a href="http://weblogs.asp.net/raduenuca/archive/2011/05/01/asp-net-mvc-display-visual-hints-for-the-fields-in-your-form.aspx">
+		ASP.NET MVC–Display visual hints for the fields in your form</a>
+</h3>
+
+@using ( Html.BeginForm( ) )
+{ 
+	<fieldset>
+		<legend>Register</legend>
+		@Html.EditorForModel()
+	</fieldset>
+	<input type="submit" value="Register" />
+}
+
+
+<!-- javascript coding -->
+<script type="text/javascript">
+	// execute your scripts when the DOM is ready. this is a good habit
+	$(function () {
+		// select all desired input fields and attach tooltips to them
+		$("form :input").tooltip({
+			// place tooltip on the right edge
+			position: "center right",
+
+			// a little tweaking of the position
+			offset: [-2, 10],
+
+			// use the built-in fadeIn/fadeOut effect
+			effect: "fade",
+
+			// custom opacity setting
+			opacity: 0.7
+		});
+	});
+</script>

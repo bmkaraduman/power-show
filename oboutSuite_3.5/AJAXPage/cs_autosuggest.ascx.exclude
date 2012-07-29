@@ -1,0 +1,56 @@
+<%@ Register TagPrefix="obout" Namespace="OboutInc.Combobox" Assembly="obout_Combobox_Net" %> 
+<%@ Control Language="C#" CodeFile="cs_autosuggest.ascx.cs" Inherits="cs_autosuggest_uc" %>
+<script type="text/javascript">        
+	// this function opens the combobox each time a user types something
+	function openCombobox() {
+		cbo1.open();
+	}
+	
+	// this function initiates an ajax callback to load the description for a given word
+	function getWordDescription() {            
+		var sWord = cbo1.getText();
+		ob_post.AddParam("sWord", sWord);
+		ob_post.post(null, "GetWordDescription", loadWordDescription);                
+	}
+	
+	// this function is executed after the description for a given word is returned from the server
+	// it will add the description inside the div with information
+	function loadWordDescription(sWordDescription) {
+		document.getElementById("divWordInformation").innerHTML = "<span class='tdText' style='white-space: wrap;width:325px;'><b>" + cbo1.getText() + "</b><br /><br /><br />" + sWordDescription.replace(/\n/g, "<br />").replace(/\r\n/g, "<br />") + "</span>";        
+	}      
+	
+	function onAjaxError(ex) {
+		alert("The error was handled: " + ex.message);
+	}      
+</script>
+<style type="text/css">
+	#divWordInformation
+	{
+		width: 350px;          
+		height: 250px;        
+		overflow: auto;
+		background-color: #FFF;
+		border: 1px solid #000;
+		white-space: wrap;
+	}
+</style>
+<span class="tdText">User Control</span>
+<table style="border:1px solid #cccccc" cellpadding="10">
+	<tr>
+		<td class="tdText" width="100" valign="top" nowrap>
+			Type a word:
+		</td>
+		<td valign="top" width="200">
+			<obout:Combobox id="cbo1" OnAjaxError="onAjaxError" Width="200" Height="225" runat="server" 
+				OnClientChange="getWordDescription()" OnClientKeyPress="openCombobox" Validate="true" 
+				AjaxMethod="OnSuggestOptions" FolderStyle="../Combobox/styles/default">
+				<Options>               
+				</Options>
+			</obout:Combobox>
+			
+		</td>
+		<td valign="top" class="tdText" align="left" valign="top">
+			<div id="divWordInformation"></div>
+		</td>
+	</tr>
+</table>

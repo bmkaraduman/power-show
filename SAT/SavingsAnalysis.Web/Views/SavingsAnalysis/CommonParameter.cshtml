@@ -1,0 +1,25 @@
+﻿@model SavingsAnalysis.Web.ViewModels.CommonInputParameterViewModel
+
+<tr>
+    <td>
+        @Html.LabelFor(m => m.CompanyName)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.CompanyName)
+    </td>
+    <td>
+        @Html.ValidationMessageFor(m => m.CompanyName)
+    </td>
+    @Html.HiddenFor(m => m.FileName)    
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.CurrencySymbol)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.CurrencySymbol)
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.CurrencySymbol)
+    </td>
+</tr>
+

@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<TextMenu ID="TextMenuMain">
+	<Item ID="brands" InnerHTML="Brands" />
+		<Item ParentID="brands" ID="ibm" InnerHTML="IBM" />
+		<Item ParentID="brands" ID="obout" InnerHTML="OBOUT" />
+			<Item ParentID="obout" ID="treeview" InnerHTML="TreeView" Url="http://www.obout.com/t2/edraganddrop.aspx" />
+			<Item ParentID="obout" ID="calendar" InnerHTML="Calendar" Url="http://www.obout.com/calendar/" />
+	<Item ID="systems" InnerHTML="Systems"/>
+		<Item ParentID="systems" ID="desktops" InnerHTML="Desktops" />
+</TextMenu>

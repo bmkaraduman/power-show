@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CB629801-E2DF-4764-97E2-BD106BF79FF0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SavingsAnalysis.Core.Integration.Tests</RootNamespace>
+    <AssemblyName>SavingsAnalysis.Core.Integration.Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.6.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ExternalLibs\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IntegrationTest.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SavingsAnalysis.AnalysisEngine.Core\SavingsAnalysis.AnalysisEngine.Core.csproj">
+      <Project>{445DCEF4-2B6E-458F-B0FC-6484EC5B9880}</Project>
+      <Name>SavingsAnalysis.AnalysisEngine.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SavingsAnalysis.AnalysisEngine.NightWatchman\SavingsAnalysis.AnalysisEngine.NightWatchman.csproj">
+      <Project>{841D7110-4199-4192-BEE6-81368E467C11}</Project>
+      <Name>SavingsAnalysis.AnalysisEngine.NightWatchman</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SavingsAnalysis.AnalysisEngine.Shopping\SavingsAnalysis.AnalysisEngine.Shopping.csproj">
+      <Project>{F090A2CA-C3E1-4BD7-B940-D90B299E24A4}</Project>
+      <Name>SavingsAnalysis.AnalysisEngine.Shopping</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SavingsAnalysis.Client\SavingsAnalysis.Client.csproj">
+      <Project>{4A1D1858-DB9C-40AF-ADAE-20737B82BA4F}</Project>
+      <Name>SavingsAnalysis.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SavingsAnalysis.Common.Tests\SavingsAnalysis.Common.Tests.csproj">
+      <Project>{33B1CD43-87B4-4C98-9543-986DEECA34F2}</Project>
+      <Name>SavingsAnalysis.Common.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SavingsAnalysis.Common\SavingsAnalysis.Common.csproj">
+      <Project>{17161B57-B18F-49E8-A555-E56835084AE0}</Project>
+      <Name>SavingsAnalysis.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SavingsAnalysis.Client.Common\SavingsAnalysis.Client.Common.csproj">
+      <Project>{B1088050-C5B5-45DA-9714-07DBD9AD34D9}</Project>
+      <Name>SavingsAnalysis.Client.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Import Project="..\packages\StyleCop.MSBuild.4.7.17.1\tools\StyleCop.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+</Project>

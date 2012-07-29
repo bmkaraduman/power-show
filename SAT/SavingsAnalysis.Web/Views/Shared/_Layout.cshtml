@@ -1,0 +1,127 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jqModal.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/App_Themes/DefaultTheme/appstyle.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/App_Themes/DefaultTheme/jquery-ui-1.8.18.custom.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/App_Themes/DefaultTheme/jqModal.css")" rel="stylesheet" type="text/css" />
+    <meta http-equiv="expires" content="Fri, 30 Dec 2011 12:00:00 GMT" />
+    
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+
+            $('#check').click(function () {
+                $.ajax({
+                    url: "@Url.Action("SavingsAnalysis","ExclusionFilters")",
+                    type: 'GET',
+                    data: { fileName: $('#FileName').val(), filters: $('#ExclusionFilter').val() },
+                    success: function (result) {
+                        var includedListBox = $("#IncludedPackage");
+                        includedListBox.empty();
+                        var includedPrograms;
+                        $.each(result.IncludedPackages, function (i, item) {
+                            includedPrograms += "<option value='" + item + "'>" + item + "</option>";
+                        });
+                        includedListBox.html(includedPrograms);
+
+                        var excludedPrograms;
+                        var excludedListBox = $("#ExcludedPackage");
+                        excludedListBox.empty();
+                        $.each(result.ExcludedPackages, function (i, item) {
+                            excludedPrograms += "<option value='" + item + "'>" + item + "</option>";
+                        });
+                        excludedListBox.html(excludedPrograms);
+                    }
+                });
+            });
+
+            // ** Double-Click section starts
+            // This doble-click section is left here for now until next version when it will be needed
+            $("#IncludedPackage").dblclick(function () {
+                var strExclu = "\n";
+                $("#IncludedPackage option:selected").each(function () {
+                    strExclu += $(this).text();
+                    $('#IncludedPackage option:selected').remove().appendTo('#ExcludedPackage');
+                    $('#ExclusionFilter').val($('#ExclusionFilter').val() + strExclu);
+                });
+            }).trigger('change');
+
+            $("#ExcludedPackage").dblclick(function () {
+                var str = "";
+                $("#ExcludedPackage option:selected").each(function () {
+                    str += $(this).text();
+                    $('#ExcludedPackage option:selected').remove().appendTo('#IncludedPackage');
+                    var excludedStr = $('#ExclusionFilter').val();
+                    var index = excludedStr.search(str);
+                    if (index != -1) {
+                        var temp = excludedStr.slice(0, index - 1); // (index - 1) removes cariage return
+                        var newStr = temp.concat(excludedStr.substring(index + str.length, excludedStr.length));
+                        $('#ExclusionFilter').val(newStr);
+                    }
+                });
+            }).trigger('change');
+            // ** Double-Click section ends
+
+            $('#dialog').jqm();
+
+
+            $('.InitiateAnalysis').click(function () {
+                loadingMask('Initiating Analysis...');
+            });
+
+            $('#Next').click(function () {
+                loadingMask('Analysing...');
+            });
+
+            $('#GenerateReport').click(function () {
+//                loadingMask('Generating Reports...');
+            });
+
+            function loadingMask(message) {
+                $("#loading-msg").text(message);
+                $("#loading-mask").show();
+                $("#header").hide();
+                $("#main").hide();
+            }
+        })
+    </script>
+       
+</head>
+<body>
+    <div id="loading-mask">
+        <div id="loading">
+            <div id="loading-indicator" style="text-align:center">
+                <img src='@Url.Content("~/App_Themes/DefaultTheme/images/ajax-loader.gif")' alt="Loading..."/>
+                <br />
+                <span id="loading-msg">Loading...</span>
+            </div>
+        </div>
+    </div>
+    <div id="header">
+        <div id="title">
+            <div class="ui-widget-header">
+                <a href="@Url.Action("Index", "SavingsAnalysis")">
+                    <img src="@Url.Content("~/App_Themes/DefaultTheme/appimages/logo.png")" alt="" /></a>
+                <div>
+                    Savings analysis tool
+                </div>
+            </div>
+            <div class="versionAlign">
+                Version: @ViewBag.Version
+            </div>
+            <div>
+                <div class="tooldownload">
+                    <a href="@Url.Content("~/sattool/AnalysisclientTool.zip")">Click here to download Analysis</a>
+                </div>
+            </div>
+        </div>
+        <div id="main">
+            @RenderBody()
+        </div>
+        <div id="footer">
+        </div>
+    </div>
+</body>
+</html>

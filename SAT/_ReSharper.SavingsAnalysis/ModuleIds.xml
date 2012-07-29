@@ -1,0 +1,10 @@
+<Modules>
+  <Module PersistentId="5F67C0F6-FD2B-4858-945D-07A0BD49097A" ModuleId="SavingsAnalysis.Web" />
+  <Module PersistentId="F090A2CA-C3E1-4BD7-B940-D90B299E24A4" ModuleId="SavingsAnalysis.AnalysisEngine.Shopping" />
+  <Module PersistentId="17161B57-B18F-49E8-A555-E56835084AE0" ModuleId="SavingsAnalysis.Common" />
+  <Module PersistentId="445DCEF4-2B6E-458F-B0FC-6484EC5B9880" ModuleId="SavingsAnalysis.AnalysisEngine.Core" />
+  <Module PersistentId="D4672149-C8F6-47D4-AB4D-EB799780500A" ModuleId="SavingsAnalysis.Web.Core" />
+  <Module PersistentId="F458B680-C849-4A12-8D0B-ADB4B2A9F97A" ModuleId="SavingsAnalysis.Client.Host" />
+  <Module PersistentId="4A1D1858-DB9C-40AF-ADAE-20737B82BA4F" ModuleId="SavingsAnalysis.Client" />
+  <Module PersistentId="B1088050-C5B5-45DA-9714-07DBD9AD34D9" ModuleId="SavingsAnalysis.Client.Common" />
+</Modules>

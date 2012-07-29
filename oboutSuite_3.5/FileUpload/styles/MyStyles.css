@@ -1,0 +1,105 @@
+﻿
+/* styles for the inner ProgressBar */
+
+.MyFileUpload .obout_ajax__progressbar
+{
+        border:1px solid #6A8FEB;
+        width:100%;
+        height:20px;
+        color:#6A8FEB;
+        background-color: #FFFFFF;
+        margin-top:1px;
+}
+.MyFileUpload .obout_ajax__progressbar_completed
+{
+		border-color: Green;
+}
+.MyFileUpload .obout_ajax__progressbar_error
+{
+		border-color: Red;
+}
+.MyFileUpload .obout_ajax__progressbar div.progress
+{
+        background-image:url(Progress.gif);
+}
+.MyFileUpload .obout_ajax__progressbar_completed  div.progress
+{
+        background-color: #E0FFE0;
+        background-image: none;
+}
+.MyFileUpload .obout_ajax__progressbar_error  div.progress
+{
+        background-color: #FFE0E0;
+        background-image: none;
+}
+.MyFileUpload .obout_ajax__progressbar div.progress .text
+{
+        position:absolute;
+        text-align:center;
+        color:blue;
+        font-size: 12px;
+        font-family: Verdana;
+        padding-top: 2px;
+}
+.MyFileUpload .obout_ajax__progressbar_completed  div.progress .text
+{
+		color: Green;
+}
+.MyFileUpload .obout_ajax__progressbar_error  div.progress .text
+{
+		color: Red;
+}
+.MyFileUpload .obout_ajax__progressbar div.text
+{
+        text-align:center;
+        font-size: 12px !important;
+        font-family: Verdana;
+        padding-top: 2px;
+}
+
+/* styles for other inner elements */
+
+/* textbox */
+.MyFileUpload input.textbox
+{
+    border:1px solid #6A8FEB;
+    background-color: White;
+    color: #6A8FEB;
+    text-align: center;
+    font-size: 12px !important;
+    font-family: Verdana;
+    height:23px;
+}
+
+/* DIV with the selected files list */
+.MyFileUpload div.fileslist
+{
+    background-color: #E0E0FF !important;
+    border:1px solid #6A8FEB !important;
+    margin:0px !important;
+    padding:0px !important;
+    padding-bottom:2px !important;
+    padding-right: 2px !important;
+    padding-left:2px !important;
+}
+
+/* files list item */
+.MyFileUpload div.fileslistitem
+{
+    color: #6A8FEB;
+    font-family: Verdana;
+    font-size:12px;
+    margin-top :2px;
+}
+
+/* the control's container */
+div.MyFileUpload
+{
+    border:1px solid blue;
+    padding:3px;
+    background-color: #B0B0FF;
+    border-radius: 5px;  
+    -moz-border-radius: 5px;  
+    -webkit-border-radius: 5px;
+    text-align:left;
+}

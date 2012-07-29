@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/cs/SiteMap-File-1.0" >
+    
+    <siteMapNode title="cs - ImageZoom Examples"  description="">
+
+      <siteMapNode title="Mode  - 2"  description="">
+        <siteMapNode url="~/ImageZoom/vb_imagezoom_single.aspx" title="Single"  description="vb_imagezoom_single" />
+        <siteMapNode url="~/ImageZoom/vb_imagezoom_gallery.aspx" title="Gallery"  description="vb_imagezoom_gallery" />
+      </siteMapNode>
+       
+  </siteMapNode>
+  
+</siteMap>
+

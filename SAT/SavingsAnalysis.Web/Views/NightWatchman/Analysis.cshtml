@@ -1,0 +1,25 @@
+﻿@model SavingsAnalysis.Web.Models.NightWatchmanAnalysisModel
+
+
+   <li>
+         @Html.LabelFor(m => m.Input.StartTime)
+         @Html.TextBoxFor(m => m.Input.StartTime)
+         @Html.ValidationMessageFor(m => m.Input.StartTime)
+   </li>
+   <li>
+         @Html.LabelFor(m => m.Input.EndTime)
+         @Html.TextBoxFor(m => m.Input.EndTime)
+         @Html.ValidationMessageFor(m => m.Input.EndTime)
+   </li>   
+   
+   
+   <li>
+         @Html.LabelFor(m => m.Results.NumberOfDesktops)
+         @Html.TextBoxFor(m => m.Results.NumberOfDesktops)
+         @Html.ValidationMessageFor(m => m.Results.NumberOfDesktops)
+   </li>
+   <li>
+         @Html.LabelFor(m => m.Results.NumberOfLaptops)
+         @Html.TextBoxFor(m => m.Results.NumberOfLaptops)
+         @Html.ValidationMessageFor(m => m.Results.NumberOfLaptops)
+   </li>

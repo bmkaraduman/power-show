@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<imageset>
+  <image>
+    <smallimage>small_image1.jpg</smallimage>
+    <bigimage>big_image1.jpg</bigimage>
+    <description>Beatiful lake</description>
+  </image>
+  <image>
+    <smallimage>small_image2.jpg</smallimage>
+    <bigimage>big_image2.jpg</bigimage>
+    <description>Back to nature</description>
+  </image>
+  <image>
+    <smallimage>small_image5.jpg</smallimage>
+    <bigimage>big_image5.jpg</bigimage>
+    <description>Peaceful</description>
+  </image>
+  <image>
+    <smallimage>small_image6.jpg</smallimage>
+    <bigimage>big_image6.jpg</bigimage>
+    <description>Amazing</description>
+  </image>
+</imageset>

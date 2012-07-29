@@ -1,0 +1,26 @@
+﻿@model SavingsAnalysis.Web.ViewModels.NightWatchmanInputParameterViewModel
+
+
+    <tr>
+        <td>
+            @Html.LabelFor(m => m.StartTime)
+        </td>
+        <td>
+            @Html.TextBoxFor(m => m.StartTime)
+        </td>
+        <td>
+            @Html.ValidationMessageFor(m => m.StartTime)
+        </td>
+    </tr>
+    <tr>
+        <td>
+            @Html.LabelFor(m => m.EndTime)
+        </td>
+        <td>
+            @Html.TextBoxFor(m => m.EndTime)
+        </td>
+        <td>
+            @Html.ValidationMessageFor(m => m.EndTime)
+        </td>
+            
+    </tr>

@@ -1,0 +1,11 @@
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.Shopping\bin\Debug\SavingsAnalysis.AnalysisEngine.Shopping.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.Shopping\bin\Debug\SavingsAnalysis.AnalysisEngine.Shopping.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.Shopping\bin\Debug\SavingsAnalysis.AnalysisEngine.Core.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.Shopping\bin\Debug\SavingsAnalysis.Common.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.Shopping\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.Shopping\bin\Debug\SavingsAnalysis.AnalysisEngine.Core.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.Shopping\bin\Debug\SavingsAnalysis.Common.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.Shopping\obj\Debug\SavingsAnalysis.AnalysisEngine.Shopping.Properties.Resources.resources
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.Shopping\obj\Debug\SavingsAnalysis.AnalysisEngine.Shopping.csproj.GenerateResource.Cache
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.Shopping\obj\Debug\SavingsAnalysis.AnalysisEngine.Shopping.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.Shopping\obj\Debug\SavingsAnalysis.AnalysisEngine.Shopping.pdb

@@ -1,0 +1,30 @@
+﻿@model List<SavingsAnalysis.Web.Core.FileManager>
+<table>
+    <caption>
+        @ViewBag.Title</caption>
+    <thead>
+        <tr>
+            <th scope="col">
+                Uploaded Files
+            </th>
+            <th scope="col">
+                Action
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>
+                <td>
+                    <a class="InitiateAnalysis" href="@Url.Action("InitiateAnalysis", "SavingsAnalysis", new { filename = item.FileName })">Start Analysis</a>
+                    |
+                    <a href="@Url.Action("RemoveFile", "SavingsAnalysis", new { filename = item.FileName })">Remove File</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

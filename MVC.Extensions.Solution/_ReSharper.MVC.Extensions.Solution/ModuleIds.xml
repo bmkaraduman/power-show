@@ -1,0 +1,5 @@
+<Modules>
+  <Module PersistentId="2855C832-BBB6-4347-8643-61ACEF62925C" ModuleId="MVC3.Extensions" />
+  <Module PersistentId="0063FF46-9AB0-43B2-83B0-64CB9BEDCF51" ModuleId="Mvc3.Extensions.Demo" />
+  <Module PersistentId="98236664-7333-4F0E-AC92-666426A767CF" ModuleId="Mvc2.Extensions.Demo" />
+</Modules>

@@ -1,0 +1,28 @@
+<slidemenu SelectedId="a_a">
+	<parent id="a">Company Home</parent>
+		<child id="a_a">
+			Entertainment
+		</child>
+		<child id="a_b">
+			Games
+		</child>
+		<child id="a_c">
+			Greeting Cards
+		</child>
+		<child id="a_d">
+			Downloads
+		</child>
+	<parent id="b">System Tasks</parent>
+		<child id="b_a">
+			View system info
+		</child>
+		<child id="b_b">
+			Add programs
+		</child>
+		<child id="b_c">
+			Change settings
+		</child>
+		<child id="b_d">
+			Add users
+		</child>
+</slidemenu>

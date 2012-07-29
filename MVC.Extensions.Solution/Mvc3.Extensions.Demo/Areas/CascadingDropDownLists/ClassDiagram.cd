@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Mvc3.Extensions.Demo.Areas.CascadingDropDownLists.Models.City">
+    <Position X="11" Y="1.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAIAAAAAAQAAAIQAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\CascadingDropDownLists\Models\City.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Country" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Mvc3.Extensions.Demo.Areas.CascadingDropDownLists.Models.Continent">
+    <Position X="0.75" Y="1.75" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAQQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\CascadingDropDownLists\Models\Continent.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Countries" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Mvc3.Extensions.Demo.Areas.CascadingDropDownLists.Models.Country">
+    <Position X="6.5" Y="1.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>EAACAAAAAAAAAAAIAAAAAAQAAAAAACABAAAAAAAAAAA=</HashCode>
+      <FileName>Areas\CascadingDropDownLists\Models\Country.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Continent" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Cities" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

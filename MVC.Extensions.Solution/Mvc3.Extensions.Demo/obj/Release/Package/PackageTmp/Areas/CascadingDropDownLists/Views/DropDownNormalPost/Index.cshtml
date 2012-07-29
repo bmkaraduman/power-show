@@ -1,0 +1,21 @@
+﻿@model Mvc3.Extensions.Demo.Areas.CascadingDropDownLists.Models.Atlas
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<h2>
+	Cascading using normal FORM post (Html.BeginForm helper)
+</h2>
+<h3>
+	<a href="http://weblogs.asp.net/raduenuca/archive/2011/03/13/asp-net-mvc-cascading-dropdown-lists-tutorial-part-2-cascading-using-normal-form-post-html-beginform-helper.aspx">
+		Cascading Dropdown Lists Tutorial–Part 2: Cascading using normal FORM post (Html.BeginForm helper)</a>
+</h3>
+
+Only Romania has cities entries (select Europe then Romania)
+
+@Html.Partial(MVC.CascadingDropDownLists.DropDownNormalPost.Views._Continents)
+@Html.Partial(MVC.CascadingDropDownLists.DropDownNormalPost.Views._Countries)
+@Html.Partial(MVC.CascadingDropDownLists.DropDownNormalPost.Views._Cities)
+
+@DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:fff")

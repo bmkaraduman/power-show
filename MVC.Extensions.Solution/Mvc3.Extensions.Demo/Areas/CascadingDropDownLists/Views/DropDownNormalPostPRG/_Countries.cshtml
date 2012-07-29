@@ -1,0 +1,24 @@
+﻿@model Mvc3.Extensions.Demo.Areas.CascadingDropDownLists.Models.Atlas
+@if ( Model.Countries != null && Model.Countries.Count( ) > 0 )
+{
+    using ( Html.BeginForm( MVC.CascadingDropDownLists.DropDownNormalPostPRG.SelectCountry( ) , FormMethod.Post ) )
+    { 
+        <fieldset>
+            <legend>Countries</legend>
+                @Html.HiddenFor( m => m.SelectedContinentId )
+                @Html.DropDownListFor( 
+                    m => m.SelectedCountryId , 
+                    new SelectList( Model.Countries , "Id" , "Name" ) , 
+                    "[Please select a country]" 
+                )
+                <input type="submit" value="Select" />
+        </fieldset>
+    }
+}
+else
+{
+    <fieldset>
+        <legend>Countries</legend>
+        No information available
+    </fieldset>
+}

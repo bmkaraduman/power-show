@@ -1,0 +1,527 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>obout_SlideMenu3_Pro_NET</name>
+    </assembly>
+    <members>
+        <member name="T:OboutInc.SlideMenu.Parent">
+            <summary>
+            Summary for Parent class
+            </summary>
+        </member>
+        <member name="T:OboutInc.SlideMenu.SlideMenuItem">
+            <summary>
+            Summary for the SlideMenuItem class
+            </summary>
+        </member>
+        <member name="F:OboutInc.SlideMenu.SlideMenuItem.EventClick">
+            <summary>
+            Contains the click event
+            </summary>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenuItem.OnClick(System.EventArgs)">
+            <summary>
+            Represents the method to handle the click event
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenuItem.RaisePostBackEvent(System.String)">
+            <summary>
+            Calls the OnClick event handler
+            </summary>
+            <param name="eventArgument"></param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenuItem.OnBubbleEvent(System.Object,System.EventArgs)">
+            <summary>
+            
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+            <returns>true</returns>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenuItem.Render(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Renders the Html markup for SlideMenu
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="E:OboutInc.SlideMenu.SlideMenuItem.Click">
+            <summary>
+            Raises the click event
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenuItem.InnerHtml">
+            <summary>
+            Text or any client side code to display.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenuItem.Url">
+            <summary>
+            URL to open to when user clicks.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenuItem.OnClientClick">
+            <summary>
+            Client side code to run when user clicks.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenuItem.UrlTarget">
+            <summary>
+            URL target frame name.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenuItem.UrlTitle">
+            <summary>
+            Title for the URL.
+            </summary>
+        </member>
+        <member name="M:OboutInc.SlideMenu.Parent.#ctor">
+            <summary>
+            Initiates a Parent Object
+            </summary>
+        </member>
+        <member name="T:OboutInc.SlideMenu.Child">
+            <summary>
+            Summary for Child class
+            </summary>
+        </member>
+        <member name="M:OboutInc.SlideMenu.Child.#ctor">
+            <summary>
+            Initiates a Child object
+            </summary>
+        </member>
+        <member name="T:OboutInc.SlideMenu.SlideMenu">
+            <summary>
+            SlideMenu class.
+            </summary>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.RaisePostDataChangedEvent">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.LoadPostData(System.String,System.Collections.Specialized.NameValueCollection)">
+            <summary>
+            Loads post data to slidemenu object from a manual postback
+            </summary>
+            <param name="postDataKey"></param>
+            <param name="postCollection"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.LoadViewState(System.Object)">
+            <summary>
+            overrides the method from System.Web.UI.Control, populates the slidemnu object from the viewstate
+            </summary>
+            <param name="savedState"></param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.SaveViewState">
+            <summary>
+            overrides the method from System.Web.UI.Control, saves data from slidemenu object to viewstate
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.AddParentAt(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Add parent to render after item with atId.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="atId">ID of an item after which to insert the parent</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+            <param name="url">Url to navigate to when user clicks on this item</param>
+            <param name="onClientClick">Client side code to execute when user clicks on this item</param>
+            <param name="urlTitle">Title for the URL</param>
+            <param name="urlTarget">Target frame or window name for URL</param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.AddParentAt(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Add parent to render after item with atId.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="atId">ID of an item after which to insert the parent</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+            <param name="url">Url to navigate to when user clicks on this item</param>
+            <param name="onClientClick">Client side code to execute when user clicks on this item</param>
+            <param name="urlTitle">Title for the URL</param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.AddParent(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Add parent to render.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+            <param name="url">Url to navigate to when user clicks on this item</param>
+            <param name="onClientClick">Client side code to execute when user clicks on this item</param>
+            <param name="urlTitle">Title for the URL</param>
+            <param name="urlTarget">Target frame or window name for URL</param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.AddParent(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Add parent to render.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+            <param name="url">Url to navigate to when user clicks on this item</param>
+            <param name="onClientClick">Client side code to execute when user clicks on this item</param>
+            <param name="urlTitle">Title for the URL</param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.AddParent(System.String,System.String,System.String,System.String)">
+            <summary>
+            Add parent to render.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+            <param name="url">Url to navigate to when user clicks on this item</param>
+            <param name="onClientClick">Client side code to execute when user clicks on this item</param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.AddParent(System.String,System.String,System.String)">
+            <summary>
+            Add parent to render.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+            <param name="url">Url to navigate to when user clicks on this item</param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.AddParent(System.String,System.String)">
+            <summary>
+            Add parent to render.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.AddChildAt(System.String,System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Add child to render after an item with ID atId.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="atId">ID of an item after which to inset the child</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+            <param name="url">Url to navigate to when user clicks on this item</param>
+            <param name="onClientClick">Client side code to execute when user clicks on this item</param>
+            <param name="urlTitle">Title for the URL</param>
+            <param name="urlTarget">Target frame or window name for URL</param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.AddChildAt(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Add child to render after an item with ID atId.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="atId">ID of an item after which to inset the child</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+            <param name="url">Url to navigate to when user clicks on this item</param>
+            <param name="onClientClick">Client side code to execute when user clicks on this item</param>
+            <param name="urlTitle">Title for the URL</param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.AddChild(System.String,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Add child to render.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+            <param name="url">Url to navigate to when user clicks on this item</param>
+            <param name="onClientClick">Client side code to execute when user clicks on this item</param>
+            <param name="urlTitle">Title for the URL</param>
+            <param name="urlTarget">Target frame or window name for URL</param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.AddChild(System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Add child to render.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+            <param name="url">Url to navigate to when user clicks on this item</param>
+            <param name="onClientClick">Client side code to execute when user clicks on this item</param>
+            <param name="urlTitle">Title for the URL</param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.AddChild(System.String,System.String,System.String,System.String)">
+            <summary>
+            Add child to render.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+            <param name="url">Url to navigate to when user clicks on this item</param>
+            <param name="onClientClick">Client side code to execute when user clicks on this item</param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.AddChild(System.String,System.String,System.String)">
+            <summary>
+            Add child to render.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+            <param name="url">Url to navigate to when user clicks on this item</param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.AddChild(System.String,System.String)">
+            <summary>
+            Add child to render.
+            </summary>
+            <param name="id">Unique ID for this item</param>
+            <param name="innerHtml">Text or any client side code to display</param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.Clear">
+            <summary>
+            Clear menu.
+            </summary>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.CreateChildControls">
+            <summary>
+            Overrides CreateChildControls to create the control tree
+            </summary>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.OnInit(System.EventArgs)">
+            <summary>
+            Overrides OnInit to initialise menu items
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.OnPreRender(System.EventArgs)">
+            <summary>
+            Overrides register the slidemenu object 
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenu.Render(System.Web.UI.HtmlTextWriter)">
+            <summary> 
+            Render this control to the output parameter specified.
+            </summary>
+            <param name="output"> The HTML writer to write out to </param>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.MenuItems">
+            <summary>
+            A collection containing all slide menu parents and children.
+            <remarks>
+            Each parent and child is of type SlideMenuItem.
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.CSSParent">
+            <summary>
+            CSS class name for parent.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.CSSParentOver">
+            <summary>
+            CSS class name for parent with mouse over.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.CSSParentSelected">
+            <summary>
+            CSS class name for selected parent.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.CSSChild">
+            <summary>
+            CSS class name for child.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.CSSChildOver">
+            <summary>
+            CSS class name for child with mouse over.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.CSSChildSelected">
+            <summary>
+            CSS class name for selected child.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.CSSMenu">
+            <summary>
+            CSS class name for menu.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.CSSChildrenBox">
+            <summary>
+            CSS class name for children box.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.ImageParent">
+            <summary>
+            Path to an image file for parent.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.ImageParentOver">
+            <summary>
+            Path to an image file for parent with mouse over.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.ImageParentSelected">
+            <summary>
+            Path to an image file for selected parent.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.ImageChild">
+            <summary>
+            Path to an image file for child.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.ImageChildOver">
+            <summary>
+            Path to an image file for child with mouse over.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.ImageChildSelected">
+            <summary>
+            Path to an image file for selected child.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.CSSImageParent">
+            <summary>
+            CSS class name for parent image.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.CSSImageChild">
+            <summary>
+            CSS class name for child image.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.CSSPath">
+            <summary>
+            Path to CSS file with menu classes.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.StyleFolder">
+            <summary>
+            Path to folder with menu style.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.Speed">
+            <summary>
+            Expand/collapse speed.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.SelectedId">
+            <summary>
+            Parent or child ID, which to select on load.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.KeepExpanded">
+            <summary>
+            Specify to leave opened parent expanded when another parent is selected.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.XmlPath">
+             <summary>
+            Path to Slide Menu XML file. Menu will first be loaded from XML file, then as Parents and Children are added in code. EX. osm.XmlPath = "smxml.xml";
+             </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.MinimumChildrenHeight">
+            <summary>
+            Minimum height for every children box.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.Height">
+            <summary>
+            Height for every children box.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.UrlTarget">
+            <summary>
+            Name of target frame for URLs.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.ImageLongDescription">
+             <summary>
+             URL for the long description of menu images. Optional
+            osm.ImageLongDescription = "longdesc.html";
+             </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.AutoQueryString">
+            <summary>
+            When true, menu will automatically add query string ?sm=[item_id] to every URL added to menu. Optional
+            osm.AutoQueryString = true;
+            Note: Use this to easily get the SelectedId. For example, osm.SelectedId = Request.QueryString["sm"]; 
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.AutoPostBack">
+            <summary>
+            Automatically post back when child is selected.
+            </summary>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenu.AllExpanded">
+            <summary>
+            When true, menu renders with all items expanded and can not be closed.
+            </summary>
+        </member>
+        <member name="T:OboutInc.SlideMenu.SlideMenuItems">
+            <summary> 
+            SlideMenu items collection class.
+            </summary>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenuItems.Add(OboutInc.SlideMenu.SlideMenuItem)">
+            <summary>
+            Adds a new SlideMenuItem
+            </summary>
+            <param name="i"></param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenuItems.Remove(System.Int32)">
+            <summary>
+            Removes a SlideMenuItem item
+            </summary>
+            <param name="i"></param>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenuItems.GetItemById(System.String)">
+            <summary>
+            Gets a SlideMenuItem by its id
+            </summary>
+            <param name="itemId"></param>
+            <returns>SlideMenuItem</returns>
+        </member>
+        <member name="M:OboutInc.SlideMenu.SlideMenuItems.InsertItemAt(System.String,OboutInc.SlideMenu.SlideMenuItem)">
+            <summary>
+            Inserts a SlideMenuItem item at a parent item
+            </summary>
+            <param name="itemId"></param>
+            <param name="item"></param>
+        </member>
+        <member name="P:OboutInc.SlideMenu.SlideMenuItems.Item(System.Int32)">
+            <summary>
+            Gets a SlideMenuItem at an index
+            </summary>
+            <param name="index"></param>
+            <returns>SlideMenuItem</returns>
+        </member>
+        <member name="T:OboutInc.SlideMenu.Designer.SlideMenuItemsEditor">
+            <summary> 
+            Collection editor.
+            </summary>
+        </member>
+        <member name="M:OboutInc.SlideMenu.Designer.SlideMenuItemsEditor.#ctor(System.Type)">
+            <summary> 
+            Collection editor constructor.
+            </summary>
+        </member>
+        <member name="M:OboutInc.SlideMenu.Designer.SlideMenuItemsEditor.CreateNewItemTypes">
+            <summary> 
+            Retrieves an array of object types that the editor can create.
+            </summary>
+        </member>
+        <member name="T:OboutInc.SlideMenu.Designer.SlideMenuDesigner">
+            <summary> 
+            Extends design-time behavior.
+            </summary>
+        </member>
+        <member name="M:OboutInc.SlideMenu.Designer.SlideMenuDesigner.GetDesignTimeHtml">
+            <summary> 
+            Generates design-time HTML for control.
+            </summary>
+        </member>
+        <member name="M:OboutInc.SlideMenu.Designer.SlideMenuDesigner.GetErrorDesignTimeHtml(System.Exception)">
+            <summary>
+            Overrides GetErrorDesignTimeHtml
+            </summary>
+            <param name="e"></param>
+            <returns></returns>
+        </member>
+        <member name="M:OboutInc.SlideMenu.Designer.SlideMenuDesigner.GetEmptyDesignTimeHtml">
+            <summary>
+            Overrides GetEmptyDesignTimeHtml
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:OboutInc.SlideMenu.ClickEventHandler">
+            <summary>
+            Delegates the event handler for ClickEvent
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+    </members>
+</doc>

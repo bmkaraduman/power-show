@@ -1,0 +1,34 @@
+<%@ Master Language="vb" Inherits="vb_masterpage" Src="vb_masterpage.master.vb"  %>
+<%@ Register Assembly="obout_AJAXPage" Namespace="OboutInc" TagPrefix="oajax" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>Untitled Page</title>
+    <script language="javascript" type="text/javascript">
+        function DoCallback()
+        {
+            ob_post.post(null, "DoCallback", function(){alert('callback ended...')});
+        }
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        Callback Panel inside master page
+        <oajax:CallbackPanel ID="CallbackPanel1" runat="server">
+            <Content style="border:1px solid black;height:40px;color:red">
+                <asp:Label ID="lblText" runat="server"></asp:Label>
+            </Content>
+        </oajax:CallbackPanel>
+		<br />
+		<input type="button" onclick="DoCallback()" value="Do Callback" />
+		<br /><br /><br />
+		<asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+        </asp:contentplaceholder>
+    </div>
+    </form>
+    
+</body>
+</html>

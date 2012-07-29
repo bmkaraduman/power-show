@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<%@ Master Language="VB" Src="vb_inside_masterpage.master.vb" Inherits="vb_inside_masterpage" %>
+<html>
+<head>
+    <HEAD>
+		<title>Obout TextMenu Horizontal Example inside Master Page</title>
+	</HEAD>
+</head>
+<body>
+    <h2>Obout TextMenu Horizontal Example</h2>
+		<br />
+		<a class="examples" href="Default.aspx?type=VBNET">« Back to examples</a>
+		<br />
+		<br />
+		TextMenu inside master page<br />
+		<asp:PlaceHolder ID="placeHolder1" runat="server"></asp:PlaceHolder>
+		<br />
+		<br />
+		<br />
+		<asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+        </asp:contentplaceholder>
+    </form>
+</body>
+</html>

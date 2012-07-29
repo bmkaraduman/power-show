@@ -1,0 +1,100 @@
+.mytoolbar1
+{
+        cursor:text;
+        background-color:#F0F0F0; padding: 0px 2px 2px 2px;
+        border-top: 1px solid #C2C2C2;
+        border-left: 1px solid #C2C2C2;
+        border-right: 1px solid #C2C2C2;
+}
+.mytoolbar1 .oae_toolbar_group
+{
+        white-space: nowrap; border-width: 0px; padding:0px; cursor:pointer; float:left;
+        margin:2px 0px 0px 0px;
+}
+.mytoolbar1 .oae_toolbar_button
+{
+        height: 21px; white-space: nowrap; border-width: 0px; padding:0px; cursor:pointer; float:left;
+        background-color:#C2C2C2; margin:2px 0px 0px 0px;
+}
+.mytoolbar1 .oae_toolbar_button td.textindicator
+{
+        font-size: 12px; background-color: White; padding-left:3px; padding-right:3px;
+}
+.mytoolbar1  div.oae_toolbar_button
+{
+        height: 19px;
+}
+.mytoolbar1  img.oae_toolbar_button
+{
+        width: 23px;
+}
+
+.mytoolbar1 .oae_toolbar_group .oae_toolbar_button
+{
+        float:none;
+        margin:0px 0px 0px 0px;
+}
+.mytoolbar1 .oae_toolbar_button_hover
+{
+        background-color:#3C8AFF;
+}
+.mytoolbar1 span.oae_toolbar_button span.oae_toolbar_selectlable
+{
+    padding:0px 2px; vertical-align:middle; cursor:text;
+    font-family:Arial; font-size:12px; font-weight:bold;
+}
+.mytoolbar1 span.oae_toolbar_button select.oae_toolbar_selectbutton
+{
+    vertical-align:middle; padding:0px; margin:0px; height: 20px; width:120px;
+    font-size:12px; font-family:arial; cursor:pointer;
+}
+.mytoolbar1 span.oae_toolbar_button select.oae_toolbar_selectbutton option
+{
+    vertical-align:middle;
+    font-size:12px;
+}
+.mytoolbar1 .oae_toolbar_button_disabled
+{
+    background-color:transparent; cursor:text;
+    -moz-opacity:0.5 ;
+    filter:alpha(opacity:50);
+    opacity: 0.5;
+}
+.mytoolbar2
+{
+        cursor:text;
+        background-color:#F0F0F0; padding: 0px 0px 2px 2px;
+        border-bottom: 1px solid #C2C2C2;
+        border-left: 1px solid #C2C2C2;
+        border-right: 1px solid #C2C2C2;
+}
+.mytoolbar2 .oae_toolbar_button
+{
+        height: 21px; white-space: nowrap; border-width: 0px; padding:0px; cursor:pointer; float:left;
+        background-color:#C2C2C2; margin:0px 4px 0px 0px;
+}
+.mytoolbar2 .oae_toolbar_button_hover
+{
+        background-color:#3C8AFF;
+}
+.mytoolbar2 .oae_toolbar_button_disabled
+{
+    background-color:transparent; cursor:text;
+    -moz-opacity:0.5 ;
+    filter:alpha(opacity:50);
+    opacity: 0.5;
+}
+/* Container for Popup-windows moving */
+.oae_editor_MoveSpan
+{
+    border-width:4px;
+    border-style:solid;
+    border-color:#A0A0FF;
+    filter: alpha(opacity=50);
+    background-color:#E0E0FF;
+    -moz-opacity:0.5;
+    -khtml-opacity:0.5;
+    opacity:0.5;
+    cursor:move;
+}
+

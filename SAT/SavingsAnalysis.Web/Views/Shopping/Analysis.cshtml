@@ -1,0 +1,32 @@
+﻿@model SavingsAnalysis.Web.Models.ShoppingAnalysisModel
+
+   <li>
+         @Html.LabelFor(m => m.Input.CurrencySymbol)
+         @Html.TextBoxFor(m => m.Input.CurrencySymbol)
+         @Html.ValidationMessageFor(m => m.Input.CurrencySymbol)
+   </li>
+   <li>
+         @Html.LabelFor(m => m.Input.CostPerRequest)
+         @Html.TextBoxFor(m => m.Input.CostPerRequest)
+         @Html.ValidationMessageFor(m => m.Input.CostPerRequest)
+   </li>
+   <li>
+         @Html.LabelFor(m => m.Input.Period)
+         @Html.TextBoxFor(m => m.Input.Period)
+         @Html.ValidationMessageFor(m => m.Input.Period)
+   </li>
+   <li>
+         @Html.LabelFor(m => m.Input.ManHourSavings)
+         @Html.TextBoxFor(m => m.Input.ManHourSavings)
+         @Html.ValidationMessageFor(m => m.Input.ManHourSavings)
+   </li>
+   <li>
+         @Html.LabelFor(m => m.Input.Threshold)
+         @Html.TextBoxFor(m => m.Input.Threshold)
+         @Html.ValidationMessageFor(m => m.Input.Threshold)
+   </li>
+   <li>
+         @Html.LabelFor(m => m.ShoppingResults.TotalRequest)
+         @Html.TextBoxFor(m => m.ShoppingResults.TotalRequest)
+         @Html.ValidationMessageFor(m => m.ShoppingResults.TotalRequest)
+   </li>

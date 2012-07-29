@@ -1,0 +1,14 @@
+<br />
+<p style="margin: 0px; text-align: center"><img src="http://test.obout.com/editor_new/images/text_decoration_header.gif" /></p>
+<p style="margin: 0px; text-align: center"><br />
+</p>
+<p style="margin: 0px; text-align: center">Generates browser-independent</p>
+<p style="margin: 0px; text-align: center">and standards-compliant HTML</p><br />
+<p style="margin: 0px; text-align: center">Loads features on demand -- lightweight and fast</p><br />
+<p style="margin: 0px; text-align: center">Fully customizable: external image galleries,</p>
+<p style="margin: 0px; text-align: center">custom buttons, import/export content, templates</p><br />
+<p style="margin: 0px; text-align: center">Integrates with grid, AJAXPage, flyout and other controls</p><br />
+<p style="margin: 0px; text-align: center"><br />
+</p>
+<p style="margin: 0px; text-align: center"><img src="http://test.obout.com/editor_new/images/text_decoration_footer.gif" /><br />
+</p>

@@ -1,0 +1,115 @@
+<%@ Register Src="aspnet_autosuggest.ascx" TagName="AutoSuggestControl" TagPrefix="uc1" %>
+<%@ Import Namespace="System.Xml" %>
+<%@ Import Namespace="System.Data.OleDb" %>
+<%@ Page language="c#" Inherits="OboutInc.oboutAJAXPage" %>
+<script language="C#" runat="server"> 
+    // This method loads the words from the database and creates and XML string
+    // The XML string will be used to add the options to the combobox 
+    public string OnSuggestOptions(string sText)
+    {
+        string sResponse = "";
+
+        // Setting the connection
+        OleDbConnection oConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/A_Words.mdb"));
+        oConn.Open();
+
+        // Run the query to retrieve the words that start with the give text
+        string sQuery = "SELECT DISTINCT TOP 10 FirstWord FROM FullTextLookup21 WHERE FirstWord LIKE '" + sText.Replace("'", "''") + "%' ORDER BY FirstWord ASC";
+        OleDbCommand oCommand = new OleDbCommand(sQuery);
+        oCommand.Connection = oConn;
+        OleDbDataReader oReader = oCommand.ExecuteReader();
+        
+        // Creating a new XML document
+        XmlDocument doc = new XmlDocument();
+        XmlElement tmp;
+        XmlNode root = doc.CreateNode(XmlNodeType.Element, "combobox", "");
+
+        XmlElement container = doc.CreateElement("container");
+        container.SetAttribute("combobox_id", "cbo1");
+        
+        // Looping through the database records and adding them to the XML string
+        while (oReader.Read())
+        {
+            tmp = doc.CreateElement("option");
+            tmp.SetAttribute("value", oReader.GetString(0).Replace("&APO;", "'"));
+            tmp.SetAttribute("text", oReader.GetString(0).Replace("&APO;", "'"));
+            tmp.SetAttribute("icon", "");
+            tmp.SetAttribute("tooltip", "");
+            container.AppendChild(tmp);
+        }
+        root.AppendChild(container);
+        doc.AppendChild(root);
+        sResponse = doc.OuterXml.ToString();
+
+        // Closing the connection
+        oReader.Close();
+        oConn.Close();
+
+        // Returning the response back to the client
+        return sResponse;
+    }
+	
+	// This method loads the full description for a give word from the database
+    public string GetWordDescription(string sWord)
+    {
+        string sServerResponse = "";
+
+        // Setting the connection
+        OleDbConnection oConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/A_Words.mdb"));
+        oConn.Open();
+
+        // Run the query to retrieve the description for the given word
+        string sQuery = "SELECT Examples FROM FullText FT INNER JOIN FullTextLookup21 FTL ON FT.ID = FTL.FullText_ID WHERE  FTL.FirstWord = '" + sWord.Replace("'", "''") + "'";
+        OleDbCommand oCommand = new OleDbCommand(sQuery);
+        oCommand.Connection = oConn;
+        OleDbDataReader oReader = oCommand.ExecuteReader();
+
+        // Looping through all the results found and create a string with all the description for the given word
+        if (oReader.HasRows)
+        {
+            while (oReader.Read())
+            {
+                sServerResponse += oReader.GetString(0) + "\r\n\r\n";
+            }
+        }
+        else
+        {
+            sServerResponse = "";
+        }
+
+        oConn.Close();       
+
+        // Returning the response back to the client
+        return sServerResponse;
+    }
+</script>
+
+<html>
+    <head runat="server">
+        <style type="text/css">
+            .tdText 
+            {
+		        font:11px Verdana;
+		        color:#333333;
+	        }
+        </style>
+    </head>
+    <body>
+        <br />
+        <br />
+        <span class="tdText">
+            <b>English Dictionary with AJAX Autosuggest inside user control</b>
+            <br /><br />
+            Search a word in the dictionary. The results will be retrived from the
+            database without reloading the page. 
+            <br /><br />
+            The database for this example contains only the words starting with "A"
+            <br /><br /><br />
+        </span>
+        
+		<uc1:AutoSuggestControl ID="AutoSuggestControl1" runat="server" />
+        <br /><br />
+		<a href="Default.aspx?type=ASPNET">« Back to examples</a>
+    </body>
+</html>
+

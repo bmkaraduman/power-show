@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Fields>
+
+    <product name="Common">
+        <field name="CompanyName"  requiredforanalysis="false" validate="true" validationregex="" tooltiptext="Please enter company name" description="Company Name" rendertype="text"/>
+    </product>
+
+    <product name="NightWatchman">
+        <field name="Startofworkingday" defaultValue="07:00"  requiredforanalysis="true"  validate="false" validationregex="" tooltiptext="Please enter company name" description="Hours (HH:MM) when company's working day begins" rendertype="text"/>
+        <field name="Endofworkingday" defaultValue="19:00" requiredforanalysis="true"  validate="false" validationregex=""  tooltiptext="Please enter company name"  description="Hours (HH:MM) when company's working day end" rendertype="text"/>
+    </product>
+
+    <product name="Shopping">
+        <field name="CurrencySymbol" defaultValue="$" requiredforanalysis="false" validate="true" validationregex="" tooltiptext="Currency Symbol ($,£)" description="Currency Symbol ($,£)" rendertype="text" />
+        <field name="CostPerRequest" defaultValue="46" requiredforanalysis="false" validate="true" validationregex="" tooltiptext="Currency" description="Cost  Per Request" rendertype="text" />
+        <field name="Period" defaultValue="30" requiredforanalysis="true" validate="true" validationregex="" tooltiptext="Period" description="Period" rendertype="text" mode="readonly"/>
+        <field name="StartDate" defaultValue="" requiredforanalysis="true" validate="true" validationregex="" tooltiptext="Date at which to start the analysis" description="Start Date" rendertype="label"/>
+        <field name="EndDate" defaultValue="" requiredforanalysis="true" validate="true" validationregex="" tooltiptext="Date at which to end the analysis" description="End Date" rendertype="label"/>
+        <field name="TotalSoftwareDistributions" defaultValue="" requiredforanalysis="true" validate="true" validationregex="" tooltiptext="The number of Software Distibutions for the start-end period." description="The number of Software Distibutions for the start-end period." rendertype="label"/>
+        <field name="IsIncludeCostPerSavings" defaultValue="checked" requiredforanalysis="true" validate="true" validationregex="" tooltiptext="Is Include Cost Per Savings" description="" rendertype="checkbox"/>
+        <field name="IncludeCostPerSavings" defaultValue="" requiredforanalysis="true" validate="true" validationregex="" tooltiptext="IncludeCostPerSavings" description="Include Cost Per Savings" rendertype="text"/>
+        <field name="IsIncludeManHours" defaultValue="checked" requiredforanalysis="true" validate="true" validationregex="" tooltiptext="Period" description="" rendertype="checkbox"/>
+        <field name="ManHourSavings" defaultValue="46" requiredforanalysis="true" validate="true" validationregex="" tooltiptext="Man Hour Savings" description="Man Hour Savings" rendertype="text" />
+        <field name="Threshold" defaultValue="" requiredforanalysis="true" validate="true" validationregex="" tooltiptext="Threshold" description="Threshold" rendertype="text"/>
+        <field name="NoOfActiveMachines" defaultValue="" requiredforanalysis="true" validate="true" validationregex="" tooltiptext="ActiveMachines" description="Active Machines" rendertype="label"/>
+        <field name="MaximumNoOfProgramsToRetreive" defaultValue="10" requiredforanalysis="true" validate="true" validationregex="" tooltiptext="Maximum Number Of Programs To Retreive" description="Maximum Number Of Programs To Retreive" rendertype="text"/>
+    </product>
+
+</Fields>

@@ -1,0 +1,71 @@
+﻿@model SavingsAnalysis.Web.ViewModels.OutputParametersViewModel
+@{
+    ViewBag.Title = "Analysis Results";
+}
+<h2>@ViewBag.Title</h2>
+<br />
+<div style="position: relative; top: -40px">
+    <img src="@Url.Content("~/App_Themes/DefaultTheme/appimages/attachment.png")" alt="Selected file"
+         title="Selected file" />
+    Selected file : @Model.CommonResults.FileName
+</div>
+<div style="float: right">
+    <a href="javascript:history.go(-1)">
+        <button>
+            <img src="@Url.Content("~/App_Themes/DefaultTheme/appimages/prev.png")" alt="Back" />
+            Back
+        </button>
+    </a>
+</div>
+@using (Html.BeginForm("Download", "SavingsAnalysis", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td colspan="3">
+                <h3>
+                    Common
+                </h3>
+                <hr />
+            </td>
+        </tr>
+        @{Html.RenderPartial("CommonParameter", Model.CommonResults);}
+        <tr>
+            <td colspan="3">
+                <h3>
+                    Nightwatchman
+                </h3>
+                <hr />
+            </td>
+        </tr>
+        
+        @{Html.RenderPartial("NightWatchmanAnalysisResults", Model.NightWatchmanResults);}
+        <tr>
+            <td colspan="3">
+                <h3>
+                    Shopping
+                </h3>
+                <hr />
+            </td>
+        </tr>
+        @{Html.RenderPartial("ShoppingAnalysisResults", Model.ShoppingResults);}
+        <tr>
+            <td colspan="3">
+                <h3>
+                </h3>
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div>
+                    <button id="GenerateReport">
+                        Generate Report<img src="@Url.Content("~/App_Themes/DefaultTheme/appimages/report.png")" alt="Generate Report" />
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+       
+     
+}

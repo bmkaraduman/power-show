@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="" title="root">
+    <siteMapNode url="" title="Products">
+      <siteMapNode url="" title="ASP.NET Controls">
+        <siteMapNode url="" title="TreeView"></siteMapNode>
+        <siteMapNode url="" title="Grid"></siteMapNode>
+        <siteMapNode url="" title="HTML Editor"></siteMapNode>
+        <siteMapNode url="" title="Spell Checker"></siteMapNode>
+      </siteMapNode>
+      <siteMapNode url="" title="ASP.NET MVC Controls" >
+        <siteMapNode url="" title="Interface controls"></siteMapNode>
+      </siteMapNode>
+    </siteMapNode>
+    <siteMapNode url="" title="Company">
+      <siteMapNode url="" title="Purchase page"/>
+      <siteMapNode url="" title="Contact Sales" />
+      <siteMapNode url="" title="License info" />
+      <siteMapNode url="" title="Sales FAQ" />
+      <siteMapNode url="" title="Customer login"/>
+      <siteMapNode url="" title="Print Invoice"/>
+    </siteMapNode>
+    <siteMapNode url="" title="Support">
+      <siteMapNode url="" title="Support"/>
+    </siteMapNode>
+    <siteMapNode url="" title="Download">
+      <siteMapNode url="" title="Download page"/>
+      <siteMapNode url="" title="Install FAQ"/>
+      <siteMapNode url="" title="Tech Support"/>
+      <siteMapNode url="" title="Our clients"/>
+      <siteMapNode url="" title="Testimonials"/>
+    </siteMapNode>
+  </siteMapNode>
+</siteMap>

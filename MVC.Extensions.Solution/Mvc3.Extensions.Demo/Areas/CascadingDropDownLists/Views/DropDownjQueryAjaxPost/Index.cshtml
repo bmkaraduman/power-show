@@ -1,0 +1,155 @@
+﻿@{
+	ViewBag.Title = "Index";
+}
+
+<h2>
+	Cascading using jQuery.ajax()
+</h2>
+<h3>
+	<a href="http://weblogs.asp.net/raduenuca/archive/2011/04/03/asp-net-mvc-cascading-dropdown-lists-tutorial-part-5-1-cascading-using-jquery-ajax-ajax-and-dom-objects.aspx">
+		Cascading Dropdown Lists Tutorial–Part 5.1: Cascading using jQuery.ajax() ($.ajax() and DOM Objects)</a>
+</h3>
+
+Only Romania has cities entries (select Europe then Romania)
+
+<fieldset>
+	<legend>Continents</legend>
+	<select id='continents'>
+		<option value=''>[Please select a continent]</option>
+	</select>
+</fieldset>
+<fieldset>
+	<legend>Countries</legend>
+	<div id="countriesContainer">
+		<select id='countries' style='display: none;'>
+			<option value=''>[Please select a country]</option>
+		</select>
+		<span id='noInfoCountries'>No information available </span>
+	</div>
+</fieldset>
+<fieldset>
+	<legend>Cities</legend>
+	<div id="citiesContainer">
+		<table id='cities' style='display: none;'>
+			<tr>
+				<th>
+					Name
+				</th>
+				<th>
+					Population
+				</th>
+			</tr>
+		</table>
+		<span id='noInfoCities'>No information available </span>
+	</div>
+</fieldset>
+
+@DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:fff")
+
+<script type='text/javascript'>
+	$(document).ready(function () {
+		//Load the continents
+		$.ajax({
+			url: '@Url.Action( MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.GetContinents( ) )',
+			type: 'GET',
+			success: function (data) {
+				var contients = $('#continents');
+				var domContinents = contients.get(0); // $('#id') != document.getElementById('id')
+
+				//Emtpy the continents dropdown list
+				for (var i = domContinents.options.length - 1; i > 0; i--) {
+					domContinents.remove(i);
+				}
+
+				for (var i = 0; i < data.length; i++) {
+					var item = data[i];
+					var continentOption = new Option(item.Name, item.Id);
+					contients.append(continentOption);
+				}
+			}
+		});
+
+		//Catch the continents change event
+		$('#continents').live('change', function () {
+			var countries = $('#countries');
+			var noInfo = $('#noInfoCountries');
+
+			var domCountries = countries.get(0);
+			for (var i = domCountries.options.length - 1; i > 0; i--) {
+				domCountries.remove(i);
+			}
+			$('#cities').hide();
+			$('#noInfoCities').show();
+			if ($('#continents option:selected').val() != '') {
+				$.ajax({
+					url: '@Url.Action( MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.GetCountries( ) )',
+					data: { continentId: $('#continents option:selected').val() },
+					type: 'GET',
+					success: function (data) {
+						if (data.length > 0) {
+							for (var i = 0; i < data.length; i++) {
+								var item = data[i];
+								var countryOption = new Option(item.Name, item.Id);
+								countries.append(countryOption);
+							}
+							noInfo.hide();
+							countries.show();
+						}
+						else {
+							countries.hide();
+							noInfo.show();
+						}
+					}
+				});
+			}
+			else {
+				countries.hide();
+				noInfo.show();
+			}
+		});
+
+	//Catch the countries change event
+	$('#countries').live('change', function () {
+		var cities = $('#cities');
+		var domCities = cities.get(0);
+		for (var i = domCities.rows.length - 1; i > 0; i--) {
+			domCities.deleteRow(i);
+		}
+		var noInfo = $('#noInfoCities');
+		if ($('#countries option:selected').val() != '') {
+			$.ajax({
+				url: '@Url.Action( MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.GetCities( ) )',
+				data: { countryId: $('#countries option:selected').val() },
+				type: 'GET',
+				success: function (data) {
+					if (data.length > 0) {
+						for (var i = 0; i < data.length; i++) {
+							var item = data[i];
+
+							var lastRow = domCities.rows.length;
+							var cityRow = domCities.insertRow(lastRow);
+
+							var cityName = cityRow.insertCell(0);
+							cityName.innerHTML = item.Name;
+
+							var cityPopulation = cityRow.insertCell(1);
+							cityPopulation.innerHTML = item.Population.toString();
+							cityPopulation.align = 'right';
+						}
+						noInfo.hide();
+						cities.show();
+					}
+					else {
+						cities.hide();
+						noInfo.show();
+					}
+				}
+			});
+		}
+		else {
+			countries.hide();
+			noInfo.show();
+		}
+	});
+	});
+</script>

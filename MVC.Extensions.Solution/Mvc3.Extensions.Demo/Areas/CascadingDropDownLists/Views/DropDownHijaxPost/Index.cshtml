@@ -1,0 +1,72 @@
+﻿@model Mvc3.Extensions.Demo.Areas.CascadingDropDownLists.Models.Atlas
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<h2>
+	Cascading using FORM Hijaxing
+</h2>
+<h3>
+	<a href="http://weblogs.asp.net/raduenuca/archive/2011/03/27/asp-net-mvc-cascading-dropdown-lists-tutorial-part-4-cascading-using-form-hijaxing-using-jquery.aspx">
+		Cascading Dropdown Lists Tutorial–Part 4: Cascading using FORM Hijaxing</a>
+</h3>
+
+Only Romania has cities entries (select Europe then Romania)
+
+@Html.Partial( MVC.CascadingDropDownLists.DropDownHijaxPost.Views._Continents )
+<div id="countries">
+	@Html.Partial( MVC.CascadingDropDownLists.DropDownHijaxPost.Views._Countries )
+</div>
+<div id="cities">
+	@Html.Partial( MVC.CascadingDropDownLists.DropDownHijaxPost.Views._Cities )
+</div>
+
+@DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss:fff")
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		//Hide the submit buttons. If javascript is disabled we'll use the normal functionality
+		$('input[type=submit]').hide();
+
+		//Continent select
+		$('#SelectedContinentId').change(function () {
+			$(this).parents('form').submit();
+			return false;
+		});
+
+		//Continent form submit
+		$("form[action$='SelectContinent']").submit(function () {
+			$.ajax({
+				url: $(this).attr('action'),
+				type: 'post',
+				data: $(this).serialize(),
+				success: function (result) {
+				    $('#countries').html(result);
+				    $('#cities').html('<fieldset><legend>Cities</legend><text>No information available</text></fieldset>');
+					$('input[type=submit]').hide();
+				}
+			});
+			return false;
+		});
+
+		//Country select
+		$('#SelectedCountryId').live('change', function () {
+			$(this).parents("form").submit();
+			return false;
+		});
+
+		//Country form submit
+		$("form[action$='SelectCountry']").live('submit', function () {
+			$.ajax({
+				url: $(this).attr('action'),
+				type: 'post',
+				data: $(this).serialize(),
+				success: function (result) {
+					$('#cities').html(result);
+				}
+			});
+			return false;
+		});
+	});
+</script>

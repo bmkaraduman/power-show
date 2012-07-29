@@ -1,0 +1,62 @@
+﻿@model SavingsAnalysis.Web.Models.InputParametersViewModel
+@{ViewBag.Title = "Report Parameters";}
+
+<h2 style="position: relative; top: -40px">@ViewBag.Title</h2>
+<div style="position: relative; top: -40px">
+    <img src="@Url.Content("~/App_Themes/DefaultTheme/appimages/attachment.png")" alt="Selected file"
+         title="Selected file" />
+    Selected file : @ViewBag.SelectedFile
+</div>
+
+@using (Html.BeginForm("ReportParameter", "SavingsAnalysis", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td colspan="3">
+                <h3>
+                    Common  
+                </h3>
+                <hr />
+            </td>
+        </tr>
+        
+      @{Html.RenderPartial("CommonParameter", Model.Common);}
+        <tr>
+            <td colspan="3">
+                <h3>
+                    Nightwatchman
+                </h3>
+                <hr />
+            </td>
+        </tr>
+      @{ Html.RenderPartial("NightWatchmanInputParameter", Model.NightWatchman); }
+        <tr>
+            <td colspan="3">
+                <h3>
+                    Shopping
+                </h3>
+                <hr />
+            </td>
+        </tr>
+        @{Html.RenderPartial("ShoppingInputParameter", Model.Shopping);}
+        <tr>
+            <td colspan="3">
+                <h3>
+                </h3>
+                <hr />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                
+                <div>
+                    <button id="Next">
+                        Next
+                        <img src="@Url.Content("~/App_Themes/DefaultTheme/appimages/next.png")" alt="Next" />
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </table>
+    
+}

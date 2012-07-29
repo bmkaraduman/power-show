@@ -1,0 +1,68 @@
+.SMParent, .SMParentOver, .SMParentSelected {
+	background-image:url(tab.gif); 
+	font:12px arial; 
+	color:white; 
+	text-align:center; 
+	padding:4px;
+	cursor:pointer; cursor:hand;
+}
+
+.SMChild {
+    font:12px arial; 
+    color:#2D466F; 
+    text-align:center;
+}
+.SMChild a {
+    font:12px arial; 
+    color:#2D466F; 
+	text-decoration:none;
+}
+
+.SMChildOver {
+    font:12px arial; 
+    color:#2D466F; 
+    text-align:center; 
+    text-decoration:underline; 
+    cursor:pointer;
+}
+.SMChildOver a {
+    font:12px arial; 
+    color:#2D466F; 
+	text-decoration:underline;
+}
+
+.SMChildSelected {
+    font:12px arial; 
+    color:#2D466F; 
+    text-align:center;
+}
+.SMChildSelected a {
+    font:12px arial; 
+    color:#2D466F; 
+	text-decoration:none;
+}
+
+.SMChildrenBox {
+    background-color:#E7EBF0;
+    border-bottom:1px solid white;
+    border-left:1px solid white;
+    border-right:1px solid white;
+}
+
+.SMMenu {
+    width:145px;
+}
+
+.SMImageParent {
+	display:none;
+}
+
+.SMImageChild {
+	display:none;
+}
+
+.SMChildImage {
+	vertical-align:middle;
+	border:0px solid black;
+	margin-right:6px;
+}

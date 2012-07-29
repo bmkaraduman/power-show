@@ -1,0 +1,14 @@
+C:\OneStop\Research\SAT\SavingsAnalysis.Client.Host\bin\Debug\SavingsAnalysis.Client.Host.exe.config
+C:\OneStop\Research\SAT\SavingsAnalysis.Client.Host\bin\Debug\SavingsAnalysis.Client.Host.exe
+C:\OneStop\Research\SAT\SavingsAnalysis.Client.Host\bin\Debug\SavingsAnalysis.Client.Host.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Client.Host\bin\Debug\log4net.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Client.Host\bin\Debug\SavingsAnalysis.Client.Common.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Client.Host\bin\Debug\SavingsAnalysis.Client.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Client.Host\bin\Debug\SavingsAnalysis.Common.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Client.Host\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Client.Host\bin\Debug\SavingsAnalysis.Client.Common.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Client.Host\bin\Debug\SavingsAnalysis.Common.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Client.Host\bin\Debug\SavingsAnalysis.Client.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Client.Host\obj\x86\Debug\SavingsAnalysis.Client.Host.csprojResolveAssemblyReference.cache
+C:\OneStop\Research\SAT\SavingsAnalysis.Client.Host\obj\x86\Debug\SavingsAnalysis.Client.Host.exe
+C:\OneStop\Research\SAT\SavingsAnalysis.Client.Host\obj\x86\Debug\SavingsAnalysis.Client.Host.pdb

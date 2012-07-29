@@ -1,0 +1,292 @@
+﻿<%@ Page Language="VB" AutoEventWireup="false" CodeFile="vb_integration_dynamic_combobox.aspx.vb" Inherits="AJAXPage_vb_integration_dynamic_combo" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>obout ASP.NET Grid examples</title>
+    <style type="text/css">
+        .tdText
+        {
+            font: 11px Verdana;
+            color: #333333;
+        }
+        .option2
+        {
+            font: 11px Verdana;
+            color: #0033cc;
+            padding-left: 4px;
+            padding-right: 4px;
+        }
+        a
+        {
+            font: 11px Verdana;
+            color: #315686;
+            text-decoration: underline;
+        }
+        a:hover
+        {
+            color: crimson;
+        }
+        .txtText
+        {
+            font-family: Verdana;
+            font-size: 10px;
+            color: #4B555E;
+            background-color: Transparent;
+            width: 96%;
+            border: 0px solid #FFFFFF;
+            text-align: left;
+        }
+        .rowEditTable td
+        {
+            font-family: Verdana;
+            font-size: 10px;
+            color: #4B555E;
+        }
+    </style>
+
+    <script type="text/javascript">
+
+        var currentCity = "";
+        var currentCountry = "";
+        
+        function LoadData(iRecordIndex,Mode){
+            var orId=grid1.Rows[iRecordIndex].Cells[0].Value;
+            ob_post.AddParam("orderId",orId);
+            ob_post.post(null, "LoadRecord", Mode=="Edit"?PopulateEdit:PopulateView);
+            ob_post.ResetParams(); 
+        }
+        
+        function PopulateView(iRecord) {
+            document.getElementById("lblShipName").value = iRecord[0].toString();
+            document.getElementById("lblShipAddress").value =iRecord[1].toString();
+            document.getElementById("lblShipCity").value = iRecord[2].toString();
+            document.getElementById("lblShipRegion").value =iRecord[3].toString();
+            document.getElementById("lblShipPostalCode").value =iRecord[4].toString();
+            document.getElementById("lblCountry").value = iRecord[5].toString();
+            document.getElementById("lblOrderDate").value = iRecord[7].toString();
+            document.getElementById("lblRequiredDate").value = iRecord[8].toString();
+            document.getElementById("lblShippedDate").value = iRecord[9].toString();
+            document.getElementById("lblShipVia").value = iRecord[10].toString();
+            document.getElementById("chkSent").checked = iRecord[11].toString().toLowerCase() == "true" ? true : false;
+            
+            }
+            
+        function PopulateEdit(iRecord) {
+            document.getElementById("txtShipName").value = iRecord[0].toString();
+            document.getElementById("txtShipAddress").value =iRecord[1].toString();
+            //document.getElementById("txtShipCity").value = iRecord[2].toString();
+            document.getElementById("txtShipRegion").value =iRecord[3].toString();
+            document.getElementById("txtShipPostalCode").value =iRecord[4].toString();
+            //document.getElementById("ob_ddlCountriesTextbox").value= iRecord[5].toString();
+            document.getElementById("txtOrderID").value=iRecord[6].toString();
+            document.getElementById("txtOrderDate").value = iRecord[7].toString();
+            document.getElementById("txtRequiredDate").value = iRecord[8].toString();
+            document.getElementById("txtShippedDate").value = iRecord[9].toString();
+            document.getElementById("txtShipVia").value = iRecord[10].toString();
+            document.getElementById("chkSentEdit").checked = iRecord[11].toString().toLowerCase() == "true" ? true : false;
+            currentCity = iRecord[2].toString();
+            currentCountry = iRecord[5].toString();
+            ob_post.AddParam("Country", currentCountry);
+            ob_post.post(null, "SetContinent", populateContinents);
+            
+        }
+        
+        function saveChanges() {
+            var oRecord = new Object();
+            oRecord.OrderID = document.getElementById("txtOrderID").value;
+            oRecord.ShipName = document.getElementById("txtShipName").value;
+            oRecord.ShipAddress = document.getElementById("txtShipAddress").value;
+            oRecord.ShipCity = cboCity.getText();
+            oRecord.ShipRegion = document.getElementById("txtShipRegion").value;
+            oRecord.ShipPostalCode = document.getElementById("txtShipPostalCode").value;
+            oRecord.ShipCountry = cboCountry.getText();
+            oRecord.OrderDate = document.getElementById("txtOrderDate").value;
+            oRecord.RequiredDate = document.getElementById("txtRequiredDate").value;
+            oRecord.ShippedDate = document.getElementById("txtShippedDate").value;
+            oRecord.ShipVia = document.getElementById("txtShipVia").value;
+            oRecord.Sent = document.getElementById("chkSentEdit").checked;
+            
+            grid1.executeUpdate(oRecord);
+        }
+
+        function ShowDetails(e) {
+            if (grid1.RecordInEditMode != null) {
+                grid1.cancel();
+            }
+
+            grid1.edit_record(e)
+
+            detailsContainer = document.getElementById("grid1_tplRowEdit_ctl00_DetailsContainer");
+            editContainer = document.getElementById("grid1_tplRowEdit_ctl00_EditContainer");
+
+            OrderID = e.id.split('_')[1];
+            if (e.value == "Edit") {
+                editContainer.style.display = "block";
+                detailsContainer.style.display = "none";
+
+                LoadData(OrderID, "Edit");
+            } else {
+                editContainer.style.display = "none";
+                detailsContainer.style.display = "block";
+
+                LoadData(OrderID, "View");
+            }
+        }
+        
+        function populateContinents(response)
+        {
+            var continent = response.split('^')[0];
+            var continentList = response.split('^')[1].split('|');
+            cboContinent.clearOptions();
+            for(var p = 0; p < continentList.length; p++)
+            {
+                var data = continentList[p].split('@');
+                cboContinent.addOption(data[0], data[1], null, null);
+            }
+            if(cboContinent.getText() == continent)
+            {
+                ob_post.AddParam("ContinentID", cboContinent.getValue());
+                ob_post.post(null, "SetCountry", populateCountries);
+                return;
+            }
+            for(var opts = 0; cboContinent.Options.length; opts++)
+            {
+                if(cboContinent.Options[opts].Text == continent) 
+                {
+                    cboContinent.setValue(cboContinent.Options[opts].Value);
+                    break;
+                }
+            }
+        }
+        
+        function populateCountries(response)
+        {
+            var countryList = response.split('|');
+            cboCountry.clearOptions();
+            
+            for(var n = 0; n < countryList.length; n++)
+            {
+                var data = countryList[n].split('@');
+                cboCountry.addOption(data[0], data[1], null, null);
+            }
+            if(cboCountry.getText() == currentCountry && cboCountry.getText().length > 0)
+            {
+                ob_post.AddParam("CountryID", cboCountry.getValue());
+                ob_post.post(null, "SetCity", populateCities);
+                return;
+            }
+            cboCountry.setValue('');
+            
+            if(currentCountry.length)
+            {
+                for(var opts = 0; cboCountry.Options.length; opts++)
+                {
+                    if(cboCountry.Options[opts].Text == currentCountry) 
+                    {
+                        cboCountry.setValue(cboCountry.Options[opts].Value);
+                        break;
+                    }
+                }
+            }
+            currentCountry = '';
+            if(cboCountry.getValue() == '')cboCountry.setText('');
+        }
+        
+        function populateCities(response)
+        {
+            var cityList = response.split('|');
+            document.getElementById('grid1_tplRowEdit_ctl00_cityRow').style.display = '';
+            cboCity.clearOptions();
+            cboCity.setValue('');
+            for(var n = 0; n < cityList.length; n++)
+            {
+                var data = cityList[n].split('@');
+                if(data.length > 1)
+                {
+                    cboCity.addOption(data[0], data[1], null, null);
+                }
+            }
+            if(currentCity.length)
+            {
+                if(cboCity.Options.length)
+                {
+                    var flag = false;
+                    for(var opts = 0; opts < cboCity.Options.length; opts++)
+                    {
+                        if(cboCity.Options[opts].Text == currentCity) 
+                        {
+                            cboCity.setValue(cboCity.Options[opts].Value);
+                            flag = true;
+                            break;
+                        }
+                    }
+                    if(!flag)
+                    {
+                        cboCity.addOption("-1", currentCity, null, null);
+                        cboCity.setValue("-1");
+                    }
+                }
+                else 
+                {
+                    cboCity.addOption("-1", currentCity, null, null);
+                    cboCity.setValue("-1");
+                }
+            }
+            currentCountry = '';
+            currentCity = '';
+            if(cboCity.getValue()=='') cboCity.setText('');
+        }
+        function SelectContinent()
+        {
+	        var ContinentID = cboContinent.getValue();	
+	        if(ContinentID)
+	        {
+	            document.getElementById('grid1_tplRowEdit_ctl00_cityRow').style.display = 'none';
+	            ob_post.AddParam("ContinentID", ContinentID);
+	            cboCountry.clearOptions();
+	            ob_post.post(null, "SetCountry", populateCountries);
+	        }
+        }
+        function SelectCountry()
+        {
+	        var CountryID = cboCountry.getValue();
+	        if(CountryID)
+	        {
+	            ob_post.AddParam("CountryID", CountryID);
+	            cboCity.clearOptions();
+	            ob_post.post(null, "SetCity", populateCities);
+	        }
+        }
+					
+    </script>
+
+</head>
+<body>
+    <form id="Form1" runat="server">
+    
+    <br />
+    
+    <span class="tdText"><b>ASP.NET Grid Integration with Dynamic Combobox</b></span>
+    
+    <br />
+    <br />
+    
+    <asp:PlaceHolder ID="phGrid1" runat="server"></asp:PlaceHolder>
+    
+    <br />
+    <br />
+    
+    <span class="tdText">
+        The details are displayed / edited using row templates. <br />
+The list of City/Country/Continent are loaded dynamically in combobox.
+    </span>
+    
+    <br /><br />
+    
+    <a href="Default.aspx?type=VBNET">« Back to examples</a>
+    
+    </form>
+</body>
+</html>

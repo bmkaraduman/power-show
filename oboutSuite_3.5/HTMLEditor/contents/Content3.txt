@@ -1,0 +1,13 @@
+<span style="font-weight: bold">Quick formatting</span><br />
+<br />
+Create any CSS classes with any styles and load them into the editor. Let your users format text with just one click. It's like macros on steroids!&nbsp;<br />
+<br />
+<span style="font-weight: bold">Load on demand</span><br />
+<br />
+Features that require some heavy processing are loaded on demand only when used for the first time. This saves loading time and page size.&nbsp;<br />
+<br />
+<span style="font-weight: bold">Fully customizable interface</span><br />
+<br />
+Show only buttons and functions your users use and hide the rest.<br />
+Fully customizable with CSS to fit your tastes.<br />
+You can create your own buttons and popup windows.

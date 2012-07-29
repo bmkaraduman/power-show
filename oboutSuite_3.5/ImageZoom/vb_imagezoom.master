@@ -1,0 +1,52 @@
+﻿<%@ Master Language="VB" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <title>Untitled Page</title>
+    <style type="text/css">
+		td.link{
+			padding-left:30px;
+			width:250px;			
+		}
+		
+		td.header {
+			padding-top:20px;
+			border-bottom:1px solid #eeeeee;
+			color:#555555;
+		}
+		
+		.tdText {
+			font:11px Verdana;
+			color:#333333;
+		}
+		.option2{
+			font:11px Verdana;
+			color:#0033cc;
+			background-color___:#f6f9fc;
+			padding-left:4px;
+			padding-right:4px;
+		}
+		a {
+			font:11px Verdana;
+			color:#315686;
+			text-decoration:underline;
+		}
+
+		a:hover {
+			color:crimson;
+		}
+	</style>    
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <a href="Default.aspx?div=vb">« Back to examples</a>
+        <br />
+        <asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+        </asp:contentplaceholder>
+    </div>
+    </form>
+</body>
+</html>

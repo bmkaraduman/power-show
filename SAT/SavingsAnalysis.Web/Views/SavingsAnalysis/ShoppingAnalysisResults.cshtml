@@ -1,0 +1,108 @@
+﻿@model SavingsAnalysis.Web.ViewModels.ShoppingAnalysisViewModel
+<tr>
+    <td>@Html.LabelFor(m => m.CostPerRequest)
+    </td>
+    <td>@Html.TextBoxFor(m => m.CostPerRequest)
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.CostPerRequest)
+    </td>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.Period)
+    </td>
+    <td>@Html.TextBoxFor(m => m.Period)
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.Period)
+    </td>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.ManHourSavings)
+    </td>
+    <td>@Html.TextBoxFor(m => m.ManHourSavings)
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.ManHourSavings)
+    </td>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.MaxNoOfProgramsToReportOn)
+    </td>
+    <td>@Html.TextBoxFor(m => m.MaxNoOfProgramsToReportOn)
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.MaxNoOfProgramsToReportOn)
+    </td>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.Threshold)
+    </td>
+    <td>@Html.TextBoxFor(m => m.Threshold)
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.Threshold)
+    </td>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.ShopStartDate)
+    </td>
+    <td>@Html.EditorFor(m => m.ShopStartDate)
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.ShopStartDate)
+    </td>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.ShopEndDate)
+    </td>
+    <td>@Html.EditorFor(m => m.ShopEndDate)
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.ShopEndDate)
+    </td>
+</tr>
+<tr>
+    <td>
+        @Html.LabelFor(m => m.TotalNumberOfRequests)
+    </td>
+    <td>
+        @Html.TextBoxFor(m => m.TotalNumberOfRequests)
+    </td>
+    <td>
+        @Html.ValidationMessageFor(m => m.TotalNumberOfRequests)
+    </td>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.IsIncludeManHours)
+    </td>
+    <td>@Html.CheckBoxFor(m => m.IsIncludeManHours)
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.IsIncludeCostPerSavings)
+    </td>
+    <td>@Html.CheckBoxFor(m => m.IsIncludeCostPerSavings)
+    </td>
+    <td>
+    </td>
+</tr>
+
+<tr>
+    <td>@Html.LabelFor(m => m.TotalNumberOfOneOffRequests)
+    </td>
+    <td>@Html.TextBoxFor(m => m.TotalNumberOfOneOffRequests)
+    </td>
+    <td>
+    </td>
+</tr>
+
+<tr>
+    <td>@Html.LabelFor(m => m.NumberOfActiveMachines)
+    </td>
+    <td>@Html.TextBoxFor(m => m.NumberOfActiveMachines)
+    </td>
+    <td>
+    </td>
+</tr>
+
+
+
+
+
+

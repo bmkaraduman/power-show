@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <sqlQueries>
+      <add name="vstatusmessages">
+        <selection>
+          <![CDATA[SELECT RecordId, MessageId, Component, machinename FROM vstatusmessages where Component='Software Distribution' and MessageID=10002]]>
+        </selection>
+        <validation></validation>
+      </add>
+      <add name="v_statmsgattributes">
+        <selection>
+          <![CDATA[SELECT RecordId, AttributeTime, AttributeId FROM v_statmsgattributes where AttributeID=401 ]]>
+        </selection>
+        <validation></validation>
+      </add>
+      <add name="v_gs_workstation_status">
+        <selection>
+          <![CDATA[SELECT resourceid, lasthwscan FROM v_gs_workstation_status]]>
+        </selection>
+        <validation></validation>
+      </add>
+      <add name="v_r_system">
+        <selection>
+          <![CDATA[SELECT resourceid, creation_date0 FROM v_r_system	]]>
+        </selection>
+        <validation></validation>
+      </add>
+      <add name="v_advertisement">
+        <selection>
+          <![CDATA[SELECT advertisementid, packageid, programname FROM v_advertisement]]>
+        </selection>
+        <validation></validation>
+      </add>
+      <add name="v_package">
+        <selection>
+          <![CDATA[SELECT packageid, [name] from v_package]]>
+        </selection>
+        <validation></validation>
+      </add>
+    </sqlQueries>
+</configuration>

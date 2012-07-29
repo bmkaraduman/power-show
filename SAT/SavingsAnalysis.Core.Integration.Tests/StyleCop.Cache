@@ -1,0 +1,33 @@
+<stylecopresultscache>
+  <version>11</version>
+  <project key="84553692">
+    <configuration>DEBUG;TRACE</configuration>
+  </project>
+  <sourcecode name=".NETFramework,Version=v4.0.AssemblyAttributes.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>05/11/2012 13:47:30</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>06/05/2012 17:20:50</timestamp>
+    <milliseconds>394</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="AssemblyInfo.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>05/11/2012 13:47:30</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>05/11/2012 13:47:22</timestamp>
+    <milliseconds>0</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IntegrationTest.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>05/11/2012 13:47:30</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>06/13/2012 16:05:06</timestamp>
+    <milliseconds>0</milliseconds>
+    <violations />
+  </sourcecode>
+</stylecopresultscache>

@@ -1,0 +1,2025 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
+  <DataSources>
+    <DataSource Name="NightwatchmandDataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:DataSourceID>d1b7b5ce-fca1-4a35-8baf-36ff0a3f0e2d</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSetNightwatchmanOvernightPowerState">
+      <Fields>
+        <Field Name="SeriesName">
+          <DataField>SeriesName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Value">
+          <DataField>Value</DataField>
+          <rd:TypeName>System.Double</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>NightwatchmandDataSource</DataSourceName>
+        <CommandText />
+        <rd:UseGenericDesigner>true</rd:UseGenericDesigner>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>NightwatchmanAnalysis.Web.Models</rd:DataSetName>
+        <rd:TableName>DataSetNightwatchmanOvernightPowerState</rd:TableName>
+        <rd:ObjectDataSourceType>NightwatchmanAnalysis.Web.Models.DataSetNightwatchmanOvernightPowerState, SavingsAnalysis.Web.Models, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <Body>
+    <ReportItems>
+      <Textbox Name="TxtSavingsEstimateFor">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>SAVINGS ESTIMATE for</Value>
+                <Style>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>28pt</FontSize>
+                  <Color>#f8961e</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>1.11125cm</Top>
+        <Left>0.86465cm</Left>
+        <Height>1.47312cm</Height>
+        <Width>10.88729cm</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="txtCompanyName">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!CompanyName.Value</Value>
+                <Style>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>28pt</FontSize>
+                  <Color>#f8961e</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>2.69021cm</Top>
+        <Left>0.86465cm</Left>
+        <Height>1.47312cm</Height>
+        <Width>10.88729cm</Width>
+        <ZIndex>1</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="txtYearlyCostSavingsText">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>="Total potential yearly cost savings from NightWatchman Enterprise for " &amp;
+Parameters!CompanyName.Value &amp;
+":"</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Segoe UI</FontFamily>
+                  <FontSize>12pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#365f91</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>4.56882cm</Top>
+        <Left>0.86465cm</Left>
+        <Height>2.39917cm</Height>
+        <Width>6.68042cm</Width>
+        <ZIndex>2</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Textbox Name="txtYearlyCostSavingsValue">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>=Parameters!CurrencySymbol.Value +
+FormatNumber(Parameters!YearlyCostSavings.Value, 0, FALSE, FALSE, TRUE)</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Segoe UI Semibold</FontFamily>
+                  <FontSize>36pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>7.1091cm</Top>
+        <Left>0.86465cm</Left>
+        <Height>1.94938cm</Height>
+        <Width>6.68042cm</Width>
+        <ZIndex>3</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Image Name="ImageBadge">
+        <Source>Embedded</Source>
+        <Value>Logo</Value>
+        <Sizing>FitProportional</Sizing>
+        <Top>1.11125cm</Top>
+        <Left>14.31329cm</Left>
+        <Height>2.30188cm</Height>
+        <Width>5.99994cm</Width>
+        <ZIndex>4</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
+      <Textbox Name="txtOvernightPCPowerState">
+        <CanGrow>true</CanGrow>
+        <KeepTogether>true</KeepTogether>
+        <Paragraphs>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value>Overnight PC power state</Value>
+                <Style>
+                  <FontStyle>Normal</FontStyle>
+                  <FontFamily>Segoe UI Semibold</FontFamily>
+                  <FontSize>12pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                  <TextDecoration>None</TextDecoration>
+                  <Color>#f8961e</Color>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+        </Paragraphs>
+        <Top>4.03966cm</Top>
+        <Left>15.00865cm</Left>
+        <Height>0.81167cm</Height>
+        <Width>5.30458cm</Width>
+        <ZIndex>5</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+          <PaddingLeft>2pt</PaddingLeft>
+          <PaddingRight>2pt</PaddingRight>
+          <PaddingTop>2pt</PaddingTop>
+          <PaddingBottom>2pt</PaddingBottom>
+        </Style>
+      </Textbox>
+      <Image Name="ImageZzzzz1">
+        <Source>Embedded</Source>
+        <Value>Zzzzz</Value>
+        <Sizing>Clip</Sizing>
+        <Top>6.42545cm</Top>
+        <Left>17.29698cm</Left>
+        <Height>2.30188cm</Height>
+        <Width>0.18521cm</Width>
+        <ZIndex>6</ZIndex>
+        <Visibility>
+          <Hidden>=IIF(Parameters!ShowZ.Value = 1, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
+      <Image Name="ImageZzzzz2">
+        <Source>Embedded</Source>
+        <Value>Zzzzz</Value>
+        <Sizing>Clip</Sizing>
+        <Top>6.42545cm</Top>
+        <Left>17.29698cm</Left>
+        <Height>2.30188cm</Height>
+        <Width>0.47828cm</Width>
+        <ZIndex>7</ZIndex>
+        <Visibility>
+          <Hidden>=IIF(Parameters!ShowZ.Value = 2, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
+      <Image Name="ImageZzzzz3">
+        <Source>Embedded</Source>
+        <Value>Zzzzz</Value>
+        <Sizing>Clip</Sizing>
+        <Top>6.42545cm</Top>
+        <Left>17.29698cm</Left>
+        <Height>2.30188cm</Height>
+        <Width>0.84693cm</Width>
+        <ZIndex>8</ZIndex>
+        <Visibility>
+          <Hidden>=IIF(Parameters!ShowZ.Value = 3, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
+      <Image Name="ImageZzzzz4">
+        <Source>Embedded</Source>
+        <Value>Zzzzz</Value>
+        <Sizing>Clip</Sizing>
+        <Top>6.42545cm</Top>
+        <Left>17.29698cm</Left>
+        <Height>2.30188cm</Height>
+        <Width>1.61396cm</Width>
+        <ZIndex>9</ZIndex>
+        <Visibility>
+          <Hidden>=IIF(Parameters!ShowZ.Value = 4, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
+      <Image Name="ImageZzzzz5">
+        <Source>Embedded</Source>
+        <Value>Zzzzz</Value>
+        <Sizing>Clip</Sizing>
+        <Top>6.42545cm</Top>
+        <Left>17.29698cm</Left>
+        <Height>2.30188cm</Height>
+        <Width>3.01625cm</Width>
+        <ZIndex>10</ZIndex>
+        <Visibility>
+          <Hidden>=IIF(Parameters!ShowZ.Value = 5, False, True)</Hidden>
+        </Visibility>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Image>
+      <Chart Name="ChartOvernightPowerState">
+        <ChartCategoryHierarchy>
+          <ChartMembers>
+            <ChartMember>
+              <Label>Value</Label>
+            </ChartMember>
+          </ChartMembers>
+        </ChartCategoryHierarchy>
+        <ChartSeriesHierarchy>
+          <ChartMembers>
+            <ChartMember>
+              <Group Name="ChartOvernightPowerState_SeriesGroup1">
+                <GroupExpressions>
+                  <GroupExpression>=Fields!SeriesName.Value</GroupExpression>
+                </GroupExpressions>
+              </Group>
+              <Label>=Fields!SeriesName.Value</Label>
+            </ChartMember>
+          </ChartMembers>
+        </ChartSeriesHierarchy>
+        <ChartData>
+          <ChartSeriesCollection>
+            <ChartSeries Name="Value">
+              <ChartDataPoints>
+                <ChartDataPoint>
+                  <ChartDataPointValues>
+                    <Y>=Sum(Fields!Value.Value)</Y>
+                  </ChartDataPointValues>
+                  <ChartDataLabel>
+                    <Style />
+                  </ChartDataLabel>
+                  <Style />
+                  <ChartMarker>
+                    <Style />
+                  </ChartMarker>
+                  <DataElementOutput>Output</DataElementOutput>
+                </ChartDataPoint>
+              </ChartDataPoints>
+              <Type>Shape</Type>
+              <Subtype>ExplodedPie</Subtype>
+              <Style />
+              <ChartEmptyPoints>
+                <Style />
+                <ChartMarker>
+                  <Style />
+                </ChartMarker>
+                <ChartDataLabel>
+                  <Style />
+                </ChartDataLabel>
+              </ChartEmptyPoints>
+              <ValueAxisName>Primary</ValueAxisName>
+              <CategoryAxisName>Primary</CategoryAxisName>
+              <ChartSmartLabel>
+                <CalloutLineColor>Black</CalloutLineColor>
+                <MinMovingDistance>0pt</MinMovingDistance>
+              </ChartSmartLabel>
+            </ChartSeries>
+          </ChartSeriesCollection>
+        </ChartData>
+        <ChartAreas>
+          <ChartArea Name="Default">
+            <ChartCategoryAxes>
+              <ChartAxis Name="Primary">
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <ChartAxisTitle>
+                  <Caption>Axis Title</Caption>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </ChartAxisTitle>
+                <ChartMajorGridLines>
+                  <Enabled>False</Enabled>
+                  <Style>
+                    <Border>
+                      <Color>Gainsboro</Color>
+                    </Border>
+                  </Style>
+                </ChartMajorGridLines>
+                <ChartMinorGridLines>
+                  <Style>
+                    <Border>
+                      <Color>Gainsboro</Color>
+                      <Style>Dotted</Style>
+                    </Border>
+                  </Style>
+                </ChartMinorGridLines>
+                <ChartMinorTickMarks>
+                  <Length>0.5</Length>
+                </ChartMinorTickMarks>
+                <CrossAt>NaN</CrossAt>
+                <Minimum>NaN</Minimum>
+                <Maximum>NaN</Maximum>
+              </ChartAxis>
+              <ChartAxis Name="Secondary">
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <ChartAxisTitle>
+                  <Caption>Axis Title</Caption>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </ChartAxisTitle>
+                <ChartMajorGridLines>
+                  <Enabled>False</Enabled>
+                  <Style>
+                    <Border>
+                      <Color>Gainsboro</Color>
+                    </Border>
+                  </Style>
+                </ChartMajorGridLines>
+                <ChartMinorGridLines>
+                  <Style>
+                    <Border>
+                      <Color>Gainsboro</Color>
+                      <Style>Dotted</Style>
+                    </Border>
+                  </Style>
+                </ChartMinorGridLines>
+                <ChartMinorTickMarks>
+                  <Length>0.5</Length>
+                </ChartMinorTickMarks>
+                <CrossAt>NaN</CrossAt>
+                <Location>Opposite</Location>
+                <Minimum>NaN</Minimum>
+                <Maximum>NaN</Maximum>
+              </ChartAxis>
+            </ChartCategoryAxes>
+            <ChartValueAxes>
+              <ChartAxis Name="Primary">
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <ChartAxisTitle>
+                  <Caption>Axis Title</Caption>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </ChartAxisTitle>
+                <ChartMajorGridLines>
+                  <Style>
+                    <Border>
+                      <Color>Gainsboro</Color>
+                    </Border>
+                  </Style>
+                </ChartMajorGridLines>
+                <ChartMinorGridLines>
+                  <Style>
+                    <Border>
+                      <Color>Gainsboro</Color>
+                      <Style>Dotted</Style>
+                    </Border>
+                  </Style>
+                </ChartMinorGridLines>
+                <ChartMinorTickMarks>
+                  <Length>0.5</Length>
+                </ChartMinorTickMarks>
+                <CrossAt>NaN</CrossAt>
+                <Minimum>NaN</Minimum>
+                <Maximum>NaN</Maximum>
+              </ChartAxis>
+              <ChartAxis Name="Secondary">
+                <Style>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <ChartAxisTitle>
+                  <Caption>Axis Title</Caption>
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                  </Style>
+                </ChartAxisTitle>
+                <ChartMajorGridLines>
+                  <Style>
+                    <Border>
+                      <Color>Gainsboro</Color>
+                    </Border>
+                  </Style>
+                </ChartMajorGridLines>
+                <ChartMinorGridLines>
+                  <Style>
+                    <Border>
+                      <Color>Gainsboro</Color>
+                      <Style>Dotted</Style>
+                    </Border>
+                  </Style>
+                </ChartMinorGridLines>
+                <ChartMinorTickMarks>
+                  <Length>0.5</Length>
+                </ChartMinorTickMarks>
+                <CrossAt>NaN</CrossAt>
+                <Location>Opposite</Location>
+                <Minimum>NaN</Minimum>
+                <Maximum>NaN</Maximum>
+              </ChartAxis>
+            </ChartValueAxes>
+            <Style>
+              <BackgroundGradientType>None</BackgroundGradientType>
+            </Style>
+          </ChartArea>
+        </ChartAreas>
+        <Palette>BrightPastel</Palette>
+        <ChartBorderSkin>
+          <Style>
+            <BackgroundColor>Gray</BackgroundColor>
+            <BackgroundGradientType>None</BackgroundGradientType>
+            <Color>White</Color>
+          </Style>
+        </ChartBorderSkin>
+        <ChartNoDataMessage Name="NoDataMessage">
+          <Caption>No Data Available</Caption>
+          <Style>
+            <BackgroundGradientType>None</BackgroundGradientType>
+            <TextAlign>General</TextAlign>
+            <VerticalAlign>Top</VerticalAlign>
+          </Style>
+        </ChartNoDataMessage>
+        <DataSetName>DataSetNightwatchmanOvernightPowerState</DataSetName>
+        <Top>4.56882cm</Top>
+        <Left>8.52288cm</Left>
+        <Height>4.54216cm</Height>
+        <Width>5.0923cm</Width>
+        <ZIndex>11</ZIndex>
+        <Style>
+          <Border>
+            <Color>LightGrey</Color>
+            <Style>None</Style>
+          </Border>
+          <BackgroundColor>White</BackgroundColor>
+          <BackgroundGradientType>None</BackgroundGradientType>
+        </Style>
+      </Chart>
+      <Rectangle Name="Rectangle1">
+        <ReportItems>
+          <Textbox Name="txtPowerStateOnValue">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!PowerStateOn.Value</Value>
+                    <Style>
+                      <Format>#,0</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Left>1.158cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.4583cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtPowerStateOffValue">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!PowerStateOff.Value</Value>
+                    <Style>
+                      <Format>#,0</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.67056cm</Top>
+            <Left>1.158cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.4583cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtPowerStateOntext">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>On</Value>
+                    <Style>
+                      <Format>#,0</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Left>3.72213cm</Left>
+            <Height>0.6cm</Height>
+            <Width>1.48398cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtPowerStateOffText">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Off</Value>
+                    <Style>
+                      <Format>#,0</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.67056cm</Top>
+            <Left>3.72213cm</Left>
+            <Height>0.6cm</Height>
+            <Width>1.54306cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <KeepTogether>true</KeepTogether>
+        <Top>4.95716cm</Top>
+        <Left>15.00865cm</Left>
+        <Height>1.27056cm</Height>
+        <Width>5.26519cm</Width>
+        <ZIndex>12</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Rectangle>
+      <Rectangle Name="RectangleRight">
+        <ReportItems>
+          <Textbox Name="txtNoOfPotentialEnergySavings">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Potential yearly energy savings at " &amp;
+Parameters!CompanyName.Value &amp;
+":"</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <Color>#365f91</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Height>0.78521cm</Height>
+            <Width>9.37241cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtNoOfPotentialEnergySavingsResult">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=FormatNumber(Parameters!PotentialYearlyKwhSavings.Value, 0, FALSE, FALSE, TRUE) &amp;
+"kWh"</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Segoe UI Semibold</FontFamily>
+                      <FontSize>36pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>0.66697cm</Top>
+            <Height>1.94938cm</Height>
+            <Width>9.37241cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtRecommendations">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>1.	Perform baseline analysis of environment
+2.	Create location and organizational groups
+3.	Assign tariffs to groups
+4.	Deploy power management policies
+5.	Monitor savings
+</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <Color>#365f91</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>12.57699cm</Top>
+            <Left>0.5916cm</Left>
+            <Height>2.47854cm</Height>
+            <Width>8.78081cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtRecommendationsTitle">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Recommendations</Value>
+                    <Style>
+                      <FontFamily>Segoe UI Semibold</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <Color>#f8961e</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>11.65069cm</Top>
+            <Height>0.78521cm</Height>
+            <Width>9.37241cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtDetails">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>This report shows the potential savings from implementing NightWatchman Enterprise across the Global Dynamics estate.  Currently over 70% of the machines in the Global Dynamics environment are being left on at night.  
+</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <Color>#365f91</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>5.32489cm</Top>
+            <Height>1.92292cm</Height>
+            <Width>9.37241cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtDetailsTitle">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Details</Value>
+                    <Style>
+                      <FontFamily>Segoe UI Semibold</FontFamily>
+                      <FontSize>12pt</FontSize>
+                      <Color>#f8961e</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>4.50441cm</Top>
+            <Height>0.67938cm</Height>
+            <Width>9.37241cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtEnergyEffieciencyRatingIs">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Based on these values your PC energy efficiency rating is:
+</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <Color>#365f91</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>7.38892cm</Top>
+            <Height>0.71732cm</Height>
+            <Width>9.37241cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="TextboxRanking">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Below Average"</Value>
+                    <Style>
+                      <FontFamily>Segoe UI Semibold</FontFamily>
+                      <FontSize>36pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.92375cm</Top>
+            <Height>1.60409cm</Height>
+            <Width>9.37241cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Rectangle Name="RectangleStars">
+            <ReportItems>
+              <Image Name="ImageStarEmpty4">
+                <Source>Embedded</Source>
+                <Value>StarEmpty</Value>
+                <Sizing>FitProportional</Sizing>
+                <Left>5.54641cm</Left>
+                <Height>1.5cm</Height>
+                <Width>1.5cm</Width>
+                <Visibility>
+                  <Hidden>=IIF (Parameters!ShowStars.Value &lt;= 3, False, True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+              <Image Name="ImageStarEmpty3">
+                <Source>Embedded</Source>
+                <Value>StarEmpty</Value>
+                <Sizing>FitProportional</Sizing>
+                <Left>3.89481cm</Left>
+                <Height>1.5cm</Height>
+                <Width>1.5cm</Width>
+                <ZIndex>1</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF (Parameters!ShowStars.Value &lt;= 2, False, True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+              <Image Name="ImageStarEmpty1">
+                <Source>Embedded</Source>
+                <Value>StarEmpty</Value>
+                <Sizing>FitProportional</Sizing>
+                <Left>0.5916cm</Left>
+                <Height>1.5cm</Height>
+                <Width>1.5cm</Width>
+                <ZIndex>2</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF (Parameters!ShowStars.Value &lt;= 0, False, True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+              <Image Name="ImageStarFull1">
+                <Source>Embedded</Source>
+                <Value>StarFull</Value>
+                <Sizing>FitProportional</Sizing>
+                <Left>0.5916cm</Left>
+                <Height>1.5cm</Height>
+                <Width>1.5cm</Width>
+                <ZIndex>3</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF (Parameters!ShowStars.Value &gt; 0, False, True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+              <Image Name="ImageStarEmpty2">
+                <Source>Embedded</Source>
+                <Value>StarEmpty</Value>
+                <Sizing>FitProportional</Sizing>
+                <Left>2.24321cm</Left>
+                <Height>1.5cm</Height>
+                <Width>1.5cm</Width>
+                <ZIndex>4</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF (Parameters!ShowStars.Value &lt;= 1, False, True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+              <Image Name="ImageStarFull2">
+                <Source>Embedded</Source>
+                <Value>StarFull</Value>
+                <Sizing>FitProportional</Sizing>
+                <Left>2.24321cm</Left>
+                <Height>1.5cm</Height>
+                <Width>1.5cm</Width>
+                <ZIndex>5</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF (Parameters!ShowStars.Value &gt; 1, False, True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+              <Image Name="ImageStarFull3">
+                <Source>Embedded</Source>
+                <Value>StarFull</Value>
+                <Sizing>FitProportional</Sizing>
+                <Left>3.89481cm</Left>
+                <Height>1.5cm</Height>
+                <Width>1.5cm</Width>
+                <ZIndex>6</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF (Parameters!ShowStars.Value &gt; 2, False, True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+              <Image Name="ImageStarFull4">
+                <Source>Embedded</Source>
+                <Value>StarFull</Value>
+                <Sizing>FitProportional</Sizing>
+                <Left>5.54641cm</Left>
+                <Height>1.5cm</Height>
+                <Width>1.5cm</Width>
+                <ZIndex>7</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF (Parameters!ShowStars.Value &gt; 3, False, True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+              <Image Name="ImageStarEmpty5">
+                <Source>Embedded</Source>
+                <Value>StarEmpty</Value>
+                <Sizing>FitProportional</Sizing>
+                <Left>7.19802cm</Left>
+                <Height>1.5cm</Height>
+                <Width>1.5cm</Width>
+                <ZIndex>8</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF (Parameters!ShowStars.Value &lt;= 4, False, True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+              <Image Name="ImageStarFull5">
+                <Source>Embedded</Source>
+                <Value>StarFull</Value>
+                <Sizing>FitProportional</Sizing>
+                <Left>7.19802cm</Left>
+                <Height>1.5cm</Height>
+                <Width>1.5cm</Width>
+                <ZIndex>9</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF (Parameters!ShowStars.Value &gt; 4, False, True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+            </ReportItems>
+            <KeepTogether>true</KeepTogether>
+            <Top>8.21207cm</Top>
+            <Height>1.54175cm</Height>
+            <Width>9.33302cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="RectangleNuclear">
+            <ReportItems>
+              <Image Name="ImageNuclear1">
+                <Source>Embedded</Source>
+                <Value>Nuclear</Value>
+                <Sizing>FitProportional</Sizing>
+                <Left>0.5916cm</Left>
+                <Height>1.5cm</Height>
+                <Width>1.5cm</Width>
+                <Visibility>
+                  <Hidden>=IIF (Parameters!ShowNuclear.Value &gt; 0, False, True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+              <Image Name="ImageNuclear2">
+                <Source>Embedded</Source>
+                <Value>Nuclear</Value>
+                <Sizing>FitProportional</Sizing>
+                <Left>2.24321cm</Left>
+                <Height>1.5cm</Height>
+                <Width>1.5cm</Width>
+                <ZIndex>1</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF (Parameters!ShowNuclear.Value &gt; 1, False, True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+              <Image Name="ImageNuclear3">
+                <Source>Embedded</Source>
+                <Value>Nuclear</Value>
+                <Sizing>FitProportional</Sizing>
+                <Left>3.89481cm</Left>
+                <Height>1.5cm</Height>
+                <Width>1.5cm</Width>
+                <ZIndex>2</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF (Parameters!ShowNuclear.Value &gt; 2, False, True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+              <Image Name="ImageNuclear4">
+                <Source>Embedded</Source>
+                <Value>Nuclear</Value>
+                <Sizing>FitProportional</Sizing>
+                <Left>5.54641cm</Left>
+                <Height>1.5cm</Height>
+                <Width>1.5cm</Width>
+                <ZIndex>3</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF (Parameters!ShowNuclear.Value &gt; 3, False, True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+              <Image Name="ImageNuclear5">
+                <Source>Embedded</Source>
+                <Value>Nuclear</Value>
+                <Sizing>FitProportional</Sizing>
+                <Left>7.19802cm</Left>
+                <Height>1.5cm</Height>
+                <Width>1.5cm</Width>
+                <ZIndex>4</ZIndex>
+                <Visibility>
+                  <Hidden>=IIF (Parameters!ShowNuclear.Value &gt; 4, False, True)</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Image>
+            </ReportItems>
+            <KeepTogether>true</KeepTogether>
+            <Top>2.79274cm</Top>
+            <Height>1.54175cm</Height>
+            <Width>9.33302cm</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+        </ReportItems>
+        <KeepTogether>true</KeepTogether>
+        <Top>9.35494cm</Top>
+        <Left>10.94082cm</Left>
+        <Height>15.05553cm</Height>
+        <Width>9.37241cm</Width>
+        <ZIndex>13</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Rectangle>
+      <Rectangle Name="RectangleLeft">
+        <ReportItems>
+          <Textbox Name="txtNoOfOverview">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="No of Desktops " &amp;
+FormatNumber(Parameters!NumberOfDesktops.Value, 0, FALSE, FALSE, TRUE) &amp;
+vbCRLF &amp;
+"No of Laptops " &amp;
+FormatNumber(Parameters!NumberOfLaptops.Value, 0, FALSE, FALSE, TRUE) &amp;
+vbCRLF &amp;
+"over a " &amp;
+FormatNumber(Parameters!Period.Value, 0, FALSE, FALSE, TRUE) &amp;
+" day period starting " &amp;
+Format(Parameters!StartDate.Value, "d MMMM yyyy")</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Height>1.71125cm</Height>
+            <Width>9.35271cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtNoOfPotentialCO2Savings">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>="Potential yearly CO2 savings at " &amp;
+Parameters!CompanyName.Value &amp;
+":"</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <Color>#365f91</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.67907cm</Top>
+            <Height>0.78521cm</Height>
+            <Width>9.35271cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtNoOfPotentialCO2SavingsResult">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=FormatNumber(Parameters!PotentialYearlyCO2Savings.Value, 0, FALSE, FALSE, TRUE) &amp;
+" tons of C02"</Value>
+                    <Style>
+                      <FontStyle>Normal</FontStyle>
+                      <FontFamily>Segoe UI Semibold</FontFamily>
+                      <FontSize>36pt</FontSize>
+                      <FontWeight>Normal</FontWeight>
+                      <TextDecoration>None</TextDecoration>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>2.79032cm</Top>
+            <Height>1.94938cm</Height>
+            <Width>9.35271cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtEquivalentToYearlyEmissions">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Equivalent to yearly emissions from:
+</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <Color>#365f91</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>6.99748cm</Top>
+            <Height>0.81167cm</Height>
+            <Width>9.35271cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtOrBurningFrom">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Or burning from:</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <Color>#365f91</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>XXX barrels of oil</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <Color>#365f91</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>12.14304cm</Top>
+            <Height>1.15563cm</Height>
+            <Width>9.35271cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Image Name="ImageTrees05">
+            <Source>Embedded</Source>
+            <Value>Trees</Value>
+            <Sizing>Clip</Sizing>
+            <Top>4.91608cm</Top>
+            <Height>1.905cm</Height>
+            <Width>0.62146cm</Width>
+            <ZIndex>5</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowTrees.Value = "0.5", False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageTrees10">
+            <Source>Embedded</Source>
+            <Value>Trees</Value>
+            <Sizing>Clip</Sizing>
+            <Top>4.91608cm</Top>
+            <Height>1.905cm</Height>
+            <Width>1.28291cm</Width>
+            <ZIndex>6</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowTrees.Value = "1.0", False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageTrees15">
+            <Source>Embedded</Source>
+            <Value>Trees</Value>
+            <Sizing>Clip</Sizing>
+            <Top>4.91608cm</Top>
+            <Height>1.905cm</Height>
+            <Width>1.91791cm</Width>
+            <ZIndex>7</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowTrees.Value = "1.5", False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageTrees20">
+            <Source>Embedded</Source>
+            <Value>Trees</Value>
+            <Sizing>Clip</Sizing>
+            <Top>4.91608cm</Top>
+            <Height>1.905cm</Height>
+            <Width>2.52646cm</Width>
+            <ZIndex>8</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowTrees.Value = "2.0", False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageTrees25">
+            <Source>Embedded</Source>
+            <Value>Trees</Value>
+            <Sizing>Clip</Sizing>
+            <Top>4.91608cm</Top>
+            <Height>1.905cm</Height>
+            <Width>3.24083cm</Width>
+            <ZIndex>9</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowTrees.Value = "2.5", False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageTrees30">
+            <Source>Embedded</Source>
+            <Value>Trees</Value>
+            <Sizing>Clip</Sizing>
+            <Top>4.91608cm</Top>
+            <Height>1.905cm</Height>
+            <Width>3.84937cm</Width>
+            <ZIndex>10</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowTrees.Value = "3.0", False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageTrees35">
+            <Source>Embedded</Source>
+            <Value>Trees</Value>
+            <Sizing>Clip</Sizing>
+            <Top>4.91608cm</Top>
+            <Height>1.905cm</Height>
+            <Width>4.51083cm</Width>
+            <ZIndex>11</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowTrees.Value = "3.5", False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageTrees40">
+            <Source>Embedded</Source>
+            <Value>Trees</Value>
+            <Sizing>Clip</Sizing>
+            <Top>4.91608cm</Top>
+            <Height>1.905cm</Height>
+            <Width>5.14583cm</Width>
+            <ZIndex>12</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowTrees.Value = "4.0", False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageTrees45">
+            <Source>Embedded</Source>
+            <Value>Trees</Value>
+            <Sizing>Clip</Sizing>
+            <Top>4.91608cm</Top>
+            <Height>1.905cm</Height>
+            <Width>5.83375cm</Width>
+            <ZIndex>13</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowTrees.Value = "4.5", False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageTrees50">
+            <Source>Embedded</Source>
+            <Value>Trees</Value>
+            <Sizing>Clip</Sizing>
+            <Top>4.91608cm</Top>
+            <Height>1.905cm</Height>
+            <Width>6.41583cm</Width>
+            <ZIndex>14</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowTrees.Value = "5.0", False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageCars7">
+            <Source>Embedded</Source>
+            <Value>Cars</Value>
+            <Sizing>Clip</Sizing>
+            <Top>8.75653cm</Top>
+            <Height>0.99729cm</Height>
+            <Width>203pt</Width>
+            <ZIndex>15</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowCars.Value = 7, False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageCars6">
+            <Source>Embedded</Source>
+            <Value>Cars</Value>
+            <Sizing>Clip</Sizing>
+            <Top>8.75653cm</Top>
+            <Height>0.99729cm</Height>
+            <Width>174pt</Width>
+            <ZIndex>16</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowCars.Value = 6, False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageCars9">
+            <Source>Embedded</Source>
+            <Value>Cars</Value>
+            <Sizing>Clip</Sizing>
+            <Top>8.75653cm</Top>
+            <Height>0.99729cm</Height>
+            <Width>263pt</Width>
+            <ZIndex>17</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowCars.Value = 9, False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageCars8">
+            <Source>Embedded</Source>
+            <Value>Cars</Value>
+            <Sizing>Clip</Sizing>
+            <Top>8.75653cm</Top>
+            <Height>0.99729cm</Height>
+            <Width>233pt</Width>
+            <ZIndex>18</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowCars.Value = 8, False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageCars5">
+            <Source>Embedded</Source>
+            <Value>Cars</Value>
+            <Sizing>Clip</Sizing>
+            <Top>8.75653cm</Top>
+            <Height>0.99729cm</Height>
+            <Width>145pt</Width>
+            <ZIndex>19</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowCars.Value = 5, False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageCars2">
+            <Source>Embedded</Source>
+            <Value>Cars</Value>
+            <Sizing>Clip</Sizing>
+            <Top>8.75653cm</Top>
+            <Height>0.99729cm</Height>
+            <Width>58pt</Width>
+            <ZIndex>20</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowCars.Value = 2, False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageCars1">
+            <Source>Embedded</Source>
+            <Value>Cars</Value>
+            <Sizing>Clip</Sizing>
+            <Top>8.75653cm</Top>
+            <Height>0.99729cm</Height>
+            <Width>28pt</Width>
+            <ZIndex>21</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowCars.Value = 1, False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageCars4">
+            <Source>Embedded</Source>
+            <Value>Cars</Value>
+            <Sizing>Clip</Sizing>
+            <Top>8.75653cm</Top>
+            <Height>0.99729cm</Height>
+            <Width>116pt</Width>
+            <ZIndex>22</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowCars.Value = 4, False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageCars3">
+            <Source>Embedded</Source>
+            <Value>Cars</Value>
+            <Sizing>Clip</Sizing>
+            <Top>8.75653cm</Top>
+            <Height>0.99729cm</Height>
+            <Width>87pt</Width>
+            <ZIndex>23</ZIndex>
+            <Visibility>
+              <Hidden>=IIF (Parameters!ShowCars.Value = 3, False, True)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageHouses">
+            <Source>Embedded</Source>
+            <Value>Houses</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>10.96936cm</Top>
+            <Height>0.99729cm</Height>
+            <Width>9.35271cm</Width>
+            <ZIndex>24</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Image Name="ImageBarrels">
+            <Source>Embedded</Source>
+            <Value>Barrels</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>13.76114cm</Top>
+            <Height>0.99729cm</Height>
+            <Width>9.35271cm</Width>
+            <ZIndex>25</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Image>
+          <Textbox Name="txtEnergyUseOfHomes">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Energy use of xxx homes:</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <Color>#365f91</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>9.98299cm</Top>
+            <Height>0.81167cm</Height>
+            <Width>9.35271cm</Width>
+            <ZIndex>26</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="txtEnergyUseOfcars">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=FormatNumber(Parameters!PassengerCars.Value, 0, FALSE, FALSE, TRUE) &amp;
+" passenger cars:"</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <Color>#365f91</Color>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <Top>7.8797cm</Top>
+            <Height>0.81167cm</Height>
+            <Width>9.35271cm</Width>
+            <ZIndex>27</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <KeepTogether>true</KeepTogether>
+        <Top>9.35494cm</Top>
+        <Left>0.86465cm</Left>
+        <Height>15.02315cm</Height>
+        <Width>9.89978cm</Width>
+        <ZIndex>14</ZIndex>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Rectangle>
+    </ReportItems>
+    <Height>25.43091cm</Height>
+    <Style>
+      <Border />
+    </Style>
+  </Body>
+  <ReportParameters>
+    <ReportParameter Name="CompanyName">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CurrencySymbol">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="NumberOfDesktops">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="NumberOfLaptops">
+      <DataType>Float</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Period">
+      <DataType>Integer</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PotentialYearlyCO2Savings">
+      <DataType>Integer</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PotentialYearlyKwhSavings">
+      <DataType>Integer</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="StartDate">
+      <DataType>DateTime</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="YearlyCostSavings">
+      <DataType>Float</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PowerStateOn">
+      <DataType>Integer</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PowerStateOff">
+      <DataType>Integer</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ShowZ">
+      <DataType>Integer</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ShowTrees">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ShowCars">
+      <DataType>Integer</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="PassengerCars">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ShowStars">
+      <DataType>Integer</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="ShowNuclear">
+      <DataType>Integer</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Width>21.11877cm</Width>
+  <Page>
+    <PageHeight>29.7cm</PageHeight>
+    <PageWidth>21cm</PageWidth>
+    <LeftMargin>0cm</LeftMargin>
+    <RightMargin>0cm</RightMargin>
+    <TopMargin>0cm</TopMargin>
+    <BottomMargin>0cm</BottomMargin>
+    <ColumnSpacing>0.13cm</ColumnSpacing>
+    <Style />
+  </Page>
+  <EmbeddedImages>
+    <EmbeddedImage Name="Logo">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="Zzzzz">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>iVBORw0KGgoAAAANSUhEUgAAAHMAAABXCAIAAAC4HO2RAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAT9SURBVHhe7Z2xThtBEIb9JMkD8Ra8Al1eIT0SeYDIbQoaoEmRIhIoFU0koEgKJEsgUaAYn+0seH0+bnbv//duz7v2DaJjvLf73dy//4zXZrTci59/xx9y+x3tBdhlbljNfJRsX8muZJVso2ypGvSl6rmRnf36omoQXw1eTg8X0yclG5/s/PHGPJtKNjLZ4vrrSvKUbEyyL98/lTvJnpDta2esjGuSEe6Ti6e/SjbsXszvryDW+Z8f1UE1ZzFis9Gb7b6Z7Ozn59pAShaTNdSasb7arOeJksUoqxHmGcc6cH8lB9WcbQJtdiSItbRZmrMBOWtcFNQB33Cas17QjM1alVvOHyXr5jKfXGMduDtvyH8l64DD2KxquaU5yyostFkmnaXN0h0M8KVs1vtyS3MW5yxjs0xXGw+0N70uZqlMDGOzjAozQ+kOtqFU/P4G/YDxDAxWE6NkLSjjTCFWX7mlOuvNtig2S72Bg6/ZlGDCVrvajCCoGiwZm1U0lluqBq5y63kCs1V2tTVnMQFos5hyS3O2ToCyWa6uNr5jQ3ZdjM0iyy3N2Q0BymadHjK56YsZqDdgbFZDV5shPkSyzOEBI8EMvoaYwZE1fVVos2BXm4E+OLJRutpKVtisu3OYsLVDRAzEoXsDymaJQ0RKFhOAZ7NWZ7XxQFzEUHSWsllty63hqgFls9ZntbmMxFHby1m4dfABeFmVCMpmdSu3EucsDw5GBpGlbFblrHbQ4FlUCpAXGWD2GX7xpmMNh23R1WYmsHtqwJfz1OGBeDarhnvHyAa9ewptVuuudl45y8ymFlNDE6YDxEdhjGdoMSvyJdvLWXJCZZh0oLwOMDarS1ebWUumZCUafp8xNgvqQNxyK7HrYu7zKkY2
+/IPaeozN4tOfn3ayHYyfokTDn6KgbFbscms3claeq+DbeozNCkp/PhtkZF46KyvRoFMUUF5fbVYP5dYO5Kw8VwEPrZeroj4KQ5zV7pKn1ddmlLNSInm/yXwUJij9u/PNhaxs+PN+kzk8ALsH0QNyISvLLb69z9is6ODggFmQlRLJH1pnzmhCCn0EpCfrKLdov8nYrD6oMWMmJusot0Lar8wZTYZCHzGJyXZpu5jtuw8iscZMSVZKJN92WbmiWBT6GKcL2dti/BHOaXp56/SGstxqUXfCqycM6J3szPMFAF3aLuWtSggOXroLWW+dUpytc/nswhnkKLda1Z1weQkDeiB7c7Rez1Hh4iqt0pbrzu6VKzNCe7IL9/AXs2ObsD4dkB0pvu3CLCmTmPZk3Y851AHxxh/ffs0EGTmNqGSRDnRpu5DrySfMT/bhZLp+rh37wPhErAHogLPc4tsu+SAjZ9KSrNRQ6AeYc5bkVk6uLW2Yl6xzW7f4pJeCOkB8FyaJ1YSlRUZePUBnF5cHb4uXXgr7AZ4aE0muLW3YyCOmR/VpWdk9KB7qf4E6EL3AT4uMvHotZ20rQMiozUpHEwDpwGoeTCbyMeTa0oa9I2ufdyGjXnldYh1Iu7yEV6+Qtc+7kFGblY5SldGBhGtLe+mSrNWB+vO+drWOUnWjA01f7+7rIqZd9haubslaHRifvO8GeHC/zWttFcC35g+brGfftw97HfcW7vc+XMLkrCcxmx92T+N1H5BEWsPIowPLWdm1cv4jPiWLbsDorZ3q8P/ohfp3QGDk8eeiBlOSgQQC+gaBIw89/D9PLvhnHg16RwAAAABJRU5ErkJggg==</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="Trees">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="Barrels">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>iVBORw0KGgoAAAANSUhEUgAAATgAAAAsCAIAAAB+LTMEAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAVHSURBVHhe7Z3LihNbFIbrSVKlgyNeQDhnIvgA4khnKuLEofgER9BnEOx02nTHSwsqOtA+h4PiXVQcCU7EiUm8ILbadidalaQuu1yVeEKSSnXd1o5dlT/skcS9yNf/vy9rr9qlNG8cdc+q7ZlCa0blbW5FW1nca5st1/cRtom4XLTBua+vHOtKMe8ct8taZ7bQLnI26tCe08x/j1jt736juo6FuCzAwXlIXfnVlSL0L8bsZrvE6VKSIHVoFDcJ4/MYl3b/CXFZjArOIwLLq64U0XjbkmPUFhm1+TbQqIjLsYQho4LzoMbyqmfJRm3Uf49REfd/7nKFC86T4gyj8qz5f81sEO6khDttE4Ai1mruguZe1NzzrI06rGhirRoIFHFZgIPzsMLyqmfFtVrOh2fiw1OHtXU7fEadBxkVcVmAg/OowHKqZzKq4dTvifodu8bZqEOndleYerBREZcBODj7jJpPXSnOapXWqO6i5l5gbdThOVr6vgkyKuLyAAfnYYXlVVdIJiGZlIQAkmej57dSjxsbdRg1iUz9tQoQ7oSFO31ZX8kjwbQBxe/tEcD5LVflmVfQEndG7RQLEauCeWcYxA36q4Nzmpk8Q7qKs/SdKbhl1ZlTowwVnAJC3OBiQ3BObtRM6SqGUUVF6ywdMR+coHRlqFcZBYS469AG58RGzZauohrVnC3QcYtReyKstrGwU5RD5lUuASHu+mMiOCczauZ0FdWo5FL92n56jpS4dB6fDJ1UuQSEuJMxKjhvcM6RjEp7blonfH/9X2/0svUVY367oHshJO+dEBecRzTGMgFkUVeRjOouqO0re1wh+suM9sO/qY5ftlERF5xlGDWLuopm1Iua9aI4uBnoLL8ySpvsUuCkyjLy
+0ViAuOA86NWp1VW4UQWdx1R2iB/LI7v25vWD9GScvPM9xO0BB2deo2ZUV+FGpbyRefuYv+DGfnVVVNSg+of0Ix/i/soIgPNAKmRqdRViVO+Su4qqv6j4jWp9q9Ilo1bArWgpgSJuHzg4M86o2dVViFHJh2ap8PHlLb9RncZ744wqyaiI2wcOzoxGza6uIix9Kbv76OQYo75/YpdVOjgeu01NOaNSn15WGXFd1wFn3qVvNnUVblSHzksv/NVeqQ161Tbb+rV99MS5vGQS4npH1uA8fFaffgLIqK7CjUobUTp3Mi/tar687HR+0O0qTv2+vnSYXEoHx/KMirjgLOW532zqOYJRyY3d3+Y9N3P+T2pUk0QVZ5MouUJccOaeUT3dZlBX0YzaheXVMZdVakH7UsZN/2BXiCu7AqzXPzhvZM4xjBr6aJskoyLuZAQEzhuZM4yKO5OSEEif1Ik1LvS/PLVxYdQkMpWS5Ej0zqipFe603U0Fo8KoSQhggEj2wHrcdUSfc/fdM+XuW2foGm7GRh3Oh717BnHTAwfnYcfkVc/0IuNlc+mw888B8wZn8zq8eUjonwKXKIjLARycR2e2nOpKodtVnLWaWK3SUMTZVqvUbe/qlvEfxGUBDs4j8sqprmiP+q5V3maVt7TmOJvX4dmtbvNd8KYfcRmAg7Nvr5hPXdEetd4pemUMVHjE2Lp1Eaq3YQj4IC4LbXAeNWpO9Yysb5KcJ45nkPWdeNYX755JdIAp49KtuLl7+j4MM2HD/K7zW0UYX43ZzfT3TqCS9UuuDHq5jfEl8IchLtMAAc6DGsurnhX9+Wm7pEWps4/lZO/Oi3mtce+UY5tjvOpYiBuLZ9CXwXlIXfnVlWIs7l7n+e80YqI8h176w9RX/UYVtom4adgO/l9w7gssx7r6CYL6eXjCaM6/AAAAAElFTkSuQmCC</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="Nuclear">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="StarFull">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="StarEmpty">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="Houses">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+    <EmbeddedImage Name="Cars">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <rd:ReportID>45f62553-0da1-44ee-9812-d6dca9de6064</rd:ReportID>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+</Report>

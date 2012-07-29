@@ -1,0 +1,72 @@
+using System;
+using System.Data.OleDb;
+using OboutInc.Combobox;
+
+public class cs_execload : OboutInc.oboutAJAXPage
+{
+	protected Combobox cboContinent;
+	protected Combobox cboCountry;
+	
+	static readonly object obj = new object();
+    void Page_Load(object sender, EventArgs e) {
+        if (!IsPostBack)
+		{
+			// load continent list from the database
+			OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/DynamicCombobox.mdb"));
+			myConn.Open();
+			
+			OleDbCommand myComm;
+			myComm = new OleDbCommand("select ContinentID, ContinentName from Continent", myConn);
+			OleDbDataReader myReader = myComm.ExecuteReader();
+			while (myReader.Read())
+				cboContinent.AddOption(myReader.GetInt32(0).ToString(), myReader.GetString(1), "");
+			myReader.Close();
+			myConn.Close();	
+			
+			cboContinent.Text = "Please select a continent";
+		}
+		
+		if (Session["ContinentID"] == null)
+			Session["ContinentID"] = 0;
+			
+		// select the countries for a continent just once (use continentSet session variable)
+		if (Session["continentSet"] != null && bool.Parse(Session["continentSet"].ToString()))
+		{
+			SelectContinent();
+			Session["continentSet"] = false;
+		}
+    }
+	
+	// update the country list with the countries from the selected continent
+	public void SelectContinent()
+	{
+		string ContinentID = Session["ContinentID"].ToString();
+		
+		// load continent list from the database
+		OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/DynamicCombobox.mdb"));
+		myConn.Open();
+		
+		OleDbCommand myComm;
+		myComm = new OleDbCommand("select CountryName from Country where ContinentID = " + ContinentID + " order by CountryName", myConn);
+		OleDbDataReader myReader = myComm.ExecuteReader();
+		lock (obj)
+		{
+			cboCountry.Options.Clear();
+			while (myReader.Read())
+			{
+				cboCountry.AddOption(myReader.GetString(0), myReader.GetString(0), "images/flags/flag_" + myReader.GetString(0).ToLower().Replace(" ", "_") + ".png");
+			}
+		}
+		myReader.Close();
+		myConn.Close();	
+	}
+	
+	public void SetContinent(string ContinentID)
+	{
+		ExecBeforeLoad("AddResult('script called by <span style=\"color:red\">ExecBeforeLoad</span> method');alert('This is triggered before the server starts processing you request!');");
+		ExecOnLoad("AddResult('script called by <span style=\"color:red\">ExecOnLoad</span> method');SetContinent();alert('This is triggered after the server finish processing you request!\\n\\nThe countries list loading script is called!');");
+		
+		Session["continentSet"] = true;
+		Session["ContinentID"] = ContinentID;
+	}
+}

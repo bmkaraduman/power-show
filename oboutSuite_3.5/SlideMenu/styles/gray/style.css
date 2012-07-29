@@ -1,0 +1,91 @@
+.SMParent {
+	background-color:#efefdd;
+	border-bottom:1px solid #cccccc;
+    font:bold 12px arial; 
+    color:#555555;
+    text-align:left;
+}
+.SMParentOver {
+	background-color: #efefed;
+	border-bottom:1px solid #cccccc;	 
+	font:bold 12px arial;
+    color:#000000;
+    text-align:left;
+	text-decoration:none; 
+    cursor:pointer;
+}
+.SMParentSelected {
+	background-color :#efefdd;
+	border-bottom:1px solid #cccccc;
+	font:bold 12px arial;
+    color:#335588;
+    text-align:left;
+	cursor:default;
+}
+
+.SMChild {
+	background-color:#fdfdf3;
+	border-bottom:1px solid #cccccc;
+	font: 9px verdana; 
+	text-decoration:none;
+    color:#406090;
+    padding-left: 10px;
+	cursor:pointer;
+	text-align:left;
+}
+.SMChild a {
+	color:#406090;
+	font:9px Verdana;
+	text-decoration:none;
+}
+
+.SMChildOver {
+	background-color:#efefef;
+	border-bottom:1px solid #cccccc;
+	font: 9px verdana; 
+	text-decoration:none; 
+    color:#406090;
+    padding-left: 10px;
+	cursor:pointer;
+	text-align:left;
+}
+.SMChildOver a {
+	color:#406090;
+	font:9px Verdana;
+	text-decoration:none;
+}
+
+.SMChildSelected {
+	background-color: #efefef;
+	border-bottom:1px solid #cccccc;
+	font:bold 9px verdana; 
+    color:#335588;
+    padding-left: 10px;
+    text-align:left;
+}
+.SMChildSelected a {
+	color:#335588;
+	font:bold 9px Verdana;
+	text-decoration:none;
+}
+
+.SMChildrenBox {
+	border-bottom:1px solid #cccccc;
+}
+
+.SMMenu {
+	background-color:white; 
+	width: 150px;
+	border:1px solid #cccccc;
+	border-bottom:none;
+	padding: 0px;
+	overflow:hidden;
+}
+
+.SMImageParent {
+	border:0px;
+}
+
+.SMImageChild {
+	display:none;
+}

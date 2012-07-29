@@ -1,0 +1,16 @@
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\bin\Debug\SavingsAnalysis.Sccm.Sql.xml
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\bin\Debug\SavingsAnalysis.Plugin.SCCM.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\bin\Debug\SavingsAnalysis.Plugin.SCCM.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\bin\Debug\SavingsAnalysis.Client.Common.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\bin\Debug\SavingsAnalysis.Client.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\bin\Debug\log4net.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\bin\Debug\SavingsAnalysis.Common.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\bin\Debug\SavingsAnalysis.Client.Common.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\bin\Debug\SavingsAnalysis.Client.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\bin\Debug\SavingsAnalysis.Common.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\obj\Debug\SavingsAnalysis.Plugin.SCCM.csprojResolveAssemblyReference.cache
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\obj\Debug\SavingsAnalysis.Plugin.SCCM.Properties.Resources.resources
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\obj\Debug\SavingsAnalysis.Plugin.SCCM.csproj.GenerateResource.Cache
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\obj\Debug\SavingsAnalysis.Plugin.SCCM.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Plugin.SCCM\obj\Debug\SavingsAnalysis.Plugin.SCCM.pdb

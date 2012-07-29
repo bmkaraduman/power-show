@@ -1,0 +1,153 @@
+﻿@model SavingsAnalysis.Web.ViewModels.ShoppingInputParameterViewModel
+           
+<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        $("#checkBoxIsIncludeCostPerSavings").click(function () {
+            var checked = $("#checkBoxIsIncludeCostPerSavings").is(':checked');
+            if (checked) {
+                $("#textboxCostPerRequest").removeAttr("disabled");
+            }
+            else {
+                $("#textboxCostPerRequest").attr("disabled", "disabled");
+            }
+        });
+
+        $("#checkBoxIsIncludeManHours").click(function () {
+            var checked = $("#checkBoxIsIncludeManHours").is(':checked');
+            if (checked) {
+                $("#textboxManHourSavings").removeAttr("disabled");
+            }
+            else {
+                $("#textboxManHourSavings").attr("disabled", "disabled");
+            }
+        });
+    });    
+</script>
+
+<tr>
+    <td>@Html.LabelFor(m => m.IsIncludeCostPerSavings)
+    </td>
+    <td>@Html.CheckBoxFor(m => m.IsIncludeCostPerSavings, new { id = "checkBoxIsIncludeCostPerSavings" })
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td class="InputerParameterIndent">@Html.LabelFor(m => m.CostPerRequest)
+    </td>
+    <td>@Html.TextBoxFor(m => m.CostPerRequest, new { id = "textboxCostPerRequest", disabled = true })
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.CostPerRequest)
+    </td>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.IsIncludeManHours)
+    </td>
+    <td>@Html.CheckBoxFor(m => m.IsIncludeManHours, new { id = "checkBoxIsIncludeManHours" })
+    </td>
+    <td>
+    </td>
+</tr>
+<tr>
+    <td class="InputerParameterIndent">@Html.LabelFor(m => m.ManHourSavings)
+    </td>
+    <td>@Html.TextBoxFor(m => m.ManHourSavings, new { id = "textboxManHourSavings", disabled = true })
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.ManHourSavings)
+    </td>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.Period)
+    </td>
+    <td>@Model.Period
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.Period)
+    </td>
+</tr>
+<tr>
+    <td class="InputerParameterIndent">@Html.LabelFor(m => m.ShopStartDate)
+    </td>
+    <td>@Model.ShopStartDate.ToString("d MMMM yyyy")
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.ShopStartDate)
+    </td>
+</tr>
+<tr>
+    <td class="InputerParameterIndent">@Html.LabelFor(m => m.ShopEndDate)
+    </td>
+    <td>@Model.ShopEndDate.ToString("d MMMM yyyy")
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.ShopEndDate)
+    </td>
+</tr>
+<tr>
+    <td class="InputerParameterIndent">Total Software Distributions for the period
+    </td>
+    <td>@string.Format("{0:#,##0}", Model.TotalDistributionCount)
+    </td>
+    <td/>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.MaxNoOfProgramsToReportOn)
+    </td>
+    <td>@Html.TextBoxFor(m => m.MaxNoOfProgramsToReportOn)
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.MaxNoOfProgramsToReportOn)
+    </td>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.Threshold)<br/>
+        There are @string.Format("{0:#,##0}", Model.NumberOfActiveMachines) active machines in the selected date range.  The recommennd threshold is @Html.DisplayFor(m => m.Threshold).
+    </td>
+    <td>@Html.TextBoxFor(m => m.Threshold)
+    </td>
+    <td>@Html.ValidationMessageFor(m => m.Threshold)
+    </td>
+</tr>
+<tr>
+    <td>@Html.LabelFor(m => m.ExclusionFilter)
+    </td>
+    <td>
+        <a href="#" id="showExclusion" class="jqModal">Show Exclusions</a>        
+        <div class="jqmWindow" id="dialog">
+        
+            <a href="#" class="jqmClose">Close</a>
+
+
+            <h2>Excluded Programs</h2>
+
+            <table>
+                <tr><th></th><th></th><th></th></tr>
+        
+                <tr>
+                    <td>
+                        @Html.TextAreaFor(m => m.ExclusionFilter, new { rows = 7, cols = 35, style = "resize: none;" })     
+                    </td>
+                    <td>
+                        <a href="#" id="check">Check</a>
+                    </td>
+                </tr>        
+                <tr>
+                <table>
+                    <tr><th>Included Programs</th><th>Excluded programs</th></tr>
+                    <tr>
+                        <td>
+                            @Html.ListBoxFor(m => m.IncludedPackage, Model.IncludedPackageList, new { Disabled = "disabled", style = "height:100px;width:250px;" })
+                        </td>
+                        <td>
+                            @Html.ListBoxFor(m => m.ExcludedPackage, Model.ExcludedPackageList, new { Disabled = "disabled", style = "height:100px;width:250px;" })
+                        </td>
+                    </tr>
+                </table>
+                </tr>
+            </table>        
+        </div>    
+    </td>
+    <td>
+    </td>
+</tr>
+
+@Html.HiddenFor(m => m.NumberOfActiveMachines)
+@Html.HiddenFor(m => m.Period)
+@Html.HiddenFor(m => m.ShopStartDate)
+@Html.HiddenFor(m => m.ShopEndDate)

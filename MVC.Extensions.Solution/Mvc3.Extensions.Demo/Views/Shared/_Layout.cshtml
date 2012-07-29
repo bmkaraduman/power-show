@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>@*CSS*@
+    <link rel="stylesheet" type="text/css" href="@Links.Content.Site_css"  />
+    <link type="text/css" rel="stylesheet" href="@Links.Scripts.jquery_treeview.jquery_treeview_css" />
+    @*<link type="text/css" rel="stylesheet" href="http://www.orchardproject.net/gallery/Themes/OrchardGallery/Styles/Site.css" />*@
+    
+    @*JS*@
+    <script type="text/javascript" src="@Links.Scripts.jquery_1_6_1_min_js"></script>
+    <script type="text/javascript" src="@Links.Scripts.jQuery_tmpl_min_js"></script>
+    <script type="text/javascript" src="@Links.Scripts.knockout_1_2_1_js"></script>
+    <script type="text/javascript" src="@Links.Scripts.knockout_mapping_latest_js"></script>
+    <script type="text/javascript" src="@Links.Scripts.jquery_unobtrusive_ajax_js"></script>
+    <script type="text/javascript" src="@Links.Scripts.MicrosoftAjax_js"></script>
+    <script type="text/javascript" src="@Links.Scripts.MicrosoftMvcAjax_js"></script>
+    <script type="text/javascript" src="@Links.Scripts.jquery_treeview.jquery_treeview_js"></script>
+    <script type="text/javascript" src="@Links.Scripts.jquery_cascadeSelect_js"></script>
+
+<!-- include the Tools -->
+<script type="text/javascript" src="http://cdn.jquerytools.org/1.2.5/tiny/jquery.tools.min.js"></script>
+<!-- tooltip styling -->
+<link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/css/tooltip-generic.css"/> 
+</head>
+<body>
+    <div class="page">
+        <div id="header">
+            <div id="title">
+                <h1>
+                    MVC3.Extensions Demo</h1>
+            </div>
+            <div id="menucontainer">
+                <ul id="menu">
+                    <li>
+                        @Html.ActionLink( "Label" , MVC.Label.Person.Edit( ) )
+                    </li>
+                    <li>
+                        @Html.ActionLink( "DropDownList With Grouping" , MVC.Select.Cities.Create( ) )
+                    </li>
+                    <li>
+                        @Html.ActionLink( "Cascading DropDown Lists" , MVC.CascadingDropDownLists.Home.Index( ) )
+                    </li>
+                    <li>
+                        @Html.ActionLink( "Tree View" , MVC.Various.TreeView.Index( ) )
+                    </li>
+                    <li>
+                        @Html.ActionLink( "ToolTip" , MVC.Various.ToolTips.Register( ) )
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="main">
+            @RenderBody( )
+            <div id="footer">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

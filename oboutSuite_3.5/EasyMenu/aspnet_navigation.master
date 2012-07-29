@@ -1,0 +1,56 @@
+<%@ Register TagPrefix="oem" Namespace="OboutInc.EasyMenu_Pro" Assembly="obout_EasyMenu_Pro" %>
+<%@ Master Language="C#" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>obout ASP.NET Easy Menu examples</title>
+
+	<!--// Only needed for this page's formatting //-->
+	<style type="text/css">
+			body 
+			{
+			    font-family: Verdana; 
+			    font-size: XX-Small; 
+			    margin: 0px; 
+			    padding: 20px
+			}
+			.title 
+			{
+			    font-size: X-Large; 
+			    padding: 20px; 
+			    border-bottom: 2px solid gray;
+			}
+			.tdText {
+                font:11px Verdana;
+                color:#333333;
+            }
+	</style>
+</head>
+<body>
+    <form id="Form1" runat="server">
+	        <span class="tdText"><b>ASP.NET Easy Menu - Navigation menu inside master page</b></span>
+		    <br /><br />	
+			<br /><br />
+		
+		    <oem:EasyMenu SelectedItemId="item1" id="EasymenuMain" runat="server" ShowEvent="Always" StyleFolder="styles/TabStrip3"
+			    Position="Horizontal" Width="330">
+			    <Components>
+				    <oem:MenuItem InnerHtml="Page 1" ID="item1" Url="aspnet_navigation.aspx?id=item1"></oem:MenuItem>
+				    <oem:MenuItem InnerHtml="Page 2" ID="item2" Url="aspnet_navigation.aspx?id=item2"></oem:MenuItem>
+				    <oem:MenuItem InnerHtml="Page 3" ID="item3" Url="aspnet_navigation.aspx?id=item3"></oem:MenuItem>
+				    <oem:MenuItem InnerHtml="Page 4" ID="item4" Url="aspnet_navigation.aspx?id=item4"></oem:MenuItem>
+			    </Components>
+		    </oem:EasyMenu>
+    		
+            <asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+            </asp:contentplaceholder>
+            
+            <br /><br /><br />
+            	
+            <a style="font-size:10pt;font-family:Tahoma" href="Default.aspx?type=ASPNET">« Back to examples</a>
+	
+        </form>
+    </body>
+</html>

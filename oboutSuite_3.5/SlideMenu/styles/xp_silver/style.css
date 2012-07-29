@@ -1,0 +1,113 @@
+.SMParent {
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+    background-image:url(background_parent.jpg);
+    background-repeat:no-repeat;
+    background-position:center;
+    font:bold 11px tahoma;
+    color:#3F3D3D;
+    text-align:left;
+    height:37px;
+    padding-left:13px;
+    padding-top:20px;
+}
+
+.SMParentOver {
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+    background-image:url(background_parentover.jpg);
+    background-repeat:no-repeat;
+    background-position:center;
+    font:bold 11px tahoma;
+    color:#7E7C7C;
+    text-align:left;
+    height:37px;
+    padding-left:13px;
+    padding-top:20px;
+    cursor:pointer;
+}
+
+.SMParentSelected {
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+    background-image:url(background_parentselected.jpg);
+    background-repeat:no-repeat;
+    background-position:center;
+    font:bold 11px tahoma;
+    color:#3F3D3D;
+    text-align:left;
+    height:37px;
+    padding-left:13px;
+    padding-top:20px;
+}
+
+.SMChild {
+    font:11px tahoma;
+    color:#3F3D3D;
+    padding-left:5px;
+    padding-top:5px;
+    text-align:left;
+}
+.SMChild a {
+	color:#3F3D3D;
+	font:11px Tahoma;
+	text-decoration:none;
+}
+
+.SMChildOver {
+    font:11px tahoma;
+    color:#3F3D3D;
+    padding-left:5px;
+    padding-top:5px;
+    text-decoration:underline;
+    cursor:pointer;
+    text-align:left;
+}
+.SMChildOver a {
+	color:#3F3D3D;
+	font:11px Tahoma;
+	text-decoration:underline;
+}
+
+.SMChildSelected {
+    font:11px tahoma;
+    color:#3F3D3D;
+    padding-left:5px;
+    padding-top:5px;
+    text-align:left;
+}
+.SMChildSelected a {
+	color:#3F3D3D;
+	font:11px Tahoma;
+	text-decoration:none;
+}
+
+.SMChildrenBox {
+    height:95px;
+    background-color:#F0F1F5;
+    border-bottom:1px solid white;
+    border-left:1px solid white;
+    border-right:1px solid white;
+}
+
+.SMMenu {
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+    width:205px;
+    padding:10px;
+	background-color:#B6B8CB;
+}
+
+.SMImageParent {
+	display:none;
+}
+
+.SMImageChild {
+	display:none;
+}
+
+.SMChildImage {
+	vertical-align:middle;
+	border:0px solid black;
+	margin-right:6px;
+}

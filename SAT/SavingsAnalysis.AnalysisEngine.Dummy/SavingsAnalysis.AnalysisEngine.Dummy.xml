@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AnalysisEngineQueries>
+   <query data="NumberOfRequests">
+      <value>
+         <![CDATA[select count(1) as NumberOfRequests from [Statusmessages]]]>
+      </value>
+   </query>
+   <query data="AnnualTotal">
+      <value>
+         <![CDATA[select count(1) as AnnualTotal from [Advertisement]]]>
+      </value>
+   </query>
+</AnalysisEngineQueries>
+  

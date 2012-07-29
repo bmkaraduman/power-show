@@ -1,0 +1,305 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <sqlQueries>
+      <add name="MachineData">
+        <selection>
+          <![CDATA[Select VRS.ResourceID 'MachineID',
+          VRS.Name0 'MachineName',
+          VRS.Resource_Domain_OR_Workgr0 'ResourceDomain',
+          VRS.User_Name0 'LoginID',
+          VRS.User_Domain0 'AccountDomain',
+          PCB.SerialNumber0 'SerialNumber',
+          CS.Manufacturer0 Manufacturer,
+          CS.Model0 Model,
+          SAS.SMS_Assigned_Sites0 'AssignedSiteCode',
+          SE.ChassisTypes0 'ChassisType'
+          From [dbo].[v_R_System] VRS
+          Join [dbo].[v_FullCollectionMembership] FCM on VRS.ResourceID = FCM.ResourceID
+          Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+          Join [dbo].[v_GS_PC_BIOS] PCB on VRS.ResourceID = PCB.ResourceID
+          Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on VRS.ResourceID = CS.ResourceID
+          Join [dbo].[v_RA_System_SMSAssignedSites] SAS on VRS.ResourceID = SAS.ResourceID
+          Join [dbo].[v_Gs_System_Enclosure] SE on VRS.ResourceID = SE.ResourceID
+          Where COL.Name = 'All Systems']]>
+        </selection>
+        <validation></validation>
+      </add>
+      <add name="MachineActivityData">
+        <selection>
+          <![CDATA[Select CS.ResourceID,
+              AD.AgentTime 'ActivityTime',
+              'Heart Beat' as ActivityType,
+              AD.AgentName as 'Client Activity'              
+              From [dbo].[v_GS_COMPUTER_SYSTEM] CS 
+              Join [dbo].[v_AgentDiscoveries] AD on CS.ResourceID = AD.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND AD.AgentTime BETWEEN @startdate AND @enddate
+              union all
+            SELECT X.[ResourceID],
+              X.[TimeStamp] 'ActivityTime',
+              'State Message' as ActivityType,
+              X.Title0 'Client Activity'
+              FROM [dbo].[v_GS_PATCHSTATE] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[TimeStamp] BETWEEN @startdate AND @enddate
+              union all
+            SELECT X.[ResourceID],
+	            X.[StateTime] 'ActivityTime',
+              'State Message' as ActivityType,
+              sn.StateName 'Client Activity'
+              FROM [dbo].[v_AssignmentStatePerTopic] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              join [dbo].[v_StateNames] sn on sn.[TopicType] = X.[TopicType]
+              Where COL.Name = 'All Systems'
+              AND X.[StateTime] BETWEEN @startdate AND @enddate
+              union all
+            SELECT X.[ResourceID],
+              X.[TimeStamp] 'ActivityTime',
+              'State Message' as ActivityType,
+              X.Title0 'Client Activity'
+              FROM [dbo].[v_GS_PATCHSTATEEX] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[TimeStamp] BETWEEN @startdate AND @enddate
+              union all
+            SELECT X.[ResourceID],
+              X.[TimeStamp] 'ActivityTime',
+              'State Message' as ActivityType,
+              X.Title0 'Client Activity'
+              FROM [dbo].[v_HS_PATCHSTATE] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[TimeStamp] BETWEEN @startdate AND @enddate
+              union all
+            SELECT X.[ResourceID],
+              X.[TimeStamp] 'ActivityTime',
+              'State Message' as ActivityType,
+              X.Title0 'Client Activity'
+              FROM [dbo].[v_HS_PATCHSTATE] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[TimeStamp] BETWEEN @startdate AND @enddate
+              union all
+            SELECT X.[ResourceID]
+              ,X.[TimeStamp] 'ActivityTime',
+              'System Activity' as ActivityType,
+              'Operating System Status' as 'Client Activity'
+              FROM [dbo].[v_gs_operating_system] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[TimeStamp] BETWEEN @startdate AND @enddate
+              Union all
+            SELECT X.[ResourceID]
+              ,X.[TimeStamp] 'ActivityTime',
+              'System Activity' as ActivityType,
+              'WorkStation HW Scan Status' as 'Client Activity'
+              FROM [dbo].v_GS_WORKSTATION_STATUS X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[TimeStamp] BETWEEN @startdate AND @enddate
+              Union all
+            SELECT X.[ResourceID],
+              X.[LastStatusTime] 'ActivityTime',
+              'Status Message' as ActivityType,
+              'Advertisment Status' as 'Client Activity'
+              FROM [dbo].[v_ClientAdvertisementStatus] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[LastStatusTime] is not NULL
+              AND X.[LastStatusTime] BETWEEN @startdate AND @enddate
+              Union all
+              SELECT X.[ResourceID],
+              X.[LastEnforcementMessageTime] 'ActivityTime',
+              'Status Message' as ActivityType,
+              'Assignment Enforcement Message Time' as 'Client Activity'
+              FROM [dbo].[v_CIAssignmentStatus] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[LastEnforcementMessageTime] BETWEEN @startdate AND @enddate
+              Union all
+              SELECT X.[ResourceID],
+              X.[LastEvaluationMessageTime] 'ActivityTime',
+              'Status Message' as ActivityType,
+              'Assignment Evaluation Message Time' as 'Client Activity'
+              FROM [dbo].[v_CIAssignmentStatus] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[LastEvaluationMessageTime] BETWEEN @startdate AND @enddate
+              Union all
+              SELECT X.[ResourceID],
+              X.[LastScanDate] 'ActivityTime',
+              'Software Inventory' as ActivityType,
+              'Software invenotry scan Time' as 'Client Activity'
+              FROM [dbo].[v_GS_LastSoftwareScan] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[LastScanDate] BETWEEN @startdate AND @enddate]]>
+        </selection>
+        <validation>
+          <![CDATA[With MachineActivityAnalysis (ResourceID,ActivityTime, ActivityType, "Client Activity") as (
+             Select CS.ResourceID,
+              AD.AgentTime 'ActivityTime',
+              'Heart Beat' as ActivityType,
+              AD.AgentName as 'Client Activity'              
+              From [dbo].[v_GS_COMPUTER_SYSTEM] CS 
+              Join [dbo].[v_AgentDiscoveries] AD on CS.ResourceID = AD.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND AD.AgentTime BETWEEN @startdate AND @enddate
+              union all
+            SELECT X.[ResourceID],
+              X.[TimeStamp] 'ActivityTime',
+              'State Message' as ActivityType,
+              X.Title0 'Client Activity'
+              FROM [dbo].[v_GS_PATCHSTATE] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[TimeStamp] BETWEEN @startdate AND @enddate
+              union all
+            SELECT X.[ResourceID],
+	            X.[StateTime] 'ActivityTime',
+              'State Message' as ActivityType,
+              sn.StateName 'Client Activity'
+              FROM [dbo].[v_AssignmentStatePerTopic] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              join [dbo].[v_StateNames] sn on sn.[TopicType] = X.[TopicType]
+              Where COL.Name = 'All Systems'
+              AND X.[StateTime] BETWEEN @startdate AND @enddate
+              union all
+            SELECT X.[ResourceID],
+              X.[TimeStamp] 'ActivityTime',
+              'State Message' as ActivityType,
+              X.Title0 'Client Activity'
+              FROM [dbo].[v_GS_PATCHSTATEEX] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[TimeStamp] BETWEEN @startdate AND @enddate
+              union all
+            SELECT X.[ResourceID],
+              X.[TimeStamp] 'ActivityTime',
+              'State Message' as ActivityType,
+              X.Title0 'Client Activity'
+              FROM [dbo].[v_HS_PATCHSTATE] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[TimeStamp] BETWEEN @startdate AND @enddate
+              union all
+            SELECT X.[ResourceID],
+              X.[TimeStamp] 'ActivityTime',
+              'State Message' as ActivityType,
+              X.Title0 'Client Activity'
+              FROM [dbo].[v_HS_PATCHSTATE] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[TimeStamp] BETWEEN @startdate AND @enddate
+              union all
+            SELECT X.[ResourceID]
+              ,X.[TimeStamp] 'ActivityTime',
+              'System Activity' as ActivityType,
+              'Operating System Status' as 'Client Activity'
+              FROM [dbo].[v_gs_operating_system] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[TimeStamp] BETWEEN @startdate AND @enddate
+              Union all
+            SELECT X.[ResourceID]
+              ,X.[TimeStamp] 'ActivityTime',
+              'System Activity' as ActivityType,
+              'WorkStation HW Scan Status' as 'Client Activity'
+              FROM [dbo].v_GS_WORKSTATION_STATUS X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[TimeStamp] BETWEEN @startdate AND @enddate
+              Union all
+            SELECT X.[ResourceID],
+              X.[LastStatusTime] 'ActivityTime',
+              'Status Message' as ActivityType,
+              'Advertisment Status' as 'Client Activity'
+              FROM [dbo].[v_ClientAdvertisementStatus] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[LastStatusTime] is not NULL
+              AND X.[LastStatusTime] BETWEEN @startdate AND @enddate
+              Union all
+              SELECT X.[ResourceID],
+              X.[LastEnforcementMessageTime] 'ActivityTime',
+              'Status Message' as ActivityType,
+              'Assignment Enforcement Message Time' as 'Client Activity'
+              FROM [dbo].[v_CIAssignmentStatus] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[LastEnforcementMessageTime] BETWEEN @startdate AND @enddate
+              Union all
+              SELECT X.[ResourceID],
+              X.[LastEvaluationMessageTime] 'ActivityTime',
+              'Status Message' as ActivityType,
+              'Assignment Evaluation Message Time' as 'Client Activity'
+              FROM [dbo].[v_CIAssignmentStatus] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[LastEvaluationMessageTime] BETWEEN @startdate AND @enddate
+              Union all
+              SELECT X.[ResourceID],
+              X.[LastScanDate] 'ActivityTime',
+              'Software Inventory' as ActivityType,
+              'Software invenotry scan Time' as 'Client Activity'
+              FROM [dbo].[v_GS_LastSoftwareScan] X
+              Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Join [dbo].[v_FullCollectionMembership] FCM on CS.ResourceID = FCM.ResourceID 
+              Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+              Where COL.Name = 'All Systems'
+              AND X.[LastScanDate] BETWEEN @startdate AND @enddate)
+              Select 
+              MAX(MAA.ActivityTime) as Maxday,
+              MIN(MAA.ActivityTime) as Minday
+              From MachineActivityAnalysis MAA]]>
+        </validation>
+      </add>
+    </sqlQueries>
+</configuration>

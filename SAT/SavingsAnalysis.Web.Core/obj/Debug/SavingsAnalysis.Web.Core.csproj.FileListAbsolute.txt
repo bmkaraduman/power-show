@@ -1,0 +1,11 @@
+C:\OneStop\Research\SAT\SavingsAnalysis.Web.Core\bin\Debug\SavingsAnalysis.Web.Core.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Web.Core\bin\Debug\SavingsAnalysis.Web.Core.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Web.Core\bin\Debug\DocumentFormat.OpenXml.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Web.Core\bin\Debug\SavingsAnalysis.AnalysisEngine.Core.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Web.Core\bin\Debug\SavingsAnalysis.Common.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Web.Core\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Web.Core\bin\Debug\SavingsAnalysis.AnalysisEngine.Core.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Web.Core\bin\Debug\SavingsAnalysis.Common.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.Web.Core\obj\Debug\SavingsAnalysis.Web.Core.csprojResolveAssemblyReference.cache
+C:\OneStop\Research\SAT\SavingsAnalysis.Web.Core\obj\Debug\SavingsAnalysis.Web.Core.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.Web.Core\obj\Debug\SavingsAnalysis.Web.Core.pdb

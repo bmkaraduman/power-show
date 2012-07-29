@@ -1,0 +1,59 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Grid.master.cs" Inherits="Grid_Grid" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>obout Grid samples</title>
+    <style type="text/css">
+		.tdText {
+			font:11px Verdana;
+			color:#333333;
+		}
+		.floating
+		{
+		    float: left;
+		    padding-right: 10px;
+		}
+		.option2{
+			font:11px Verdana;
+			color:#0033cc;				
+			padding-left:4px;
+			padding-right:4px;
+		}
+		a {
+			font:11px Verdana;
+			color:#315686;
+			text-decoration:underline;
+		}
+
+		a:hover {
+			color:crimson;
+		}
+		.ob_iBC
+        {
+            display: block !important;
+        }
+
+        * HTML .ob_iBC
+        {
+            -display: inline !important; 
+        }
+    </style>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+        
+        <br /><br /><br />
+		
+		<a href="Default.aspx?type=<%= (Request.ServerVariables["URL"].IndexOf("/aspnet_") != -1 ? "ASPNET" : (Request.ServerVariables["URL"].IndexOf("/cs_") != -1 ? "CSHARP" : "VBNET")) %>">« Back to examples</a>
+    </div>
+    </form>
+</body>
+</html>

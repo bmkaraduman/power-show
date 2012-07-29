@@ -1,0 +1,7 @@
+C:\OneStop\Research\MvcTreeExample\TreeViewTest\bin\TreeViewTest.dll
+C:\OneStop\Research\MvcTreeExample\TreeViewTest\bin\TreeViewTest.pdb
+C:\OneStop\Research\MvcTreeExample\TreeViewTest\bin\EntityFramework.dll
+C:\OneStop\Research\MvcTreeExample\TreeViewTest\bin\EntityFramework.xml
+C:\OneStop\Research\MvcTreeExample\TreeViewTest\obj\Debug\TreeViewTest.csprojResolveAssemblyReference.cache
+C:\OneStop\Research\MvcTreeExample\TreeViewTest\obj\Debug\TreeViewTest.dll
+C:\OneStop\Research\MvcTreeExample\TreeViewTest\obj\Debug\TreeViewTest.pdb

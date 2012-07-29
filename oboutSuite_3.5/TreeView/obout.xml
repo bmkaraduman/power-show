@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Home>
+  <Node text="Books" >
+    <SubNode text="Asp.Net" ></SubNode>
+    <SubNode text="Ajax" ></SubNode>
+    <SubNode text="MS SQL Server 2005" ></SubNode>
+    <SubNode text="JavaScript" ></SubNode>
+  </Node>
+  <Node text="Electronics"  >
+    <SubNode text="Camera" >
+      <SubNode text="Digital" >
+        <SubNode text="Canon" ></SubNode>
+        <SubNode text="Kodak" ></SubNode>
+        <SubNode text="Sony" ></SubNode>
+        <SubNode text="Casio" ></SubNode>
+        <SubNode text="Fuji" ></SubNode>
+      </SubNode>
+      <SubNode text="Film Camera" ></SubNode>
+    </SubNode>
+    <SubNode text="DVDs" >
+      <SubNode text="Comedy" >
+        <SubNode text="English" ></SubNode>
+        <SubNode text="French" ></SubNode>
+        <SubNode text="German" ></SubNode>
+        <SubNode text="Spanish" ></SubNode>
+      </SubNode>
+      <SubNode text="Kids Movies" ></SubNode>
+      <SubNode text="Romance Movies" ></SubNode>
+      <SubNode text="Action Movies" ></SubNode>
+    </SubNode>
+  </Node>
+  <Node text="Contact Us" ></Node>
+</Home>
+

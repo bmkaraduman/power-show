@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="AgilityFramework" default="default" xmlns="http://schemas.1e.com/nant/0.85-rc4-combined">
+
+  <property name="nant.contrib.tasks.dll" value="${path::combine(environment::get-variable('NANT_CONTRIB_HOME'), 'bin\NAnt.Contrib.Tasks.dll')}"/>
+
+  <fail unless="${file::exists(nant.contrib.tasks.dll)}" message="Can't find NAnt.Contrib.Tasks.dll. Is NANT_CONTRIB_HOME set correctly?"/>
+
+  <loadtasks assembly="${nant.contrib.tasks.dll}"/>
+
+  <!-- TODO - This sucks. When building the product, the build servers download the artifacts from the Build Tasks build and put them in a single
+        directory (so all the DLLs, etc are grouped together in one place). This DOES NOT happen automatically on our dev machines; instead, we have
+        to manually build the Build tasks project, and copy all the artifacts to one location (see the 'Artifacts Path' for the Build Tasks build
+        in TeamCity to get an idea of what needs to be copied where. -->
+  <property name="build_root" value="c:\Build" if="${not environment::variable-exists('BUILD_ROOT')}" />
+  <property name="build_root" value="${environment::get-variable('BUILD_ROOT')}" if="${environment::variable-exists('BUILD_ROOT')}" />
+
+  <loadtasks assembly="${build_root}\Build.Tasks\bin\Release\Build.Tasks.dll" />
+  <loadtasks assembly="${build_root}\Build.Tasks\bin\Release\Test.Tasks.dll"/>
+
+  <!-- TeamCity will to do this for you, but if you're running locally, we'll have to do it here. -->
+  <svn-update uri="http://svn:82/repos/default/internal/Build/trunk/BuildCommon/" destination="BuildCommon" if="${directory::exists('BuildCommon')}"/>
+  <svn-checkout uri="http://svn:82/repos/default/internal/Build/trunk/BuildCommon/" destination="BuildCommon" unless="${directory::exists('BuildCommon')}"/>
+
+  <property name="product.name" value="SavingsAnalysisTool"/>
+  <property name="teamcity.projectName" value="${product.name}" unless="${property::exists('teamcity.projectName')}"/>
+  <property name="build.number" value="1.0.0.0" unless="${property::exists('build.number')}"/>
+    
+  <!-- This next property stolen from AppClarity's default.build
+        BuildCommon (which is shared by other products) defines this to point to NANT 2.4 but we need to override it for .NET 4.0 targetting; if we do, the include will use our value -->
+  <property name="path.nunit.exe" value="${path::combine(environment::get-variable('ProgramFiles'), 'NUnit-2.5.10\bin\net-2.0\nunit-console-x86.exe')}" overwrite="false"/>
+
+  <!-- General build scripts -->
+  <include buildfile="BuildCommon\Testing.include" failonerror="true"/>
+  <include buildfile="BuildCommon\Versioning.include" failonerror="true"/>
+  <include buildfile="BuildCommon\BuildVerification.include" failonerror="true"/>
+  <include buildfile="BuildCommon\SymbolStore.include" failonerror="true"/>
+
+  <!-- Savings Analysis tool properties -->
+  <property name="source.path" value="." />
+  <property name="output.path" value=".\Output" />
+  <property name="analysis.path" value="${output.path}\Analysis" />
+  <property name="output.tool.zip" value="AnalysisClientTool.zip" />
+  <property name="output.web.zip" value="${output.path}\SavingsAnalysisTool.Web.zip" />
+  <property name="WebConfigPath" value=".\Output\WebConfig" />
+  <property name="ConfigTransformToolPath" value="${source.path}\packages\ConfigTransformationTool.1.2.0.0\lib\ctt.exe" />
+
+  <!-- Sign a DLL in-place using 1E certificate and hash -->
+  <define name="sign-binary">
+      <signcode store="SPC" cn="1E" hash="42a08b7d4d38ca3e7abd60096e92d71e97d53075" info="http://www.1e.com" name="${product.name}" timestamp="http://timestamp.verisign.com/scripts/timstamp.dll" path="${this.file}" />
+  </define>
+  <define name="webconfig-transform">
+      <exec program="${ConfigTransformToolPath}">
+          <arg line='"s:${this.source}"'/>
+          <arg line='"t:${this.transform}"'/>
+          <arg line='"d:${this.destination}"'/>
+      </exec>
+  </define>
+
+  <!--******************************************************-->
+
+  <call target="get-revnum" unless="${property::exists('build.vcs.number.1')}"/>
+
+  <target name="default" depends="debug build"/>
+
+  <target name="debug">
+      <echo message="Setting solution configuration for a Debug build"/>
+      <property name="solution.configuration" value="Debug"/>
+  </target>
+
+  <target name="release">
+      <echo message="Setting solution configuration for a Release build"/>
+      <property name="solution.configuration" value="Release"/>
+  </target>
+
+  <target name="build" depends="update-versions">
+      <!-- Build global solution -->
+      <vs2010 solution="${source.path}\SavingsAnalysis.sln" configuration="${solution.configuration}" />
+
+      <!-- MS Build for the WebService deployment project -->
+      <property name="MSBuildPath" value="C:\WINDOWS\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"/>
+      <exec program="${MSBuildPath}">
+          <arg line='"${source.path}\SavingsAnalysis.Web\SavingsAnalysis.Web.csproj"' />
+          <arg line="/property:Configuration=${solution.configuration}" />
+          <arg line="/property:_PackageTempDir=..\${output.path}\SavingsAnalysis.Web" />
+          <arg line="/property:AutoParameterizationWebConfigConnectionStrings=false" />
+          <arg value="/target:PipelinePreDeployCopyAllFilesToOneFolder" />
+          <arg value="/verbosity:normal" />
+          <arg value="/nologo" />
+      </exec>
+
+     <call target="sign-and-gather" />
+  </target>
+
+  <target name="sign-and-gather">
+    <!-- Sign Client Tool -->
+    <sign-binary file="${source.path}\SavingsAnalysis.Client.Host\bin\${solution.configuration}\SavingsAnalysis.Common.dll" />
+    <sign-binary file="${source.path}\SavingsAnalysis.Client.Host\bin\${solution.configuration}\SavingsAnalysis.Client.Host.exe" />
+
+    <!-- Sign WebApp binaries -->
+    <sign-binary file="${output.path}\SavingsAnalysis.Web\bin\SavingsAnalysis.Common.dll" />
+    <sign-binary file="${output.path}\SavingsAnalysis.Web\bin\SavingsAnalysis.AnalysisEngine.Core.dll" />
+    <sign-binary file="${output.path}\SavingsAnalysis.Web\bin\SavingsAnalysis.Web.Core.dll" />
+    <sign-binary file="${output.path}\SavingsAnalysis.Web\bin\SavingsAnalysis.Web.dll" />
+     
+    <!-- Sign Client data collection plugin-->
+    <sign-binary file="${source.path}\SavingsAnalysis.Plugin.SCCM\bin\${solution.configuration}\SavingsAnalysis.Plugin.SCCM.dll" />
+
+    <!-- Sign data analysis plugin-->
+    <sign-binary file="${source.path}\SavingsAnalysis.AnalysisEngine.NightWatchman\bin\${solution.configuration}\SavingsAnalysis.AnalysisEngine.NightWatchman.dll" />
+
+    <!-- Sign dummy data analysis plugin-->
+    <sign-binary file="${source.path}\SavingsAnalysis.AnalysisEngine.Shopping\bin\${solution.configuration}\SavingsAnalysis.AnalysisEngine.Shopping.dll" />     
+     
+    <!-- Gather everything -->
+    <call target="gather" />
+  </target>
+
+  <target name="gather">
+    <!-- Get the compiled version of the tool, zip it, and copy it into the website's folder
+         so it can be downloaded by the website users -->
+    <zip zipfile="${output.path}\SavingsAnalysis.Web\SatTool\${output.tool.zip}">
+      <fileset basedir="${source.path}\SavingsAnalysis.Client.Host\bin\${solution.configuration}" failonempty="true">
+        <include name="**" />
+        <exclude name="*.pdb" />
+      </fileset>
+    </zip>
+
+    <mkdir dir="${WebConfigPath}" />
+    <webconfig-transform 
+      source="${source.path}\SavingsAnalysis.Web\Web.config" 
+      transform="${source.path}\SavingsAnalysis.Web\Web.Deploy.config" 
+      destination="${WebConfigPath}\Web.Deploy.config" />
+
+    <!-- For the moment, now zip up everything in the Web folder -->
+    <zip zipfile="${output.web.zip}">
+        <fileset basedir="${output.path}\SavingsAnalysis.Web" failonempty="true">
+            <include name="**" />
+        </fileset>
+       <fileset basedir="${source.path}\SavingsAnalysis.AnalysisEngine.NightWatchman\bin\${solution.configuration}" prefix="Analysis" failonempty="true">
+          <include name="SavingsAnalysis.AnalysisEngine.NightWatchman.dll" />
+       </fileset>
+       <fileset basedir="${source.path}\SavingsAnalysis.AnalysisEngine.Shopping\bin\${solution.configuration}" prefix="Analysis" failonempty="true">
+          <include name="SavingsAnalysis.AnalysisEngine.Shopping.dll" />
+       </fileset>
+    </zip>
+  </target>
+</project>

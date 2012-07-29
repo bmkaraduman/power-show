@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "NewAnalysisResults";
+}
+@using SavingsAnalysis.Web.Models
+@model SavingsAnalysis.Web.Models.InputParameters
+           
+<h2>NewAnalysisResults</h2>
+
+@using (Html.BeginForm())
+{
+    Html.RenderAction("Analysis", "Common", 
+        new
+            {
+                analysis = ViewBag.ViewModel.Common
+            });
+    Html.RenderAction("Analysis", "NightWatchman",
+        new 
+        { 
+            analysis =  ViewBag.ViewModel.NightWatchman,
+            common = ViewBag.ViewModel.Common,
+        });
+    Html.RenderAction("Analysis", "Shopping",
+        new
+        {
+            analysis = ViewBag.ViewModel.Shopping,
+            common = ViewBag.ViewModel.Common,
+        });
+   <input type="submit" value="Next" />
+}

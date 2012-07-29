@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<imageset>
+  <image>
+    <smallimage>small_image1.jpg</smallimage>
+    <bigimage>image1.jpg</bigimage>
+    <description>1024 x 768 · 547 kB</description>
+  </image>
+  <image>
+    <smallimage>small_image2.jpg</smallimage>
+    <bigimage>image2.jpg</bigimage>
+    <description>460 x 360 · 21 kB</description>
+  </image>
+  <image>
+    <smallimage>small_image3.jpg</smallimage>
+    <bigimage>image3.jpg</bigimage>
+    <description>500 x 376 · 15 kB</description>
+  </image>
+
+  <image>
+    <smallimage>small_image4.jpg</smallimage>
+    <bigimage>image4.jpg</bigimage>
+    <description>800 x 553 · 140 kB</description>
+  </image>
+
+  <image>
+    <smallimage>small_image5.jpg</smallimage>
+    <bigimage>image5.jpg</bigimage>
+    <description>360 x 300 · 38 kB</description>
+  </image>
+
+  <image>
+    <smallimage>small_image6.jpg</smallimage>
+    <bigimage>image6.jpg</bigimage>
+    <description>600 x 600 · 223 kB</description>
+  </image>
+  <image>
+    <smallimage>small_image7.jpg</smallimage>
+    <bigimage>image7.jpg</bigimage>
+    <description>200 x 150 · 18 kB</description>
+  </image>
+  <image>
+    <smallimage>small_image8.jpg</smallimage>
+    <bigimage>image8.jpg</bigimage>
+    <description>640 x 423 · 43 kB</description>
+  </image>
+
+</imageset>

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<categories>
+  <category text="Mystery &amp; Thrillers" >   
+    <item text="Ian Rankin"></item>
+    <item text="James Patterson"></item>
+    <item text="Nancy Atherton"></item>
+  </category>
+  <category text="History">
+    <item text="John Mack Faragher"></item>
+    <item text="Jim Dwyer"></item>
+    <item text="Larry Schweikart"></item>
+    <item text="R. Lee Ermey"></item>
+  </category>
+  <category text="Horror" >
+    <item text="Stephen King"></item>   
+    <item text="Mary Janice Davidson"></item>
+    <item text="Katie Macalister" ></item>
+  </category>
+  <category text="Science Fiction &amp; Fantasy" >
+    <item text="Audrey Niffenegger" ></item>
+    <item text="Philip Roth"></item>
+  </category>
+  <category text="Sport">
+    <item text="Bill Reynolds" ></item>
+  </category>
+  <category text="Teens" >   
+    <item text="Meg Cabot" ></item>
+    <item text="Garth Nix" ></item>
+    <item text="Ann Brashares" ></item>
+  </category>
+</categories>

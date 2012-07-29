@@ -1,0 +1,450 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>obout_Flyout2_NET</name>
+    </assembly>
+    <members>
+        <member name="T:OboutInc.Flyout2.DragPanel">
+            <summary>
+            Summary for DragPanel Entity
+            </summary>
+        </member>
+        <member name="M:OboutInc.Flyout2.DragPanel.#ctor">
+            <summary>
+            Initiates a DragPanel object with opacity 100 and cursor as move
+            </summary>
+        </member>
+        <member name="M:OboutInc.Flyout2.DragPanel.OnPreRender(System.EventArgs)">
+            <summary>
+            Overrides the method in System.Web.UI.Control, registers the DragPanel to the Parent Flyout object
+            </summary>
+            <param name="e"></param>
+        </member>
+        <member name="M:OboutInc.Flyout2.DragPanel.Render(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Overrides the method in System.Web.UI.Control, renders the Html markup for DragPanel
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="M:OboutInc.Flyout2.DragPanel.getClientID">
+            <summary>
+            Gets the clientId for DragPanel
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:OboutInc.Flyout2.DragPanel.findParentControl">
+            <summary>
+            Finds the parent flyout control
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:OboutInc.Flyout2.DragPanel.DraggingOpacity">
+            <summary>
+            Gets or sets the Opacity of Flyout when it is dragged.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.DragPanel.Cursor">
+            <summary>
+            Gets or sets Cursor when mouse is over the DragPanel.
+            </summary>
+        </member>
+        <member name="T:OboutInc.Flyout2.Flyout">
+            <summary>
+            Summary for Flyout entity
+            </summary>
+        </member>
+        <member name="M:OboutInc.Flyout2.Flyout.#ctor">
+            <summary>
+            Initiates a flyout object with default values
+            With default 200 open, delay and close time
+            Positioned at bottom center and middle aligned
+            Open at MouseOver, Close on MouseOut
+            No flying or sliding effect
+            Page color: #DDDDDD
+            </summary>
+        </member>
+        <member name="M:OboutInc.Flyout2.Flyout.getClientID">
+            <summary>
+            Gets the client object name
+            </summary>
+        </member>
+        <member name="M:OboutInc.Flyout2.Flyout.getClientID(System.String)">
+            <summary>
+            Gets the client object name for multiple IDs
+            </summary>       
+        </member>
+        <member name="M:OboutInc.Flyout2.Flyout.Render(System.Web.UI.HtmlTextWriter)">
+            <summary>
+            Renders the Html markup for the flyout control
+            </summary>
+            <param name="writer"></param>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.AttachTo">
+            <summary>
+            Gets or sets ID of the element which Flyout will be attached to.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.OpenEvent">
+            <summary>
+            Gets or sets the open trigger of flyout
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.CloseEvent">
+            <summary>
+            Gets or sets the open trigger of flyout
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.OpenTime">
+            <summary>
+            Gets or sets the time Flyout need to open. Default = 200
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.CloseTime">
+            <summary>
+            Gets or sets the time Flyout need to open. Default = 200
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.Resolution">
+            <summary>
+            Gets or sets resolution which is how many frame Flyout will draw when openning. The higher value the smoother. Default = 10.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.RelativeLeft">
+            <summary>
+            Gets or sets relative Left of Flyout to Left of AttachTo element when Position is ABSOLUTE.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.RelativeTop">
+            <summary>
+            Gets or sets relative Top of Flyout to Top of AttachTo element when Position is ABSOLUTE.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.DelayTime">
+            <summary>
+            Gets or sets the delay time which is how long FlyBox will wait before closing when user move mouse out of Flyout.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.Position">
+            <summary>
+            Gets or sets the built-in common used relative postion of Flyout to position of AttachTo element.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.Align">
+            <summary>
+            Gets or sets the Alignment with AttachTo element. 
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.Opacity">
+            <summary>
+            Gets or sets opacity. Default = 100;
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.PageOpacity">
+            <summary>
+            Gets or sets opacity. Default = 25;
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.PageColor">
+            <summary>
+            Gets or sets opacity. Default = "#CCCCCC";
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.OpenEffects">
+            <summary>
+            Gets or sets open effect of Flyout
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.CloseEffects">
+            <summary>
+            Gets or sets close effect of Flyout
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.DragPanels">
+            <summary>
+            List of DragPanels
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.OnClientClose">
+            <summary>
+            Set function for Close event"
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.OnClientOpen">
+            <summary>
+            Set function for Close event"
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.OnClientInit">
+            <summary>
+            Set function for Close event"
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.IsModal">
+            <summary>
+            Get or set whether Flyotu shown in modal mode
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.ClearType">
+            <summary>
+            Get or set whether Flyotu shown in modal mode
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.FlyingEffect">
+            <summary>
+            Gets or sets type of FlyingEffect 
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.SlidingEffect">
+            <summary>
+            Gets or sets type of Sliding Effect 
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.SlidingRange">
+            <summary>
+            Gets or sets the SlidingRange effect
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.FadingEffect">
+            <summary>
+            Gets or sets whether Fading effect is on
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.NoneEffect">
+            <summary>
+            Gets or sets whether Fading effect is on
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.DebugMode">
+            <summary>
+            Gets or sets whether Flyout is on Debug Mode.
+            </summary>
+        </member>
+        <member name="P:OboutInc.Flyout2.Flyout.zIndex">
+            <summary>
+            Gets or sets the zIndex of Flyout
+            </summary>
+        </member>
+        <member name="T:OboutInc.Flyout2.PositionStyle">
+             <summary>
+             Gets or sets the built-in common used relative postion of Flyout to position of AttachTo element.  Optional 
+            Default value is BOTTOM_CENTER. 
+             </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.PositionStyle.ABSOLUTE">
+            <summary>
+            Positions the flyout in absolute position
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.PositionStyle.TOP_LEFT">
+            <summary>
+            Positions the flyout on Top left to position of AttachTo element
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.PositionStyle.TOP_CENTER">
+            <summary>
+            Positions the flyout on Top center to position of AttachTo element
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.PositionStyle.TOP_RIGHT">
+            <summary>
+            Positions the flyout on Top right to position of AttachTo element
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.PositionStyle.MIDDLE_LEFT">
+            <summary>
+            Positions the flyout on Middle left to position of AttachTo element
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.PositionStyle.MIDDLE_CENTER">
+            <summary>
+            Positions the flyout on Middle center to position of AttachTo element
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.PositionStyle.MIDDLE_RIGHT">
+            <summary>
+            Positions the flyout on Middle right to position of AttachTo element
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.PositionStyle.BOTTOM_LEFT">
+            <summary>
+            Positions the flyout on bottom left to position of AttachTo element
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.PositionStyle.BOTTOM_CENTER">
+            <summary>
+            Positions the flyout on bottom center to position of AttachTo element
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.PositionStyle.BOTTOM_RIGHT">
+            <summary>
+            Positions the flyout on bottom right to position of AttachTo element
+            </summary>
+        </member>
+        <member name="T:OboutInc.Flyout2.FlyingEffectStyle">
+            <summary>
+            Gets or sets the flying effect. The value of FlyingEffect indicates the place in AttachTo element that Flyout will be open from. 
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.FlyingEffectStyle.NONE">
+            <summary>
+            Flyout control appears with no fly effect
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.FlyingEffectStyle.TOP_LEFT">
+            <summary>
+            Flyout control appears from top left
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.FlyingEffectStyle.TOP_CENTER">
+            <summary>
+            Flyout control appears from top center
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.FlyingEffectStyle.TOP_RIGHT">
+            <summary>
+            Flyout control appears from top right
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.FlyingEffectStyle.MIDDLE_LEFT">
+            <summary>
+            Flyout control appears from middle left
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.FlyingEffectStyle.MIDDLE_CENTER">
+            <summary>
+            Flyout control appears from middle center
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.FlyingEffectStyle.MIDDLE_RIGHT">
+            <summary>
+            Flyout control appears from middle right
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.FlyingEffectStyle.BOTTOM_LEFT">
+            <summary>
+            Flyout control appears from bottom left
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.FlyingEffectStyle.BOTTOM_CENTER">
+            <summary>
+            Flyout control appears from bottom center
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.FlyingEffectStyle.BOTTOM_RIGHT">
+            <summary>
+            Flyout control appears from bottom right
+            </summary>
+        </member>
+        <member name="T:OboutInc.Flyout2.AlignStyle">
+             <summary>
+             Gets or sets the Alignment with AttachTo element. Optional 
+            Default value is MIDDLE. 
+             </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.AlignStyle.LEFT">
+            <summary>
+            Aligns the flyout control left of the attched to control
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.AlignStyle.RIGHT">
+            <summary>
+            Aligns the flyout control right of the attched to control
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.AlignStyle.TOP">
+            <summary>
+            Aligns the flyout control top of the attched to control
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.AlignStyle.MIDDLE">
+            <summary>
+            Aligns the flyout control middle of the attched to control
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.AlignStyle.BOTTOM">
+            <summary>
+            Aligns the flyout control bottom of the attched to control
+            </summary>
+        </member>
+        <member name="T:OboutInc.Flyout2.SlidingEffectStyle">
+            <summary>
+            Gets or sets the sliding effect. The value of SlidingEffect indicates the the direction of sliding. 
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.SlidingEffectStyle.LEFT">
+            <summary>
+            flyout slides from left
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.SlidingEffectStyle.RIGHT">
+            <summary>
+            flyout slides from right
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.SlidingEffectStyle.TOP">
+            <summary>
+            flyout slides from top
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.SlidingEffectStyle.NONE">
+            <summary>
+            no slide effect
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.SlidingEffectStyle.BOTTOM">
+            <summary>
+            flyout slides from bottom
+            </summary>
+        </member>
+        <member name="T:OboutInc.Flyout2.OpenEvents">
+            <summary>
+            Gets or sets the open event for flyout. Optional
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.OpenEvents.ONMOUSEOVER">
+            <summary>
+            Flyout opens on mouse over
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.OpenEvents.ONCLICK">
+            <summary>
+            Flyout opens on mouse click
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.OpenEvents.ONRIGHTCLICK">
+            <summary>
+            Flyout opens on mouse right click
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.OpenEvents.ONFOCUS">
+            <summary>
+            Flyout opens on focus of the control
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.OpenEvents.NONE">
+            <summary>
+            No open event
+            </summary>
+        </member>
+        <member name="T:OboutInc.Flyout2.CloseEvents">
+            <summary>
+            Gets or sets the close event for flyout Optional
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.CloseEvents.ONMOUSEOUT">
+            <summary>
+            Flyout closes on mouse out
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.CloseEvents.ONFOCUSOUT">
+            <summary>
+            Flyout closes on focus out
+            </summary>
+        </member>
+        <member name="F:OboutInc.Flyout2.CloseEvents.NONE">
+            <summary>
+            No close event
+            </summary>
+        </member>
+    </members>
+</doc>

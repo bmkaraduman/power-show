@@ -1,0 +1,11 @@
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.NightWatchman\bin\Debug\SavingsAnalysis.AnalysisEngine.NightWatchman.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.NightWatchman\bin\Debug\SavingsAnalysis.AnalysisEngine.NightWatchman.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.NightWatchman\bin\Debug\SavingsAnalysis.AnalysisEngine.Core.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.NightWatchman\bin\Debug\SavingsAnalysis.Common.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.NightWatchman\bin\Debug\ICSharpCode.SharpZipLib.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.NightWatchman\bin\Debug\SavingsAnalysis.AnalysisEngine.Core.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.NightWatchman\bin\Debug\SavingsAnalysis.Common.pdb
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.NightWatchman\obj\Debug\SavingsAnalysis.AnalysisEngine.NightWatchman.Properties.Resources.resources
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.NightWatchman\obj\Debug\SavingsAnalysis.AnalysisEngine.NightWatchman.csproj.GenerateResource.Cache
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.NightWatchman\obj\Debug\SavingsAnalysis.AnalysisEngine.NightWatchman.dll
+C:\OneStop\Research\SAT\SavingsAnalysis.AnalysisEngine.NightWatchman\obj\Debug\SavingsAnalysis.AnalysisEngine.NightWatchman.pdb

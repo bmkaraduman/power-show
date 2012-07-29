@@ -1,0 +1,63 @@
+.SMParent, .SMParentOver, .SMParentSelected {
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+    font:bold 10px verdana;
+    text-align:left;
+    height:20px;
+    cursor:pointer;
+}
+
+.SMChild {
+    font:10px verdana;
+    padding: 2px;
+    padding-left:4px;
+    border: 1px solid #F3F3F3;
+}
+
+.SMChildOver {
+    font:10px verdana;
+    cursor:pointer;
+    padding: 2px;
+    padding-left:4px;
+    background-color: White;
+    border: 1px solid #808080;
+}
+
+.SMChildSelected {
+    font:10px verdana;
+    padding: 2px;
+    padding-left:4px;
+    background-color: #CCCCCC;
+    border: 1px solid #808080;
+}
+
+.SMChild a, .SMChildOver a, .SMChildSelected a {
+	font:10px verdana;
+	color:black;
+	text-decoration:none;
+}
+
+.SMChildrenBox {
+    
+	text-align:left;
+}
+
+.SMMenu {
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+    width:160px;
+    padding:10px;
+    background-color: #F3F3F3;
+    border: 1px solid #CCCCCC;
+}
+
+.SMImageParent {
+	border:0px solid black;
+	margin-right:4px;
+	vertical-align:middle;
+}
+
+.SMImageChild {
+	border:0px solid black;
+	vertical-align:middle;
+}

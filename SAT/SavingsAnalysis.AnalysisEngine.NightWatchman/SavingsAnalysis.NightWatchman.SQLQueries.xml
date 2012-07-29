@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<AnalysisEngineQueries>
+  <query data="NumberOfDesktops">
+    <value>
+      <![CDATA[
+      Select COUNT(VRS.ResourceID) as NumberOfDesktops
+          From [dbo].[v_R_System] VRS
+          Join [dbo].[v_FullCollectionMembership] FCM on VRS.ResourceID = FCM.ResourceID
+          Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+          Join [dbo].[v_GS_PC_BIOS] PCB on VRS.ResourceID = PCB.ResourceID
+          Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on VRS.ResourceID = CS.ResourceID
+          Join [dbo].[v_RA_System_SMSAssignedSites] SAS on VRS.ResourceID = SAS.ResourceID
+          Join [dbo].[v_Gs_System_Enclosure] SE on VRS.ResourceID = SE.ResourceID
+          Where COL.CollectionID = 'SMS00001'
+         AND SE.ChassisTypes0 IN ( 3, 4, 5, 6, 7, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24)
+      ]]>
+    </value>
+  </query>
+  <query data="NumberOfLaptops">
+    <value>
+      <![CDATA[
+      Select COUNT(VRS.ResourceID) as NumberOfLaptops
+          From [dbo].[v_R_System] VRS
+          Join [dbo].[v_FullCollectionMembership] FCM on VRS.ResourceID = FCM.ResourceID
+          Join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+          Join [dbo].[v_GS_PC_BIOS] PCB on VRS.ResourceID = PCB.ResourceID
+          Join [dbo].[v_GS_COMPUTER_SYSTEM] CS on VRS.ResourceID = CS.ResourceID
+          Join [dbo].[v_RA_System_SMSAssignedSites] SAS on VRS.ResourceID = SAS.ResourceID
+          Join [dbo].[v_Gs_System_Enclosure] SE on VRS.ResourceID = SE.ResourceID
+          Where COL.CollectionID = 'SMS00001'
+      AND SE.ChassisTypes0 IN ( 8, 9, 10, 14)
+      ]]>
+    </value>
+  </query> 
+  <query data="MachinesOnForWeekdays">
+    <value> <![CDATA[
+    WITH Activity (ResId, TimeOfTheDay, DayOfTheWeek, DayOfTheYear) AS
+          (
+      SELECT ResourceID AS ResId, ((DATEPART(HH,ActivityTime)*60)+DATEPART(N,ActivityTime)) AS TimeOfTheDay, 
+            DATENAME(DW,ActivityTime) AS DayOfTheWeek, DATEPART(DY,ActivityTime) AS DayOfTheYear
+         FROM 
+       (
+           SELECT Activity.ResourceId, Activity.ActivityTime
+           FROM
+           (
+             Select CS.ResourceID, AD.AgentTime as [ActivityTime]
+               From [dbo].[v_AgentDiscoveries] AD
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = AD.ResourceId 
+               union all
+             SELECT X.[ResourceID], X.[TimeStamp] as [ActivityTime]
+               FROM [dbo].[v_GS_PATCHSTATE] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              union all
+             SELECT X.[ResourceID], X.[StateTime] as [ActivityTime]
+               FROM [dbo].[v_AssignmentStatePerTopic] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              union all
+             SELECT X.[ResourceID], X.[TimeStamp] as [ActivityTime]
+               FROM [dbo].[v_GS_PATCHSTATEEX] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+               union all
+             SELECT X.[ResourceID], X.[TimeStamp] as [ActivityTime]
+               FROM [dbo].[v_HS_PATCHSTATE] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+               union all
+             SELECT X.[ResourceID], X.[TimeStamp] as [ActivityTime]
+               FROM [dbo].[v_HS_PATCHSTATE] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+               union all
+             SELECT X.[ResourceID] ,X.[TimeStamp] as [ActivityTime]
+               FROM [dbo].[v_gs_operating_system] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+               Union all
+             SELECT X.[ResourceID] ,X.[TimeStamp] as [ActivityTime]
+               FROM [dbo].v_GS_WORKSTATION_STATUS X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+               Union all
+             SELECT X.[ResourceID], X.[LastStatusTime] as [ActivityTime]
+               FROM [dbo].[v_ClientAdvertisementStatus] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+               AND X.[LastStatusTime] is not NULL
+               Union all
+             SELECT X.[ResourceID],X.[LastEnforcementMessageTime] as [ActivityTime]
+               FROM [dbo].[v_CIAssignmentStatus] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+               Union all
+               SELECT X.[ResourceID],X.[LastEvaluationMessageTime] as [ActivityTime]
+               FROM [dbo].[v_CIAssignmentStatus] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Union all
+               SELECT X.[ResourceID], X.[LastScanDate] as [ActivityTime]
+               FROM [dbo].[v_GS_LastSoftwareScan] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+           ) AS Activity
+            inner join [dbo].[v_FullCollectionMembership] FCM on Activity.ResourceID = FCM.ResourceID 
+            inner join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+            Where COL.CollectionID = 'SMS00001'
+         ) AS [MachineActivityData]
+          )
+          SELECT MachinesOnForWeekdays = case 
+          when AVG(MachineCount) is null  then 0
+              else AVG(MachineCount)
+          end
+          FROM (
+              SELECT COUNT(DISTINCT ResId) AS MachineCount, DayOfTheYear
+              FROM Activity 
+              WHERE DayOfTheWeek NOT IN ('Saturday', 'Sunday')
+                AND (TimeOfTheDay < @starttime OR TimeOfTheDay > @endtime)
+              GROUP BY DayOfTheYear
+            ) AS T;
+]]>
+    </value>
+  </query>
+  <query data="MachinesOnForWeekends">
+    <value>
+        <![CDATA[
+    WITH Activity (ResId, TimeOfTheDay, DayOfTheWeek, DayOfTheYear) AS
+          (
+      SELECT ResourceID AS ResId, ((DATEPART(HH,ActivityTime)*60)+DATEPART(N,ActivityTime)) AS TimeOfTheDay, 
+            DATENAME(DW,ActivityTime) AS DayOfTheWeek, DATEPART(DY,ActivityTime) AS DayOfTheYear
+         FROM 
+       (
+           SELECT Activity.ResourceId, Activity.ActivityTime
+           FROM
+           (
+             Select CS.ResourceID, AD.AgentTime as [ActivityTime]
+               From [dbo].[v_AgentDiscoveries] AD
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = AD.ResourceId 
+               union all
+             SELECT X.[ResourceID], X.[TimeStamp] as [ActivityTime]
+               FROM [dbo].[v_GS_PATCHSTATE] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              union all
+             SELECT X.[ResourceID], X.[StateTime] as [ActivityTime]
+               FROM [dbo].[v_AssignmentStatePerTopic] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              union all
+             SELECT X.[ResourceID], X.[TimeStamp] as [ActivityTime]
+               FROM [dbo].[v_GS_PATCHSTATEEX] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+               union all
+             SELECT X.[ResourceID], X.[TimeStamp] as [ActivityTime]
+               FROM [dbo].[v_HS_PATCHSTATE] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+               union all
+             SELECT X.[ResourceID], X.[TimeStamp] as [ActivityTime]
+               FROM [dbo].[v_HS_PATCHSTATE] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+               union all
+             SELECT X.[ResourceID] ,X.[TimeStamp] as [ActivityTime]
+               FROM [dbo].[v_gs_operating_system] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+               Union all
+             SELECT X.[ResourceID] ,X.[TimeStamp] as [ActivityTime]
+               FROM [dbo].v_GS_WORKSTATION_STATUS X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+               Union all
+             SELECT X.[ResourceID], X.[LastStatusTime] as [ActivityTime]
+               FROM [dbo].[v_ClientAdvertisementStatus] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+               AND X.[LastStatusTime] is not NULL
+               Union all
+             SELECT X.[ResourceID],X.[LastEnforcementMessageTime] as [ActivityTime]
+               FROM [dbo].[v_CIAssignmentStatus] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+               Union all
+               SELECT X.[ResourceID],X.[LastEvaluationMessageTime] as [ActivityTime]
+               FROM [dbo].[v_CIAssignmentStatus] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+              Union all
+               SELECT X.[ResourceID], X.[LastScanDate] as [ActivityTime]
+               FROM [dbo].[v_GS_LastSoftwareScan] X
+               inner join [dbo].[v_GS_COMPUTER_SYSTEM] CS on CS.ResourceID = X.ResourceId 
+           ) AS Activity
+            inner join [dbo].[v_FullCollectionMembership] FCM on Activity.ResourceID = FCM.ResourceID 
+            inner join [dbo].[v_Collection] COL on FCM.CollectionID = COL.CollectionID
+            Where COL.CollectionID = 'SMS00001'
+         ) AS [MachineActivityData]
+          )
+          SELECT MachinesOnForWeekend = case 
+          when AVG(MachineCount) is null  then 0
+              else AVG(MachineCount)
+          end
+          FROM (
+              SELECT COUNT(DISTINCT ResId) AS MachineCount, DayOfTheYear
+              FROM Activity 
+              WHERE DayOfTheWeek IN ('Saturday', 'Sunday')
+                AND (TimeOfTheDay < @starttime OR TimeOfTheDay > @endtime)
+              GROUP BY DayOfTheYear
+            ) AS T;
+                 ]]>
+      </value>
+  </query>
+</AnalysisEngineQueries>
+  

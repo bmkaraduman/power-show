@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+    <sqlQueries>
+       <sqlQuery name="vstatusmessages">
+        <selection>
+          <![CDATA[SELECT RecordId, MessageId, Component, machinename FROM vstatusmessages]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>
+       <sqlQuery name="v_statmsgattributes">
+        <selection>
+          <![CDATA[SELECT RecordId, AttributeTime, AttributeId, AttributeValue FROM v_statmsgattributes]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>
+      <sqlQuery name="v_gs_workstation_status">
+        <selection>
+          <![CDATA[SELECT * FROM v_gs_workstation_status]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>
+      <sqlQuery name="v_advertisement">
+        <selection>
+          <![CDATA[SELECT advertisementid, packageid, programname FROM v_advertisement]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>
+      <sqlQuery name="v_package">
+        <selection>
+          <![CDATA[SELECT packageid, [name] from v_package]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>     
+       
+      <sqlQuery name="v_AgentDiscoveries">
+        <selection>
+          <![CDATA[SELECT * from [dbo].[v_AgentDiscoveries]]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>       
+      <sqlQuery name="v_AssignmentStatePerTopic">
+        <selection>
+          <![CDATA[SELECT * from [dbo].[v_AssignmentStatePerTopic]]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>        
+      <sqlQuery name="v_CIAssignmentStatus">
+        <selection>
+          <![CDATA[SELECT * from [dbo].[v_CIAssignmentStatus]]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>       
+      <sqlQuery name="v_ClientAdvertisementStatus">
+        <selection>
+          <![CDATA[SELECT * from [dbo].[v_ClientAdvertisementStatus]]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>       
+      <sqlQuery name="v_Collection">
+        <selection>
+          <![CDATA[SELECT * from [dbo].[v_Collection]]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>       
+      <sqlQuery name="v_FullCollectionMembership">
+        <selection>
+          <![CDATA[SELECT * from [dbo].[v_FullCollectionMembership]]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>       
+      <sqlQuery name="v_GS_COMPUTER_SYSTEM">
+        <selection>
+          <![CDATA[SELECT * from [dbo].[v_GS_COMPUTER_SYSTEM]]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>       
+      <sqlQuery name="v_GS_LastSoftwareScan">
+        <selection>
+          <![CDATA[SELECT * from [dbo].[v_GS_LastSoftwareScan]]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>       
+      <sqlQuery name="v_gs_operating_system">
+        <selection>
+          <![CDATA[SELECT * from [dbo].[v_gs_operating_system]]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>       
+      <sqlQuery name="v_GS_PATCHSTATE">
+        <selection>
+          <![CDATA[SELECT * from [dbo].[v_GS_PATCHSTATE]]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>       
+      <sqlQuery name="v_GS_PATCHSTATEEX">
+        <selection>
+          <![CDATA[SELECT * from [dbo].[v_GS_PATCHSTATEEX]]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>
+      <sqlQuery name="v_GS_PC_BIOS">
+        <selection>
+          <![CDATA[SELECT * from [dbo].[v_GS_PC_BIOS]]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>     
+      <sqlQuery name="v_Gs_System_Enclosure">
+        <selection>
+          <![CDATA[SELECT * from [dbo].[v_Gs_System_Enclosure]]]>
+        </selection>
+        <validation></validation>
+      </sqlQuery>    
+      <sqlQuery name="v_GS_WORKSTATION_STATUS">
+         <selection>
+            <![CDATA[SELECT * from [dbo].[v_GS_WORKSTATION_STATUS]]]>
+         </selection>
+         <validation></validation>
+      </sqlQuery>
+      <sqlQuery name="v_HS_PATCHSTATE">
+          <selection>
+             <![CDATA[SELECT * from [dbo].[v_HS_PATCHSTATE]]]>
+          </selection>
+          <validation></validation>
+       </sqlQuery>
+      <sqlQuery name="v_R_System">
+         <selection>
+            <![CDATA[SELECT * from [dbo].[v_R_System]]]>
+         </selection>
+         <validation></validation>
+      </sqlQuery>
+      <sqlQuery name="v_RA_System_SMSAssignedSites">
+         <selection>
+            <![CDATA[SELECT * from [dbo].[v_RA_System_SMSAssignedSites]]]>
+         </selection>
+         <validation></validation>
+      </sqlQuery>    
+      <sqlQuery name="v_StateNames">
+         <selection>
+            <![CDATA[SELECT * from [dbo].[v_StateNames]]]>
+         </selection>
+         <validation></validation>
+      </sqlQuery>         
+       
+    </sqlQueries>
+</configuration>

@@ -1,0 +1,12 @@
+﻿@model Mvc3.Extensions.Demo.Areas.CascadingDropDownLists.Models.Atlas
+
+@*@using ( Html.BeginForm( "SelectContinent" , "DropDownNormalPost") )*@
+@using ( Html.BeginForm( MVC.CascadingDropDownLists.DropDownNormalPostPRG.SelectContinent( ) ) )
+{ 
+     <fieldset>
+        <legend>Continents</legend>
+        
+        @Html.DropDownListFor( m => m.SelectedContinentId , new SelectList( Model.Continents , "Id" , "Name" ) , "[Please select a continent]" )
+        <input type="submit" value="Select" />
+    </fieldset>
+}

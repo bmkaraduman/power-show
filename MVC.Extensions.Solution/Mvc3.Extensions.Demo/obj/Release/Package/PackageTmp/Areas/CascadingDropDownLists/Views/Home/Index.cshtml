@@ -1,0 +1,38 @@
+﻿@{
+	ViewBag.Title = "Index";
+}
+
+<h2>
+	Cascading Dropdown Lists Examples
+</h2>
+<h3>
+	<a href="http://weblogs.asp.net/raduenuca/archive/2011/03/06/asp-net-mvc-cascading-dropdown-lists-tutorial-part-1-defining-the-problem-and-the-context.aspx">
+		ASP.NET MVC–Cascading Dropdown Lists Tutorial</a>
+</h3>
+
+<i>Only Romania has cities entries (select Europe then Romania)</i>
+
+<ul>
+	<li>
+        Cascading using normal FORM post (Html.BeginForm helper):
+        <ul>
+            <li>
+                @Html.ActionLink( "No POST/Redirect/Get" , MVC.CascadingDropDownLists.DropDownNormalPost.Index( ) , new { target = "_blank" } )
+            </li>
+            <li>
+                @Html.ActionLink( "POST/Redirect/Get" , MVC.CascadingDropDownLists.DropDownNormalPostPRG.Index( ) , new { target = "_blank" } )
+            </li>
+        </ul>
+    </li>
+	<li>@Html.ActionLink( "Cascading using Microsoft AJAX (Ajax.BeginForm helper)" , MVC.CascadingDropDownLists.DropDownAjaxPost.Index( ) , new { target = "_blank" } )</li>
+	<li>@Html.ActionLink( "Cascading using FORM Hijaxing" , MVC.CascadingDropDownLists.DropDownHijaxPost.Index( ) , new { target = "_blank" } )</li>
+	<li>
+		Cascading using jQuery.ajax():
+		<ul>
+			<li>@Html.ActionLink( "$.ajax() and DOM Objects" , MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.Index( ) , new { target = "_blank" } )</li>
+			<li>@Html.ActionLink( "$.ajax() and jQuery Templates" , MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.jQueryTemplates( ) , new { target = "_blank" } )</li>
+			<li>@Html.ActionLink( "$.ajax() and Knockout.js" , MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.KnockOutJs( ) , new { target = "_blank" } )</li>
+		</ul>
+	</li>
+    <li>@Html.ActionLink( "Cascading using a cascadeSelect jQuery plugin" , MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.CascadePlugin( ) , new { target = "_blank" } )</li>
+</ul>

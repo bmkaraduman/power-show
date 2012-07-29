@@ -1,0 +1,90 @@
+<%@ Page Language="C#" %>
+<%@ Register TagPrefix="obout" Namespace="Obout.Grid" Assembly="obout_Grid_NET" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+	<head>
+		<title>obout ASP.NET Grid examples</title>
+		<style type="text/css">
+			.tdText {
+				font:11px Verdana;
+				color:#333333;
+			}
+			.option2{
+				font:11px Verdana;
+				color:#0033cc;				
+				padding-left:4px;
+				padding-right:4px;
+			}
+			a {
+				font:11px Verdana;
+				color:#315686;
+				text-decoration:underline;
+			}
+
+			a:hover {
+				color:crimson;
+			}
+		</style>
+	</head>
+	<body>	
+		<form runat="server">
+					
+		<br />
+		<span class="tdText"><b>ASP.NET Grid - Declarative Insert/Update/Delete (no coding)</b></span>
+		<br /><br />
+				
+		<obout:Grid id="grid1" runat="server" CallbackMode="true" Serialize="true" AutoGenerateColumns="false"
+			FolderStyle="styles/black_glass" AllowFiltering="true" DataSourceID="SqlDataSource1">
+			<Columns>
+				<obout:Column DataField="OrderID" Visible="false" ReadOnly="true" HeaderText="ORDER ID" Width="100" runat="server"/>
+				<obout:Column DataField="ShipName" HeaderText="NAME" Width="200" runat="server"/>				
+				<obout:Column DataField="ShipCity" HeaderText="CITY" Width="125" runat="server" />
+				<obout:Column DataField="ShipRegion" HeaderText="REGION" Width="125" runat="server" />
+				<obout:Column DataField="ShipPostalCode" HeaderText="POSTAL CODE" Width="125" runat="server" />
+				<obout:Column DataField="ShipCountry" HeaderText="COUNTRY" Width="125" runat="server" />
+				<obout:Column HeaderText="EDIT" AllowEdit="true" AllowDelete="true" Width="125" runat="server" />
+			</Columns>					
+		</obout:Grid>
+		
+		<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|Northwind.mdb;"
+            ProviderName="System.Data.OleDb"
+            SelectCommand="SELECT TOP 50 [OrderID], [OrderDate], [ShipName], [ShipAddress], [ShipCity], [ShipRegion], [ShipPostalCode], [ShipCountry] FROM [Orders] ORDER BY OrderID DESC"
+            InsertCommand="INSERT INTO Orders(ShipName, ShipCity, ShipRegion, ShipPostalCode, ShipCountry) VALUES(@ShipName, @ShipCity, @ShipRegion, @ShipPostalCode, @ShipCountry)"
+            UpdateCommand="UPDATE Orders SET ShipName=@ShipName, ShipCity=@ShipCity, ShipRegion=@ShipRegion, ShipPostalCode=@ShipPostalCode, ShipCountry=@ShipCountry WHERE OrderID=@OrderID"
+            DeleteCommand="DELETE FROM Orders WHERE OrderID=@OrderID">
+            <InsertParameters>
+                <asp:Parameter Name="ShipName" Type="String" />
+                <asp:Parameter Name="ShipCity" Type="String" />
+                <asp:Parameter Name="ShipRegion" Type="String" />
+                <asp:Parameter Name="ShipPostalCode" Type="String" />
+                <asp:Parameter Name="ShipCountry" Type="String" />                
+            </InsertParameters>
+            <UpdateParameters>
+                <asp:Parameter Name="ShipName" Type="String" />
+                <asp:Parameter Name="ShipCity" Type="String" />
+                <asp:Parameter Name="ShipRegion" Type="String" />
+                <asp:Parameter Name="ShipPostalCode" Type="String" />
+                <asp:Parameter Name="ShipCountry" Type="String" />
+                <asp:Parameter Name="OrderID" Type="Int32" />
+            </UpdateParameters>
+            <DeleteParameters>
+                <asp:Parameter Name="OrderID" Type="Int32" />                
+            </DeleteParameters>
+        </asp:SqlDataSource>
+					
+		<br /><br />
+		
+		<span class="tdText">
+		    The Grid can use the InsertCommand/InsertMethod, UpdateCommand/UpdateMethod, DeleteCommand/DeleteMethod properties <br />
+		    of the DataSourceControl objects (SqlDataSource, ObjectDataSource etc.)
+		</span>
+		
+		<br /><br /><br />
+				 
+		<a href="Default.aspx?type=ASPNET">« Back to examples</a>
+		
+		</form>
+	</body>
+</html>

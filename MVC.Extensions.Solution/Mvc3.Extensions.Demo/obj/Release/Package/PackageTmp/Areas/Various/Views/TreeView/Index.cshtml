@@ -1,0 +1,55 @@
+﻿@using Mvc3.Extensions.Demo.Areas.Various.Models
+@{
+	ViewBag.Title = "Treeview Sample";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model IEnumerable<Folder>
+		   
+@helper TreeView( IEnumerable<Folder> folders )
+{
+	foreach ( var folder in folders )
+	{
+		<li>
+			@if ( folder.IsLeaf )
+			{
+				<span class="leaf @folder.Type" id="@folder.Id">@folder.Name</span> 
+			}
+			else
+			{
+				<span class="folder">@folder.Name</span>
+				<ul>
+					@TreeView( folder.Subfolders )
+				</ul>
+			}
+		</li>
+	}
+}
+
+<h2>
+	TreeView using declarative helper and jQuery
+</h2>
+<h3>
+	<a href="http://weblogs.asp.net/raduenuca/archive/2011/04/24/asp-net-mvc-displaying-a-tree-view-using-a-recursive-declarative-helper-and-jquery.aspx">
+		ASP.NET MVC–Displaying a tree view using a recursive declarative helper and jQuery</a>
+</h3>
+
+<ul id="continentFolders" class="filetree treeview-famfamfam">
+	@TreeView( Model )
+</ul>
+
+<script type="text/javascript">
+	$(document).ready(function () {
+		$('#continentFolders').treeview({ collapsed: true });
+
+		$(".leaf.city").click(function () {
+			$.ajax({
+				url: '@Url.Action( MVC.Various.TreeView.GetCity( ) )',
+				data: { cityId: $(this).attr("id") },
+				type: 'GET',
+				success: function (data) {
+					alert("Selected city: " + data.Name + ", population: " + data.Population.toString());
+				}
+			});
+		});
+	});
+</script>

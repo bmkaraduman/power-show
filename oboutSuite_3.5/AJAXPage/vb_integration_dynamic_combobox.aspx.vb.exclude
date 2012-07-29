@@ -1,0 +1,626 @@
+﻿Imports Obout.Grid
+Imports System.Data.OleDb
+Imports OboutInc.Combobox
+
+Partial Class AJAXPage_vb_integration_dynamic_combo
+    Inherits OboutInc.oboutAJAXPage
+    Private grid1 As New Grid()
+    Shared ReadOnly obj As New Object()
+
+    Protected Sub Page_load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+        grid1.ID = "grid1"
+        grid1.CallbackMode = True
+        grid1.Serialize = True
+        grid1.AutoGenerateColumns = False
+        grid1.AllowAddingRecords = False
+
+        grid1.TemplateSettings.RowEditTemplateId = "tplRowEdit"
+
+        grid1.FolderStyle = "../grid/styles/premiere_blue"
+
+        ' setting the event handlers
+
+        AddHandler CType(grid1, Grid).UpdateCommand, AddressOf UpdateRecord
+        AddHandler CType(grid1, Grid).Rebind, AddressOf RebindGrid
+
+
+        ' creating the Template for editing Rows
+        '------------------------------------------------------------------------
+        Dim RowEditTemplate As New GridRuntimeTemplate()
+        RowEditTemplate.ID = "tplRowEdit"
+        RowEditTemplate.Template = New Obout.Grid.RuntimeTemplate()
+        AddHandler CType(RowEditTemplate.Template, Obout.Grid.RuntimeTemplate).CreateTemplate, AddressOf CreateRowEditTemplate
+        '------------------------------------------------------------------------
+
+        '------------------------------------------------------------------------
+        Dim editBtnTemplate As New GridRuntimeTemplate()
+        editBtnTemplate.ID = "editBtnTemplate"
+        editBtnTemplate.Template = New Obout.Grid.RuntimeTemplate()
+        AddHandler CType(editBtnTemplate.Template, Obout.Grid.RuntimeTemplate).CreateTemplate, AddressOf CreateEditBtnTemplate
+        '------------------------------------------------------------------------
+
+        '------------------------------------------------------------------------
+        Dim updateBtnTemplate As New GridRuntimeTemplate()
+        updateBtnTemplate.ID = "updateBtnTemplate"
+        updateBtnTemplate.Template = New Obout.Grid.RuntimeTemplate()
+        AddHandler CType(updateBtnTemplate.Template, Obout.Grid.RuntimeTemplate).CreateTemplate, AddressOf CreateUpdateBtnTemplate
+        '------------------------------------------------------------------------
+
+        grid1.Templates.Add(RowEditTemplate)
+        grid1.Templates.Add(editBtnTemplate)
+        grid1.Templates.Add(updateBtnTemplate)
+
+        ' creating the columns
+        Dim oCol1 As New Column()
+        oCol1.DataField = "OrderID"
+        oCol1.[ReadOnly] = True
+        oCol1.Visible = False
+        oCol1.HeaderText = "ORDER ID"
+        oCol1.Width = "150"
+
+        Dim oCol2 As New Column()
+        oCol2.DataField = "ShipName"
+        oCol2.Visible = True
+        oCol2.HeaderText = "NAME"
+        oCol2.Width = "200"
+
+
+
+        Dim oCol3 As New Column()
+        oCol3.DataField = "ShipCountry"
+        oCol3.Visible = True
+        oCol3.HeaderText = "COUNTRY"
+        oCol3.Width = "200"
+
+
+        Dim oCol4 As New Column()
+        oCol4.DataField = "OrderDateFormatted"
+        oCol4.Visible = True
+        oCol4.HeaderText = "ORDER DATE"
+        oCol4.Width = "170"
+
+
+        Dim oCol5 As New Column()
+        oCol5.Width = "200"
+        oCol5.AllowEdit = True
+        oCol5.TemplateSettings.TemplateId = "editBtnTemplate"
+        oCol5.TemplateSettings.EditTemplateId = "updateBtnTemplate"
+
+        ' add the columns to the Columns collection of the grid
+        grid1.Columns.Add(oCol1)
+        grid1.Columns.Add(oCol2)
+        grid1.Columns.Add(oCol3)
+        grid1.Columns.Add(oCol4)
+        grid1.Columns.Add(oCol5)
+
+        ' add the grid to the controls collection of the PlaceHolder        
+        phGrid1.Controls.Add(grid1)
+
+
+        If Not Page.IsPostBack Then
+            CreateGrid()
+        End If
+
+    End Sub
+
+    ' Create the methods that will load the data into the templates
+    '------------------------------------------------------------------------
+    Public Sub CreateEditBtnTemplate(ByVal sender As Object, ByVal e As Obout.Grid.GridRuntimeTemplateEventArgs)
+        Dim oLiteral As New Literal()
+        e.Container.Controls.Add(oLiteral)
+        AddHandler CType(oLiteral, Literal).DataBinding, AddressOf DataBindEditBtnTemplate
+    End Sub
+    Protected Sub DataBindEditBtnTemplate(ByVal sender As Object, ByVal e As EventArgs)
+        Dim oLiteral As Literal = TryCast(sender, Literal)
+        Dim oContainer As Obout.Grid.TemplateContainer = TryCast(oLiteral.NamingContainer, Obout.Grid.TemplateContainer)
+
+        oLiteral.Text = "<input type=""button"" id=""btnEdit_" & oContainer.PageRecordIndex & """ class=""tdText"" value=""Edit"" onclick=""ShowDetails(this)""/> | <input type=""button"" id=""btnDetails_" & oContainer.PageRecordIndex & """ class=""tdText"" value=""View Details"" onclick=""ShowDetails(this)""/>"
+
+    End Sub
+    '------------------------------------------------------------------------
+
+    '------------------------------------------------------------------------
+    Public Sub CreateUpdateBtnTemplate(ByVal sender As Object, ByVal e As Obout.Grid.GridRuntimeTemplateEventArgs)
+        Dim oLiteral As New Literal()
+        e.Container.Controls.Add(oLiteral)
+        AddHandler CType(oLiteral, Literal).DataBinding, AddressOf DataBindUpdateBtnTemplate
+    End Sub
+    Protected Sub DataBindUpdateBtnTemplate(ByVal sender As Object, ByVal e As EventArgs)
+        Dim oLiteral As Literal = TryCast(sender, Literal)
+        Dim oContainer As Obout.Grid.TemplateContainer = TryCast(oLiteral.NamingContainer, Obout.Grid.TemplateContainer)
+
+        oLiteral.Text = "&nbsp;"
+    End Sub
+    '------------------------------------------------------------------------
+
+    '------------------------------------------------------------------------
+    Public Sub CreateRowEditTemplate(ByVal sender As Object, ByVal e As Obout.Grid.GridRuntimeTemplateEventArgs)
+        Dim oPH1 As New PlaceHolder()
+        e.Container.Controls.Add(oPH1)
+        AddHandler CType(oPH1, PlaceHolder).DataBinding, AddressOf DataBindRowEditTemplate
+    End Sub
+    Protected Sub DataBindRowEditTemplate(ByVal sender As Object, ByVal e As EventArgs)
+        Dim oPH1 As PlaceHolder = TryCast(sender, PlaceHolder)
+        Dim oContainer As Obout.Grid.TemplateContainer = TryCast(oPH1.NamingContainer, Obout.Grid.TemplateContainer)
+
+        Dim DetailsContainer As New Panel()
+        DetailsContainer.ID = "DetailsContainer"
+        DetailsContainer.Attributes("style") = "display:none"
+
+        Dim EditContainer As New Panel()
+        EditContainer.ID = "EditContainer"
+        EditContainer.Attributes("style") = "display:none"
+
+        EditContainer.Controls.Add(CreateTableForEdit())
+        DetailsContainer.Controls.Add(CreateTableForDetails())
+
+        oPH1.Controls.Add(EditContainer)
+        oPH1.Controls.Add(DetailsContainer)
+    End Sub
+
+    Public Function CreateTableForEdit() As Table
+        Dim oTable As New Table()
+
+        oTable.CssClass = "rowEditTable"
+
+        Dim oTr As New TableRow()
+
+        Dim oCell1 As New TableCell()
+        Dim oCell2 As New TableCell()
+
+        ' For Ship Information
+
+        Dim oPanelShipInformation As New Panel()
+        oPanelShipInformation.Attributes("style") = "width: 275px; height: 216px"
+        oPanelShipInformation.GroupingText = "Ship Information"
+        Dim oTableShipInformation As New Table()
+
+        oTableShipInformation.Rows.Add(CreateTableRowWithTextbox("Ship Name:", "txtShipName"))
+        oTableShipInformation.Rows.Add(CreateTableRowWithTextbox("Ship Address:", "txtShipAddress"))
+        oTableShipInformation.Rows.Add(CreateTableRowWithTextbox("Ship Region:", "txtShipRegion"))
+        oTableShipInformation.Rows.Add(CreateTableRowWithTextbox("Ship Postal Code:", "txtShipPostalCode"))
+        oTableShipInformation.Rows.Add(CreateTableRowWithCombobox("Ship Continent:", "cboContinent", "SelectContinent()"))
+        oTableShipInformation.Rows.Add(CreateTableRowWithCombobox("Ship Country:", "cboCountry", "SelectCountry()"))
+        oTableShipInformation.Rows.Add(CreateTableRowWithCombobox("Ship City:", "cboCity", String.Empty))
+
+        oTableShipInformation.Rows.Add(CreateEmptyTableRow())
+
+        oPanelShipInformation.Controls.Add(oTableShipInformation)
+        oCell1.Controls.Add(oPanelShipInformation)
+
+        ' For Ship Information
+        Dim oPanelOrderInformation As New Panel()
+        oPanelOrderInformation.Attributes("style") = "width: 275px; height: 216px"
+        oPanelOrderInformation.GroupingText = "Order Information"
+        Dim oTableOrderInformation As New Table()
+
+        oTableOrderInformation.Rows.Add(CreateTableRowWithLabel("Order ID:", "txtOrderID"))
+        oTableOrderInformation.Rows.Add(CreateTableRowWithCalendar("Order Date:", "txtOrderDate", "gridCal1"))
+        oTableOrderInformation.Rows.Add(CreateTableRowWithCalendar("Required Date:", "txtRequiredDate", "gridCal2"))
+        oTableOrderInformation.Rows.Add(CreateTableRowWithCalendar("Shipped Date:", "txtShippedDate", "gridCal3"))
+        oTableOrderInformation.Rows.Add(CreateTableRowWithTextbox("Ship Via:", "txtShipVia"))
+        oTableOrderInformation.Rows.Add(CreateTableRowWithCheckbox("Sent:", "chkSentEdit"))
+
+
+        oPanelOrderInformation.Controls.Add(oTableOrderInformation)
+        oCell2.Controls.Add(oPanelOrderInformation)
+
+
+        oTr.Cells.Add(oCell1)
+        oTr.Cells.Add(oCell2)
+        oTable.Rows.Add(oTr)
+
+        oTable.Rows.Add(CreateEmptyTableRow())
+
+        Dim oTr2 As New TableRow()
+        Dim oCell2_1 As New TableCell()
+        oCell2_1.ColumnSpan = 3
+        oCell2_1.HorizontalAlign = HorizontalAlign.Center
+
+        Dim oSaveButton As New Button()
+        oSaveButton.CssClass = "tdText"
+        oSaveButton.OnClientClick = "saveChanges();return false"
+        oSaveButton.Text = "Save"
+
+        Dim oSpacer As New Literal()
+        oSpacer.Text = " "
+
+        Dim oCancelButton As New Button()
+        oCancelButton.CssClass = "tdText"
+        oCancelButton.OnClientClick = "grid1.cancel();return false"
+        oCancelButton.Text = "Cancel"
+
+        oCell2_1.Controls.Add(oSaveButton)
+        oCell2_1.Controls.Add(oSpacer)
+        oCell2_1.Controls.Add(oCancelButton)
+        oTr2.Controls.Add(oCell2_1)
+
+        oTable.Rows.Add(oTr2)
+
+        Return oTable
+    End Function
+
+    Public Function CreateTableForDetails() As Table
+        Dim oTable As New Table()
+
+        oTable.CssClass = "rowEditTable"
+
+        Dim oTr As New TableRow()
+
+        Dim oCell1 As New TableCell()
+        Dim oCell2 As New TableCell()
+
+        ' For Ship Information
+
+        Dim oPanelShipInformation As New Panel()
+        oPanelShipInformation.Attributes("style") = "width: 275px; height: 150px"
+        oPanelShipInformation.GroupingText = "Ship Information"
+        Dim oTableShipInformation As New Table()
+
+        oTableShipInformation.Rows.Add(CreateTableRowWithLabel("Ship Name:", "lblShipName"))
+        oTableShipInformation.Rows.Add(CreateTableRowWithLabel("Ship Address:", "lblShipAddress"))
+        oTableShipInformation.Rows.Add(CreateTableRowWithLabel("Ship City:", "lblShipCity"))
+        oTableShipInformation.Rows.Add(CreateTableRowWithLabel("Ship Region:", "lblShipRegion"))
+        oTableShipInformation.Rows.Add(CreateTableRowWithLabel("Ship Postal Code:", "lblShipPostalCode"))
+        oTableShipInformation.Rows.Add(CreateTableRowWithLabel("Ship Country:", "lblCountry"))
+        oTableShipInformation.Rows.Add(CreateEmptyTableRow())
+
+        oPanelShipInformation.Controls.Add(oTableShipInformation)
+        oCell1.Controls.Add(oPanelShipInformation)
+
+        ' For Ship Information
+        Dim oPanelOrderInformation As New Panel()
+        oPanelOrderInformation.Attributes("style") = "width: 275px; height: 150px"
+        oPanelOrderInformation.GroupingText = "Order Information"
+
+        Dim oTableOrderInformation As New Table()
+
+
+        oTableOrderInformation.Rows.Add(CreateTableRowWithLabel("Order Date:", "lblOrderDate"))
+        oTableOrderInformation.Rows.Add(CreateTableRowWithLabel("Required Date:", "lblRequiredDate"))
+        oTableOrderInformation.Rows.Add(CreateTableRowWithLabel("Shipped Date:", "lblShippedDate"))
+        oTableOrderInformation.Rows.Add(CreateTableRowWithLabel("Ship Via:", "lblShipVia"))
+        oTableOrderInformation.Rows.Add(CreateTableRowWithCheckbox("Sent:", "chkSent"))
+        oTableOrderInformation.Rows.Add(CreateEmptyTableRow())
+        oTableOrderInformation.Rows.Add(CreateEmptyTableRow())
+
+
+        oPanelOrderInformation.Controls.Add(oTableOrderInformation)
+        oCell2.Controls.Add(oPanelOrderInformation)
+
+
+        oTr.Cells.Add(oCell1)
+        oTr.Cells.Add(oCell2)
+        oTr.VerticalAlign = VerticalAlign.Top
+        oTr.HorizontalAlign = HorizontalAlign.Center
+        oTable.Rows.Add(oTr)
+
+        Dim oTr2 As New TableRow()
+        Dim oCell2_1 As New TableCell()
+        oCell2_1.ColumnSpan = 3
+        oCell2_1.HorizontalAlign = HorizontalAlign.Center
+
+        Dim oHideButton As New Button()
+        oHideButton.CssClass = "tdText"
+        oHideButton.OnClientClick = "grid1.cancel();return false"
+        oHideButton.Text = "Hide Details"
+
+
+        oCell2_1.Controls.Add(oHideButton)
+
+        oTr2.Controls.Add(oCell2_1)
+
+        oTable.Rows.Add(oTr2)
+
+        Return oTable
+    End Function
+
+    Public Function CreateTableRowWithTextbox(ByVal sLabelText As String, ByVal sControlId As String) As TableRow
+        Dim oTr As New TableRow()
+        Dim oCell1 As New TableCell()
+        Dim oCell2 As New TableCell()
+
+        Dim oLabel As New Label()
+        oLabel.Text = sLabelText
+        oCell1.Wrap = False
+        oCell1.Controls.Add(oLabel)
+
+        Dim oLiteral As New Literal()
+        oLiteral.Text = "<input id=""" & sControlId & """ style=""width: 150px;"" class=""ob_gEC"" Type=""text""  />"
+
+        oCell2.Controls.Add(oLiteral)
+
+        oTr.Cells.Add(oCell1)
+        oTr.Cells.Add(oCell2)
+
+        Return oTr
+    End Function
+
+    Public Function CreateTableRowWithCombobox(ByVal sLabelText As String, ByVal sControlId As String, ByVal clientChangeMethod As String) As TableRow
+        Dim oTr As New TableRow()
+        Dim oCell1 As New TableCell()
+        Dim oCell2 As New TableCell()
+
+        Dim oLabel As New Label()
+        oLabel.Text = sLabelText
+        oCell1.Controls.Add(oLabel)
+        Dim cbo1 As OboutInc.Combobox.Combobox = New Combobox()
+
+        cbo1.ID = sControlId
+        cbo1.Height = 150
+        cbo1.Width = 150
+        cbo1.InnerWidth = 150
+        cbo1.AlignContainer = "right"
+        cbo1.FolderStyle = "../Combobox/styles/default"
+        If Not String.IsNullOrEmpty(clientChangeMethod) Then
+            cbo1.OnClientChange = clientChangeMethod
+        Else
+            oTr.ID = "cityRow"
+            oTr.Style.Add("display", "none")
+        End If
+        oCell2.Controls.Add(cbo1)
+
+        oTr.Cells.Add(oCell1)
+        oTr.Cells.Add(oCell2)
+
+        Return oTr
+    End Function
+
+    Public Function CreateTableRowWithCalendar(ByVal sLabelText As String, ByVal sControlId As String, ByVal sCalendarId As String) As TableRow
+        Dim oTr As New TableRow()
+        Dim oCell1 As New TableCell()
+        Dim oCell2 As New TableCell()
+        Dim oCell3 As New TableCell()
+
+        Dim oLabel As New Label()
+        oLabel.Text = sLabelText
+        oCell1.Controls.Add(oLabel)
+
+        Dim oLiteral As New Literal()
+        oLiteral.Text = "<input id=""" & sControlId & """ style=""width: 150px;"" class=""ob_gEC"" type=""text""  />"
+
+        oCell2.Controls.Add(oLiteral)
+
+        Dim cal1 As New OboutInc.Calendar2.Calendar()
+        cal1.ID = sCalendarId
+        cal1.StyleFolder = "../Calendar/styles/expedia"
+        cal1.DatePickerMode = True
+        cal1.TextBoxId = sControlId
+        cal1.DatePickerImagePath = "../Calendar/styles/icon2.gif"
+
+        oCell3.Controls.Add(cal1)
+
+        oTr.Cells.Add(oCell1)
+        oTr.Cells.Add(oCell2)
+        oTr.Cells.Add(oCell3)
+
+        Return oTr
+    End Function
+
+    Public Function CreateTableRowWithCheckbox(ByVal sLabelText As String, ByVal sControlId As String) As TableRow
+        Dim oTr As New TableRow()
+        Dim oCell1 As New TableCell()
+        Dim oCell2 As New TableCell()
+
+        Dim oLabel As New Label()
+        oLabel.Text = sLabelText
+        oCell1.Controls.Add(oLabel)
+
+        Dim oLiteral As New Literal()
+
+        oLiteral.Text = "<input id=""" & sControlId & """ class=""tdText"" Type=""checkbox""  />"
+
+        oCell2.Controls.Add(oLiteral)
+
+        oTr.Cells.Add(oCell1)
+        oTr.Cells.Add(oCell2)
+
+        Return oTr
+    End Function
+
+
+    Public Function CreateTableRowWithLabel(ByVal sLabelText As String, ByVal sControlId As String) As TableRow
+        Dim oTr As New TableRow()
+        Dim oCell1 As New TableCell()
+        Dim oCell2 As New TableCell()
+        oCell1.CssClass = "txtText"
+        oCell2.CssClass = "txtText"
+
+        Dim oLabel As New Label()
+        oLabel.Text = sLabelText
+        oCell1.Wrap = False
+        oCell1.Controls.Add(oLabel)
+
+        Dim oLiteral As New Literal()
+        oLiteral.Text = "<input id=""" & sControlId & """ style=""width: 150px;"" class=""txtText"" readonly=""readonly""  />"
+
+        oCell2.Controls.Add(oLiteral)
+
+        oTr.Cells.Add(oCell1)
+        oTr.Cells.Add(oCell2)
+
+        Return oTr
+    End Function
+
+    Public Function CreateEmptyTableRow() As TableRow
+        Dim oTr As New TableRow()
+        Dim oCell1 As New TableCell()
+        oCell1.ColumnSpan = 2
+
+        Dim oLiteral As New Literal()
+        oLiteral.Text = "<br />"
+
+        oCell1.Controls.Add(oLiteral)
+        oTr.Cells.Add(oCell1)
+
+        Return oTr
+    End Function
+
+    '-----------------------------------------------------------------------
+
+    Private Sub CreateGrid()
+        Dim myConn As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/Northwind.mdb"))
+
+        Dim myComm As New OleDbCommand("SELECT TOP 25 *, FORMAT(OrderDate, ""mm/dd/yyyy"") AS OrderDateFormatted, FORMAT(RequiredDate, ""mm/dd/yyyy"") AS RequiredDateFormatted, FORMAT(ShippedDate, ""mm/dd/yyyy"") AS ShippedDateFormatted FROM Orders ORDER BY OrderID DESC", myConn)
+        myConn.Open()
+        Dim myReader As OleDbDataReader = myComm.ExecuteReader()
+
+        grid1.DataSource = myReader
+        grid1.DataBind()
+
+        myConn.Close()
+    End Sub
+    Private Sub DeleteRecord(ByVal sender As Object, ByVal e As GridRecordEventArgs)
+        Dim myConn As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/Northwind.mdb"))
+        myConn.Open()
+
+        Dim myComm As New OleDbCommand("DELETE FROM Orders WHERE OrderID = @OrderID", myConn)
+
+        myComm.Parameters.Add("@OrderID", OleDbType.[Integer]).Value = e.Record("OrderID")
+
+        myComm.ExecuteNonQuery()
+        myConn.Close()
+    End Sub
+
+    Private Sub UpdateRecord(ByVal sender As Object, ByVal e As GridRecordEventArgs)
+        Dim myConn As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/Northwind.mdb"))
+        myConn.Open()
+
+        Dim myComm As New OleDbCommand("UPDATE Orders SET ShipName = @ShipName, ShipAddress=@ShipAddress, ShipCity = @ShipCity,ShipRegion=@ShipRegion, ShipPostalCode=@ShipPostalCode, ShipCountry =@ShipCountry, Sent = @Sent, OrderDate=@OrderDate,RequiredDate=@RequiredDate, ShippedDate=@ShippedDate, ShipVia=@ShipVia" & vbCr & vbLf & "        WHERE OrderID = @OrderID", myConn)
+
+        myComm.Parameters.Add("@ShipName", OleDbType.VarChar).Value = e.Record("ShipName")
+        myComm.Parameters.Add("@ShipAddress", OleDbType.VarChar).Value = e.Record("ShipAddress")
+        myComm.Parameters.Add("@ShipCity", OleDbType.VarChar).Value = e.Record("ShipCity")
+        myComm.Parameters.Add("@ShipRegion", OleDbType.VarChar).Value = e.Record("ShipRegion")
+        myComm.Parameters.Add("@ShipPostalCode", OleDbType.VarChar).Value = e.Record("ShipPostalCode")
+        myComm.Parameters.Add("@ShipCountry", OleDbType.VarChar).Value = e.Record("ShipCountry")
+        myComm.Parameters.Add("@Sent", OleDbType.[Boolean]).Value = e.Record("Sent")
+        myComm.Parameters.Add("@OrderDate", OleDbType.[Date]).Value = e.Record("OrderDate")
+        myComm.Parameters.Add("@RequiredDate", OleDbType.[Date]).Value = e.Record("RequiredDate")
+        myComm.Parameters.Add("@ShippedDate", OleDbType.[Date]).Value = e.Record("ShippedDate")
+        myComm.Parameters.Add("@ShipVia", OleDbType.[Integer]).Value = e.Record("ShipVia")
+        myComm.Parameters.Add("@OrderID", OleDbType.[Integer]).Value = e.Record("OrderID")
+        myComm.ExecuteNonQuery()
+        myConn.Close()
+    End Sub
+
+
+
+    Public Function LoadRecord(ByVal orderId As String) As String()
+        Dim myConn As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/Northwind.mdb"))
+
+        Dim myComm As New OleDbCommand("SELECT *,FORMAT(OrderDate,""mm/dd/yyyy"") AS OrderDateFormatted,FORMAT(RequiredDate, ""mm/dd/yyyy"") AS RequiredDateFormatted,FORMAT(ShippedDate, ""mm/dd/yyyy"") AS ShippedDateFormatted FROM Orders WHERE OrderId=@OrderID", myConn)
+        myComm.Parameters.Add("@OrderID", OleDbType.[Integer]).Value = Integer.Parse(orderId)
+        myConn.Open()
+        Dim myReader As OleDbDataReader = myComm.ExecuteReader()
+        Dim sRecord As String() = New String(11) {}
+        While myReader.Read()
+            sRecord(0) = myReader("ShipName").ToString()
+            sRecord(1) = myReader("ShipAddress").ToString()
+            sRecord(2) = myReader("ShipCity").ToString()
+            sRecord(3) = myReader("ShipRegion").ToString()
+            sRecord(4) = myReader("ShipPostalCode").ToString()
+            sRecord(5) = myReader("ShipCountry").ToString()
+            sRecord(6) = myReader("OrderID").ToString()
+            sRecord(7) = myReader("OrderDate").ToString()
+            sRecord(8) = myReader("RequiredDate").ToString()
+            sRecord(9) = myReader("ShippedDate").ToString()
+            sRecord(10) = myReader("ShipVia").ToString()
+
+            sRecord(11) = myReader("Sent").ToString()
+        End While
+        myConn.Close()
+        Return sRecord
+
+    End Function
+
+    Private Sub RebindGrid(ByVal sender As Object, ByVal e As EventArgs)
+        CreateGrid()
+    End Sub
+
+    ' update the country list with the countries from the selected continent
+    Public Function SetCountry(ByVal ContinentID As String) As String
+        ' load continent list from the database
+        'OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("continent.mdb"));
+        Dim myConn As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../App_Data/DynamicCombobox.mdb"))
+        myConn.Open()
+
+        Dim myComm As OleDbCommand
+        myComm = New OleDbCommand("select CountryID, CountryName from Country where ContinentID = " & ContinentID & " order by CountryName", myConn)
+        Dim myReader As OleDbDataReader = myComm.ExecuteReader()
+        Dim responseData As String = String.Empty
+        SyncLock obj
+            While myReader.Read()
+                Dim data As String = (myReader.GetInt32(0).ToString() & "@") + myReader.GetString(1)
+
+                If responseData.Length = 0 Then
+                    responseData += data
+                Else
+                    responseData += "|" & data
+                End If
+
+            End While
+        End SyncLock
+        myReader.Close()
+        myConn.Close()
+
+        Return responseData
+    End Function
+
+    ' update the city list with the cities from the selected country
+    Public Function SetCity(ByVal CountryID As String) As String
+        ' load continent list from the database
+        'OleDbConnection myConn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("continent.mdb"));
+        Dim myConn As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../App_Data/DynamicCombobox.mdb"))
+        myConn.Open()
+
+        Dim myComm As OleDbCommand
+        myComm = New OleDbCommand("select CityID, CityName from City where CountryID = " & CountryID & " order by CityName", myConn)
+        Dim myReader As OleDbDataReader = myComm.ExecuteReader()
+        Dim responseData As String = String.Empty
+        SyncLock obj
+            While myReader.Read()
+                Dim data As String = (myReader.GetInt32(0).ToString() & "@") + myReader.GetString(1)
+                If responseData.Length = 0 Then
+                    responseData += data
+                Else
+                    responseData += "|" & data
+                End If
+
+            End While
+        End SyncLock
+        myReader.Close()
+        myConn.Close()
+
+        Return responseData
+    End Function
+
+    Public Function SetContinent(ByVal Country As String) As String
+        Dim myConn As New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" & Server.MapPath("../App_Data/DynamicCombobox.mdb"))
+        myConn.Open()
+
+        Dim myComm As OleDbCommand
+        myComm = New OleDbCommand("select ContinentName from Continent where ContinentID = (select ContinentID from Country where CountryName = '" & Country & "')", myConn)
+        Dim myReader As OleDbDataReader = myComm.ExecuteReader()
+        Dim continentName As String = String.Empty
+        While myReader.Read()
+            continentName = myReader.GetString(0)
+        End While
+        myReader.Close()
+        myComm = New OleDbCommand("select ContinentID, ContinentName from Continent", myConn)
+        myReader = myComm.ExecuteReader()
+        Dim continentsForCombo As String = String.Empty
+        While myReader.Read()
+            Dim data As String = (myReader.GetInt32(0).ToString() & "@") + myReader.GetString(1)
+            If continentsForCombo.Length = 0 Then
+                continentsForCombo += data
+            Else
+                continentsForCombo += "|" & data
+            End If
+
+        End While
+        myReader.Close()
+        myConn.Close()
+        Return ((continentName & "^") + continentsForCombo)
+    End Function
+End Class

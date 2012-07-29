@@ -1,0 +1,84 @@
+.SMParent {
+    font:bold 13px arial; 
+    color:#444400;
+    text-align:left;
+    padding-left: 2px;
+
+}
+.SMParentOver {
+	background-color: #efefed; 
+	font:bold 13px arial; 
+    color:#000000;
+    text-align:left;
+	text-decoration:underline; 
+    padding-left: 2px;
+    cursor:pointer;
+}
+.SMParentSelected {
+	background-color :#eeeecc;
+	font:bold 13px arial; 
+    color:#000000;
+    text-align:left;
+    padding-left: 2px;
+	cursor:pointer; 
+}
+
+.SMChild {
+	font:bold 10px verdana; 
+	text-decoration:none;
+    color:#cc0000;
+    padding-left: 15px;
+	cursor:pointer;
+	text-align:left;
+}
+.SMChild a {
+	color:#cc0000;
+	font:bold 10px Verdana;
+	text-decoration:none;
+}
+
+.SMChildOver {
+	background-color:#efefed;    
+	font:bold 10px verdana; 
+	text-decoration:underline; 
+    color:#000000;
+    padding-left: 15px;
+	cursor:pointer;
+	text-align:left;
+}
+.SMChildOver a {
+	color:#000000;
+	font:bold 10px Verdana;
+	text-decoration:underline;
+}
+
+.SMChildSelected {
+	background-color: white;
+	font:bold 10px verdana; 
+    color:maroon;
+    padding-left: 15px;
+    text-align:left;
+}
+.SMChildSelected a {
+	color:maroon;
+	font:bold 10px Verdana;
+	text-decoration:none;
+}
+
+.SMChildrenBox {
+}
+
+.SMMenu {
+	background-color:white; 
+	width: 170px;
+	border:1px solid #CCCCCC;
+}
+
+.SMImageParent {
+	border:0px;
+	vertical-align:middle;
+}
+
+.SMImageChild {
+	display:none;
+}

@@ -1,0 +1,15 @@
+﻿@{
+   ViewBag.Title = "NewReportParameter";
+}
+@model SavingsAnalysis.Web.Models.InputParameters
+
+<h2>NewReportParameter</h2>
+
+
+@using (Html.BeginForm())
+{
+   Html.RenderAction("InputParameter", "Common");
+   Html.RenderAction("InputParameter", "NightWatchman");
+   Html.RenderAction("InputParameter", "Shopping");
+   <input type="submit" value="Next" />
+}

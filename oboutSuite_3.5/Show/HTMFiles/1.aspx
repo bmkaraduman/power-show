@@ -1,0 +1,1 @@
+<%= "Page <b>1.aspx</b> was reloaded at: " + DateTime.Now.ToString()%>

@@ -1,0 +1,29 @@
+﻿using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+
+public partial class HTMLEditor_cs_oboutWindow : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!Page.IsPostBack)
+        {
+            StreamReader input;
+
+            input = new StreamReader(System.Web.HttpContext.Current.Server.MapPath("contents/Content1.txt"), System.Text.Encoding.ASCII);
+            ContentPanel.Text = input.ReadToEnd();
+            editor.Content = ContentPanel.Text;
+            input.Close();
+        }
+    }
+
+    protected void SubmitClick(object sender, EventArgs e)
+    {
+        ContentPanel.Text = editor.Content;
+    }
+}

@@ -1,0 +1,79 @@
+imports System.Xml
+imports System.Data.OleDb
+
+public partial class vb_autosuggest 
+	Inherits OboutInc.oboutAJAXPage
+
+	' This method loads the words from the database and creates and XML string
+    ' The XML string will be used to add the options to the combobox 
+    Public Function OnSuggestOptions(ByVal sText As String) As String
+        Dim sResponse As String = ""
+
+        ' Setting the connection
+        Dim oConn As OleDbConnection = New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/A_Words.mdb"))
+        oConn.Open()
+
+        ' Run the query to retrieve the words that start with the give text
+        Dim sQuery As String = "SELECT DISTINCT TOP 10 FirstWord FROM FullTextLookup21 WHERE FirstWord LIKE '" + sText.Replace("'", "''") + "%' ORDER BY FirstWord ASC"
+        Dim oCommand As OleDbCommand = New OleDbCommand(sQuery)
+        oCommand.Connection = oConn
+        Dim oReader As OleDbDataReader = oCommand.ExecuteReader()
+
+        ' Creating a new XML document
+        Dim doc As XmlDocument = New XmlDocument()
+        Dim tmp As XmlElement
+        Dim root As XmlNode = doc.CreateNode(XmlNodeType.Element, "combobox", "")
+
+        Dim container As XmlElement = doc.CreateElement("container")
+        container.SetAttribute("combobox_id", "cbo1")
+        
+        ' Looping through the database records and adding them to the XML string
+        While oReader.Read()
+            tmp = doc.CreateElement("option")
+            tmp.SetAttribute("value", oReader.GetString(0).Replace("&APO;", "'"))
+            tmp.SetAttribute("text", oReader.GetString(0).Replace("&APO;", "'"))
+            tmp.SetAttribute("icon", "")
+            tmp.SetAttribute("tooltip", "")
+            container.AppendChild(tmp)
+        End While
+        root.AppendChild(container)
+        doc.AppendChild(root)
+        sResponse = doc.OuterXml.ToString()
+
+        ' Closing the connection
+        oReader.Close()
+        oConn.Close()
+
+        ' Returning the response back to the client
+        Return sResponse
+    End Function
+
+    ' This method loads the full description for a give word from the database
+    Public Function GetWordDescription(ByVal sWord As String) As String    
+        Dim sServerResponse As String = ""
+
+        ' Setting the connection
+        Dim oConn As OleDbConnection = New OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/A_Words.mdb"))
+        oConn.Open()
+
+        ' Run the query to retrieve the description for the given word
+        Dim sQuery As String = "SELECT Examples FROM FullText FT INNER JOIN FullTextLookup21 FTL ON FT.ID = FTL.FullText_ID WHERE  FTL.FirstWord = '" + sWord.Replace("'", "''") + "'"
+        Dim oCommand As OleDbCommand = New OleDbCommand(sQuery)
+        oCommand.Connection = oConn
+        Dim oReader As OleDbDataReader = oCommand.ExecuteReader()
+
+        ' Looping through all the results found and create a string with all the description for the given word
+        If oReader.HasRows Then        
+            While oReader.Read()
+                sServerResponse = sServerResponse + oReader.GetString(0) + "\r\n\r\n"
+            End While
+        Else
+            sServerResponse = ""
+        End If
+
+        oConn.Close()
+
+        ' Returning the response back to the client
+        Return sServerResponse
+    End Function
+end class

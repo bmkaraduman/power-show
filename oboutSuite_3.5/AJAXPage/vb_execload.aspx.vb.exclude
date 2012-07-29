@@ -1,0 +1,73 @@
+imports System
+imports System.Data.OleDb
+imports OboutInc.Combobox
+
+public class vb_execload 
+	inherits OboutInc.oboutAJAXPage
+
+	protected cboContinent as Combobox
+	protected cboCountry as Combobox 
+	
+	shared readonly dim obj as object = new object()
+	
+    sub Page_Load(byval sender as object, byval e as EventArgs)
+        if not IsPostBack
+		
+			' load continent list from the database
+			dim myConn as OleDbConnection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/DynamicCombobox.mdb"))
+			myConn.Open()
+			
+			dim myComm as OleDbCommand
+			myComm = new OleDbCommand("select ContinentID, ContinentName from Continent", myConn)
+			dim myReader as OleDbDataReader = myComm.ExecuteReader()
+			while myReader.Read()
+				cboContinent.AddOption(myReader.GetInt32(0).ToString(), myReader.GetString(1), "")
+			end while
+			myReader.Close()
+			myConn.Close()
+			
+			cboContinent.Text = "Please select a continent"
+		end if 
+		
+		if Session("ContinentID") is nothing
+			Session("ContinentID") = 0
+		end if
+			
+		' select the countries for a continent just once (use continentSet session variable)
+		if not Session("continentSet") is nothing
+			if boolean.Parse(Session("continentSet").ToString())
+				SelectContinent()
+				Session("continentSet") = false
+			end if
+		end if
+    end sub
+	
+	' update the country list with the countries from the selected continent
+	public sub SelectContinent()
+		dim ContinentID as string = Session("ContinentID").ToString()
+		
+		' load continent list from the database
+		dim myConn as OleDbConnection = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Server.MapPath("../App_Data/DynamicCombobox.mdb"))
+		myConn.Open()
+		
+		dim myComm as OleDbCommand
+		myComm = new OleDbCommand("select CountryName from Country where ContinentID = " + ContinentID + " order by CountryName", myConn)
+		dim myReader as OleDbDataReader = myComm.ExecuteReader()
+		SyncLock obj
+			cboCountry.Options.Clear()
+			while (myReader.Read())
+				cboCountry.AddOption(myReader.GetString(0), myReader.GetString(0), "images/flags/flag_" + myReader.GetString(0).ToLower().Replace(" ", "_") + ".png")
+			end while
+		end SyncLock 
+		myReader.Close()
+		myConn.Close()
+	end sub
+	
+	public sub SetContinent(byval ContinentID as string)
+		ExecBeforeLoad("AddResult('script called by <span style=""color:red"">ExecBeforeLoad</span> method');alert('This is triggered before the server starts processing you request!');")
+		ExecOnLoad("AddResult('script called by <span style=""color:red"">ExecOnLoad</span> method');SetContinent();alert('This is triggered after the server finish processing you request!\\n\\nThe countries list loading script is called!');")
+		
+		Session("continentSet") = true
+		Session("ContinentID") = ContinentID
+	end sub
+end class

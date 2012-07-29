@@ -1,0 +1,134 @@
+﻿@{
+	ViewBag.Title = "Index";
+}
+
+<h2>
+	Cascading using jQuery.ajax()
+</h2>
+<h3>
+	<a href="http://weblogs.asp.net/raduenuca/archive/2011/04/17/asp-net-mvc-cascading-dropdown-lists-tutorial-part-5-3-cascading-using-jquery-ajax-ajax-and-knockout-js.aspx">
+		Cascading Dropdown Lists Tutorial–Part 5.3: Cascading using jQuery.ajax() ($.ajax() and Knockout.js)</a>
+</h3>
+
+Only Romania has cities entries (select Europe then Romania)
+
+<fieldset>
+	<legend>Continents</legend>
+	<select id="continents" 
+			data-bind='
+				options: continents, 
+				optionsValue : "Id", 
+				optionsText: "Name", 
+				optionsCaption: "[Please select a continent]", 
+				value: selectedContinent'>
+	</select>
+</fieldset>
+<fieldset>
+	<legend>Countries</legend>
+	<div>
+		<select id="countries" 
+				data-bind='
+					options: selectedContinent() ? countries : null, 
+					optionsValue : "Id", 
+					optionsText: "Name", 
+					optionsCaption: "[Please select a country]", 
+					value: selectedCountry,
+					visible: (countries() && countries().length > 0 )'>
+		</select>
+		<span data-bind='
+			template: {name: "noInfoTemplate"},
+			visible: !(countries() && countries().length > 0)'>
+		</span>
+	</div>
+</fieldset>
+<fieldset>
+	<legend>Cities</legend>
+	<div>
+		<table data-bind='visible: (cities() && cities().length > 0)'>
+			<thead>
+				<tr>
+					<th>
+						Name
+					</th>
+					<th>
+						Population
+					</th>
+				</tr>
+			</thead>
+			<tbody data-bind='template: {name: "citiesTemplate", foreach: cities}'>
+			</tbody>
+		</table>
+		<span data-bind='
+			template: {name: "noInfoTemplate"},
+			visible: !(cities() && cities().length > 0)'>
+		</span>
+	</div>
+</fieldset>
+
+@DateTime.Now.ToString( "dd/MM/yyyy HH:mm:ss:fff" )
+
+<script type="text/html" id="citiesTemplate">
+	<tr>
+		<td>${Name}</td>
+		<td align='right'>${Population}</td>
+	</tr>
+</script>
+
+<script type="text/html" id="noInfoTemplate">
+	No Information Available
+</script>
+
+<script type='text/javascript'>
+	$(document).ready(function () {
+		var atlas = function () {
+			this.selectedContinent = ko.observable();
+			this.selectedCountry = ko.observable();
+			this.continents = ko.observableArray();
+			this.countries = ko.observableArray();
+			this.cities = ko.observableArray();
+
+			// Whenever the continent changes, reset the country selection
+			this.selectedContinent.subscribe(function (continentId) {
+				this.selectedCountry(undefined);
+				this.countries(undefined);
+
+				if (continentId != null) {
+					$.ajax({
+						url: '@Url.Action( MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.GetCountries( ) )',
+						data: { continentId: continentId },
+						type: 'GET',
+						success: function (data) {
+							atlasViewModel.countries(data);
+						}
+					});
+				}
+			} .bind(this));
+
+			this.selectedCountry.subscribe(function (countryId) {
+				this.cities(undefined);
+				if (countryId != null) {
+					$.ajax({
+						url: '@Url.Action( MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.GetCities( ) )',
+						data: { countryId: countryId },
+						type: 'GET',
+						success: function (data) {
+							atlasViewModel.cities(data);
+						}
+					});
+				}
+			} .bind(this));
+		};
+
+		var atlasViewModel = new atlas();
+		ko.applyBindings(atlasViewModel);
+
+		//Load the continents
+		$.ajax({
+			url: '@Url.Action( MVC.CascadingDropDownLists.DropDownjQueryAjaxPost.GetContinents( ) )',
+			type: 'GET',
+			success: function (data) {
+				atlasViewModel.continents(data);
+			}
+		});
+	});
+</script>

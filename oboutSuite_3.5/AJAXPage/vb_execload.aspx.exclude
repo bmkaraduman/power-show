@@ -1,0 +1,120 @@
+<%@ Page Language="vb" Inherits="vb_execload" Src="vb_execload.aspx.vb" %>
+<%@ Register TagPrefix="oajax" Namespace="OboutInc" Assembly="obout_AJAXPage" %>
+<%@ Register TagPrefix="obout" Namespace="OboutInc.Combobox" Assembly="obout_Combobox_Net" %> 
+<html>
+	<head runat="server">
+		<script language="JavaScript">
+			// update the country list with the countries from the selected continent
+			function SelectContinent()
+			{
+				document.getElementById("divResult").innerHTML = "<br />";
+				AddResult('before doing the callback to server');
+				
+				var ContinentID = cboContinent.getValue();	
+				
+				ob_post.post(null, "SetContinent", EndCallback, {"ContinentID":ContinentID});
+			}
+			// update countries list script
+			function SetContinent()
+			{
+				document.getElementById('divComment').style.display = 'none';
+				ob_post.UpdatePanel("callbackPanelCountry");
+			}
+			function EndCallback() {
+				AddResult("<span style=\"color:navy;font-weight:bold\">callback ended</span>");
+			}
+			
+			function AddResult(text) {
+				text = "&nbsp;&nbsp;&middot;&nbsp;" + text;
+				document.getElementById("divResult").innerHTML = document.getElementById("divResult").innerHTML + text + "<br /><br />";
+			}		
+		</script>
+		<style>
+			.title {font-size: X-Large; padding: 20px; border-bottom: 2px solid gray; width: 100%; }
+		</style>
+	</head>
+	<body>
+		<form runat="server">
+		<table border="0">
+			<tr>
+				<td valign="top" width="630" colspan="4">
+					<span class="title">ExecBeforeLoad/ExecOnLoad</span><br /><br /><br />
+				</td>
+			</tr>
+		</table>
+		<br />
+			Please select a continent from the continent combobox <br />to populate the countries combobox, <span style="color:crimson">without reloading the page</span>. <br /><br />
+			<table style="width:300px" border="0">
+				<tr>
+					<td class="bodyStyle">
+						Continent:
+					</td>
+					<td valign="top" class="h5" align="left" style="padding-left:20px">	            			            
+						<div style="width:200px;height:25px" id="divContinent">
+							<obout:Combobox FolderStyle="../Combobox/styles/default" id="cboContinent" Width="200" runat="server" OnClientChange="SelectContinent()">
+								<Options>
+								</Options>
+							</obout:Combobox> 
+						</div>
+					</td>	
+				</tr>
+				<tr>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="bodyStyle">
+						Country:
+					</td>
+					<td valign="middle" class="h5" align="left" style="padding-left:20px;height:27px">	             			            
+						<div style="width:280px" id="divCountry"  class="bodyStyle">
+							<div id="divComment" style="width:280px;">Please select a continent from the list above</div>
+							<oajax:CallbackPanel runat="server" ID="callbackPanelCountry" RenderMethod="OnExplicitRequest">
+								<content style="height:25px;width:200px;">
+									<table width=100% height=100% cellpadding=0 cellspacing=0>
+										<tr>
+											<td align=left>
+												<obout:Combobox FolderStyle="../Combobox/styles/default" id="cboCountry" Width="200" Height="200" runat="server">
+													<Options>
+													</Options>
+												</obout:Combobox> 
+											</td>
+										</tr>
+									</table>
+								</content>
+								<loading style="text-align:center;height:25px;width:200px;">
+									<table width=100% height=100% cellpadding=0 cellspacing=0>
+										<tr>
+											<td align=center>
+												<img src="loading_icons/1.gif">
+											</td>
+										</tr>
+									</table>
+								</loading>
+							</oajax:CallbackPanel>  
+						</div>
+					</td>	
+				</tr>
+			</table>
+			<br /><br />
+			This example demonstrates the execution order of the client-scripts<br />
+			triggered by the server-side methods ExecBeforeLoad and ExecOnLoad.
+			<br />In the panel below you will see the order of execution. 
+			<br /><br />
+			<table width="100%">
+				<tr>
+					<td class="tdText">
+						<b>Execution order</b><br />
+						<div class="tdText" id="divResult" style="border:1px solid gray;width:300px;height:180px">
+							<br />
+						</div>
+					</td>
+				</tr>
+			</table>
+			<br />
+			<br />
+			<br /><br /><br />
+		
+		<a style="font-family:Tahoma;font-size:12px" href="Default.aspx?type=VBNET">« Back to examples</a>
+		</form>
+	</body>
+</html>
